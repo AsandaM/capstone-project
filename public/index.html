@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoints</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1{
+            color: #333;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #5a7283;
+            color: white
+        }
+
+        tr:nth-child(even){
+            background-color: #f9f9f9;
+        }
+        tr:hover{
+            background-color: #f1f1f1;
+        }
+        caption{
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Endpoints</h1>
+    <table>
+        <caption>Users</caption>
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/users/signup</td>
+                <td>POST</td>
+                <td>Add a new user</td>
+            </tr>
+            <tr>
+                <td>/users/login</td>
+                <td>POST</td>
+                <td>Checks credentials and logs in the user.</td>
+            </tr>
+            <tr>
+                <td>/users</td>
+                <td>GET</td>
+                <td>Retrieves a list of all users.</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>GET</td>
+                <td>Retrieves details of a specific user by ID.</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>DELETE</td>
+                <td>Removes a user account by ID.</td>
+            </tr>
+            <tr>
+                <td>/users/:id</td>
+                <td>PATCH</td>
+                <td>Updates details of a specific user by ID.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table>
+        <caption>Products</caption>
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/products</td>
+                <td>POST</td>
+                <td>Add a new product to the catalog.</td>
+            </tr>
+            <tr>
+                <td>/products</td>
+                <td>GET</td>
+                <td>Retrieves a list of all products.</td>
+            </tr>
+            <tr>
+                <td>/products/:id</td>
+                <td>GET</td>
+                <td>Retrieves details of a specific product by ID.</td>
+            </tr>
+            <tr>
+                <td>/products/:id</td>
+                <td>DELETE</td>
+                <td>Delete a product from the catalog by ID.</td>
+            </tr>
+            <tr>
+                <td>/products/:id</td>
+                <td>PATCH</td>
+                <td>Updates details of a specific product by ID.</td>
+            </tr>
+            <tr>
+                <td>/products/recent</td>
+                <td>GET</td>
+                <td>Retrieves the 5 most recent products.</td>
+            </tr>
+            <tr>
+                <td>/products/homeRecent</td>
+                <td>GET</td>
+                <td>Retrieves the 3 most recent products for the homepage.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
