@@ -21,17 +21,17 @@ const deleteProductDb = async(id)=>{
 
 // insert
 
-const insertProductDb = async(prodName, price, prodDesc, image, category, quantity)=>{
-    let [data] = await pool.query(`INSERT INTO products (prodName, price, prodDesc, image, category, quantity) VALUES (?,?,?,?,?,?)`, [prodName, price, prodDesc, image, category, quantity])
+const insertProductDb = async(prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions)=>{
+    let [data] = await pool.query(`INSERT INTO products (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions) VALUES (?,?,?,?,?,?,?,?)`, [prodName, price, prodDesc, image, category, quantity,  ingredients, usage_instructions])
     return data
 }
 
 // update
 
-const editProductDb = async(prodName, quantity, price, category, image, prodDesc, id)=>{
+const editProductDb = async(prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions, id)=>{
     await pool.query(`UPDATE products 
-        SET prodName = ?, quantity = ?, price = ?, category = ?, image = ?, prodDesc = ?
-        WHERE prodID = ?`, [prodName, quantity, price, category, image, prodDesc, id])
+        SET prodName = ?, price = ?, prodDesc = ?, image = ?, category = ?, quantity = ?, ingredients = ?, usage_instructions = ?
+        WHERE prodID = ?`, [prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions, id])
 }
 
 export {getProductsDb, getProductDb, deleteProductDb, insertProductDb, editProductDb}
