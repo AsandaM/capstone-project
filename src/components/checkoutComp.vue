@@ -9,7 +9,9 @@
                 <form action="#!" method="get" id="form">
                     <h6>Contact information</h6>
                     <div class="form-control">
-                        <label for="checkout-email">E-mail</label>
+                        <label for="checkout-email"><span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-slate-700">
+                            Email</span>
+                        </label>
                         <div>
                             <span class="fa fa-envelope"></span>
                             <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email...">
