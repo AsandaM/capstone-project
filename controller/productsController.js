@@ -79,8 +79,6 @@ const editProduct = async(req, res)=>{
         res.status(500).send('Error editing a product')
         throw err
     }
-    
-
 }
 
 
