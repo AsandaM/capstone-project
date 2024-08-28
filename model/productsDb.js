@@ -41,7 +41,7 @@ const getProductDb = async (id) => {
   return data;
 };
 
-// delete
+// delete git branch --set-upstream-to=origin/<branch> backend
 const deleteProductDb = async (id) => {
   await pool.query("DELETE FROM products WHERE prodID = ?", [id]);
 };
