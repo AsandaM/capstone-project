@@ -85,7 +85,7 @@
                             <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png" alt=""></div>
                             <div class="card-details">
                                 <div class="card-name">Vintage Backbag</div>
-                                <div class="card-price">$54.99</div>
+                                <div class="card-price">R54.99</div>
                                 <div class="card-wheel">
                                     <button>-</button>
                                     <span>1</span>
@@ -97,7 +97,7 @@
                             <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png" alt=""></div>
                             <div class="card-details">
                                 <div class="card-name">Levi Shoes</div>
-                                <div class="card-price">$74.99</div>
+                                <div class="card-price">R74.99</div>
                                 <div class="card-wheel">
                                     <button>-</button>
                                     <span>1</span>
@@ -108,11 +108,11 @@
                     </div>
                     <div class="checkout-shipping">
                         <h6>Shipping</h6>
-                        <p>$19</p>
+                        <p>R19</p>
                     </div>
                     <div class="checkout-total">
                         <h6>Total</h6>
-                        <p>$148.98</p>
+                        <p>R148.98</p>
                     </div>
                 </div>
             </section>
@@ -134,12 +134,12 @@
 
 .checkout {
     font-family: "Poppins", sans-serif;
-    height: 100vh;
-    width: 70%;
+    min-height: 100vh;
+    width: 100%; 
+    background-color: #d3f1a4;
+    color: #4E5150;
     margin: 0 auto;
     padding: 50px 0 0;
-    color: #4E5150;
-    
 }
 
 .header {
@@ -157,6 +157,8 @@
     height: 85%;
     display: flex;
     column-gap: 100px;
+    justify-content: center;
+    align-items: center;
 }
 
 .checkout-form {
@@ -173,6 +175,7 @@
     position: relative;
     text-align: left;
     border: none;
+    background: transparent;
 }
 
 .checkout-form .form-control label:not([for="checkout-checkbox"]) {
@@ -202,17 +205,6 @@
     font-weight: 500;
     line-height: 10px;
 }
-
-.checkout-form .form-control > div {
-    /* position: relative; */
-}
-
-/* .checkout-form .form-control > div span.fa {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translate(15px, -50%);
-} */
 
 .checkout-form .form-group {
     display: flex;
