@@ -121,7 +121,7 @@
         } else if (this.sortOption === 'priceDesc') {
           filteredProducts.sort((a, b) => b.price - a.price);
         } else if (this.sortOption === 'newest') {
-          filteredProducts.sort((a, b) => b.prodID - a.prodID); // Assuming higher ID means newer product
+          filteredProducts.sort((a, b) => b.prodID - a.prodID); 
         }
   
         return filteredProducts;
@@ -285,7 +285,9 @@ a:hover {
 }
 
 .section-products .single-product .part-1 ul li a {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
     line-height: 40px;

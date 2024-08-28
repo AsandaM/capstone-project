@@ -1,12 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/products">Product</router-link> |
-    <router-link to="/checkout">Checkout</router-link>
-  </nav>
+  <navbarComp/>
   <router-view/>
 </template>
+
+<script>
+import navbarComp from '@/components/navbarComp.vue'
+export default {
+  components: {
+    navbarComp
+  }
+}
+</script>
 
 <style>
 #app {
