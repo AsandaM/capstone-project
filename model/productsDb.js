@@ -32,7 +32,7 @@ GROUP BY
   return data;
 };
 
-// get single
+// get single item
 
 const getProductDb = async (id) => {
   let [[data]] = await pool.query("SELECT * FROM products WHERE prodID = ?", [
