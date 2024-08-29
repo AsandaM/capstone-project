@@ -1,20 +1,20 @@
 <template>
   <section>
     <nav>
-      <ul>
-        <li :class="{ active: $route.path === '/' }">
+      <ul class="nav-tabs">
+        <li :class="{ active: $route.path === '/' }" class="nav-item">
           <router-link to="/" class="nav-link text-success">HOME</router-link>
         </li>
-        <li :class="{ active: $route.path === '/about' }">
+        <li :class="{ active: $route.path === '/about' }" class="nav-item">
           <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
         </li>
-        <li :class="{ active: $route.path === '/products' }">
+        <li :class="{ active: $route.path === '/products' }" class="nav-item">
           <router-link to="/products" class="nav-link text-success">products</router-link>
         </li>
-        <li :class="{ active: $route.path === '/checkout' }">
+        <li :class="{ active: $route.path === '/checkout' }" class="nav-item">
           <router-link to="/checkout" class="nav-link text-success">checkout</router-link>
         </li>
-        <li :class="{ active: $route.path === '/signup' }">
+        <li :class="{ active: $route.path === '/signup' }" class="nav-item">
           <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">log-in / sign-up</a>
         </li>
       </ul>
@@ -50,12 +50,13 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 
 section {
-  height: 100%;
+  /* height: 100%; */
   border-bottom: 2px solid rgb(217, 247, 144);
+  background-color: aquamarine;
 }
 
 nav {
-  max-width: 960px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0px 0;
 }
