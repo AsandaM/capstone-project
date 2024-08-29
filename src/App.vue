@@ -22,6 +22,10 @@ export default {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-image: url('https://asandam.github.io/images/images_capstone/image9.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 nav {

@@ -1,7 +1,7 @@
 <template>
   <section>
-    <nav>
-      <ul class="nav-tabs">
+    <nav class="navbar navbar-expand-lg">
+      <ul class="nav">
         <li :class="{ active: $route.path === '/' }" class="nav-item">
           <router-link to="/" class="nav-link text-success">HOME</router-link>
         </li>
@@ -17,6 +17,10 @@
         <li :class="{ active: $route.path === '/signup' }" class="nav-item">
           <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">log-in / sign-up</a>
         </li>
+        <li :class="{ active: $route.path === '/admin' }" class="nav-item">
+          <router-link to="/admin" class="nav-link text-success">Admin</router-link>
+        </li>
+        
       </ul>
     </nav>
     <signup-comp v-if="isModalVisible" @close="closeModal" />
@@ -50,15 +54,17 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 
 section {
-  /* height: 100%; */
-  border-bottom: 2px solid rgb(217, 247, 144);
-  background-color: aquamarine;
+  height: 100%;
+  /* border-bottom: 2px solid rgb(217, 247, 144); */
+  /* background-color: aquamarine; */
 }
 
 nav {
   max-width: 900px;
   margin: 0 auto;
   padding: 0px 0;
+  background-color: azure;
+  border-radius: 50px;
 }
 
 nav ul {

@@ -169,9 +169,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-45deg, #d6ade2, #ec9ebc, #e9b5ee, #f1b9d0);
+  /* background: linear-gradient(-45deg, #d6ade2, #ec9ebc, #e9b5ee, #f1b9d0);
   background-size: 300% 300%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite; */
+  
 }
 @keyframes gradient {
 	0% {
@@ -309,6 +310,12 @@ a:hover {
 .section-products .single-product .part-2 h4 {
     display: inline-block;
     font-size: 1rem;
+}
+
+.container{
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  /* z-index: -1; */
 }
 
   </style>
