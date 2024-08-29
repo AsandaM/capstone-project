@@ -1,28 +1,34 @@
 <template>
   <section>
-    <nav class="navbar">
-      <ul class="nav">
-        <li :class="{ active: $route.path === '/' }" class="nav-item">
-          <router-link to="/" class="nav-link text-success">HOME</router-link>
-        </li>
-        <li :class="{ active: $route.path === '/about' }" class="nav-item">
-          <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
-        </li>
-        <li :class="{ active: $route.path === '/products' }" class="nav-item">
-          <router-link to="/products" class="nav-link text-success">products</router-link>
-        </li>
-        <li :class="{ active: $route.path === '/checkout' }" class="nav-item">
-          <router-link to="/checkout" class="nav-link text-success">checkout</router-link>
-        </li>
-        <li :class="{ active: $route.path === '/signup' }" class="nav-item">
-          <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">log-in / sign-up</a>
-        </li>
-        <li :class="{ active: $route.path === '/admin' }" class="nav-item">
-          <router-link to="/admin" class="nav-link text-success">Admin</router-link>
-        </li>
-        
-      </ul>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item" :class="{ active: $route.path === '/' }">
+            <router-link to="/" class="nav-link text-success">HOME</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/about' }">
+            <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/products' }">
+            <router-link to="/products" class="nav-link text-success">PRODUCTS</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
+            <router-link to="/checkout" class="nav-link text-success">CHECKOUT</router-link>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/signup' }">
+            <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">LOG-IN / SIGN-UP</a>
+          </li>
+          <li class="nav-item" :class="{ active: $route.path === '/admin' }">
+            <router-link to="/admin" class="nav-link text-success">ADMIN</router-link>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
     <signup-comp v-if="isModalVisible" @close="closeModal" />
   </section>
 </template>
