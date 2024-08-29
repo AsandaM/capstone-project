@@ -16,9 +16,11 @@
               <p class="h5 mb-4">
                 At NutrifyNow, we believe that genuine wellness begins with what you consume. That’s why we create our juices using only the freshest, top-quality fruits and vegetables, without any added sugars or preservatives. Our juices are crafted to nourish your body and enhance your overall health.
               </p>
-              <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">
-                Shop Now
-              </button>
+              <router-link to="/products">
+                <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">
+                  Shop Now
+                </button>
+              </router-link>
             </div>
           </header>
         </div>
