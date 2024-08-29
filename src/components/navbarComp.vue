@@ -1,6 +1,6 @@
 <template>
   <section>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar">
       <ul class="nav">
         <li :class="{ active: $route.path === '/' }" class="nav-item">
           <router-link to="/" class="nav-link text-success">HOME</router-link>
