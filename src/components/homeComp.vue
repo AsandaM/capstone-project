@@ -29,13 +29,16 @@
         <div class="slideshow-container">
           <div class="slides">
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/home.avif" alt="home" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/home1.png" alt="home" class="w-100 h-100 object-cover">
             </div>
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/image26.jpg" alt="Image 1" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/h8.png" alt="Image 1" class="w-100 h-100 object-cover">
             </div>
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/image32.jpg" alt="Image 2" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/h7.png" alt="Image 2" class="w-100 h-100 object-cover">
+            </div>
+            <div class="image-container">
+              <img src="https://asandam.github.io/images/images_capstone/h10.png" alt="Image 2" class="w-100 h-100 object-cover">
             </div>
           </div>
         </div>
@@ -48,10 +51,10 @@
   
   #home {
     font-family: "Muli";
-    background-image: url('https://asandam.github.io/images/images_capstone/image9.jpg');
+    /* background-image: url('https://asandam.github.io/images/images_capstone/image9.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center; */
   }
   
   .h2 {
