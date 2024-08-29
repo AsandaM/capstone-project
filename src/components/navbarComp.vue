@@ -1,32 +1,30 @@
 <template>
-    <section>
-        <nav>
-         <ul>
-           <li :class="{ active: $route.path === '/' }">
-            <router-link to="/" class="nav-link text-success">HOME</router-link>
-           </li>
-           <li :class="{ active: $route.path === '/about' }">
-            <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
-           </li>
-           <li :class="{ active: $route.path === '/products' }">
-            <router-link to="/products" class="nav-link text-success">products</router-link>
-           </li>
-           <li :class="{ active: $route.path === '/checkout' }">
-            <router-link to="/checkout" class="nav-link text-success">checkout</router-link>
-           </li>
-           <li :class="{ active: $route.path === '/signup' }">
+  <section>
+    <nav>
+      <ul>
+        <li :class="{ active: $route.path === '/' }">
+          <router-link to="/" class="nav-link text-success">HOME</router-link>
+        </li>
+        <li :class="{ active: $route.path === '/about' }">
+          <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
+        </li>
+        <li :class="{ active: $route.path === '/products' }">
+          <router-link to="/products" class="nav-link text-success">products</router-link>
+        </li>
+        <li :class="{ active: $route.path === '/checkout' }">
+          <router-link to="/checkout" class="nav-link text-success">checkout</router-link>
+        </li>
+        <li :class="{ active: $route.path === '/signup' }">
           <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">log-in / sign-up</a>
         </li>
-         </ul>
-       </nav>
-       <signup-comp v-show="isModalVisible"
-      @close="closeModal" />
-    </section>
+      </ul>
+    </nav>
+    <signup-comp v-if="isModalVisible" @close="closeModal" />
+  </section>
 </template>
 
 <script>
 import signupComp from './signupComp.vue';
-// import {Modal} from 'bootstrap';
 
 export default {
   components: {
@@ -39,22 +37,21 @@ export default {
   },
   methods: {
     showModal() {
-        this.isModalVisible = true;
-      },
-      closeModal() {
-        this.isModalVisible = false;
-      }
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
+  }
 };
 </script>
- 
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 
 section {
-  height:100%;
+  height: 100%;
   border-bottom: 2px solid rgb(217, 247, 144);
-  
 }
 
 nav {
@@ -71,10 +68,10 @@ nav ul li {
   display: inline-block;
 }
 
-.nav-link{
+.nav-link {
   padding: 18px;
   font-family: "Muli";
-  text-transform:uppercase;
+  text-transform: uppercase;
   color: rgb(74, 73, 73);
   font-size: 18px;
   text-decoration: none;
@@ -82,13 +79,11 @@ nav ul li {
 }
 
 .nav-link:hover {
- text-decoration: underline;
- text-decoration-color: rgba(7, 84, 39, 0.5);
+  text-decoration: underline;
+  text-decoration-color: rgba(7, 84, 39, 0.5);
 }
 
 .nav-link.active {
   background-color: seagreen;
 }
-
 </style>
-  
