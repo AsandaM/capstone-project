@@ -60,7 +60,7 @@ section {
 }
 
 nav {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0px 0;
   background-color: azure;
