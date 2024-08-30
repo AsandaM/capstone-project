@@ -6,7 +6,10 @@
           <div class="row justify-content-center text-center">
             <div class="col-md-8 col-lg-6">
               <div class="header2">
-                <h2>Juice and Smoothies for a Healthier You!</h2>
+                <h2 class="display-4 display-lg-2 font-weight-bold">
+                  Juice and Smoothies for a <span class="text-success">Healthier</span> You!
+              </h2>
+              <div class="w-35 h-2 bg-success my-3"></div>
               </div>
             </div>
           </div>
@@ -25,20 +28,20 @@
             <!-- Sort and Filter Options on the Right -->
             <div class="col-md-4 d-flex justify-content-end mb-3">
               <!-- Sort Option -->
-              <select class="form-select me-2" aria-label="Sort by" v-model="sortOption">
+              <select class="form-select me-2 text-success" aria-label="Sort by" v-model="sortOption">
                 <option value="">Sort by</option>
                 <option value="priceAsc">Price: Low to High</option>
                 <option value="priceDesc">Price: High to Low</option>
                 <option value="newest">Newest Arrivals</option>
               </select>
               <!-- Filter by Category Option -->
-              <select class="form-select" aria-label="Filter by Category" v-model="filterCategory">
+              <select class="form-select me-2 text-success" aria-label="Filter by Category" v-model="filterCategory">
                 <option value="">Filter by Category</option>
                 <option value="Detox">Detox</option>
                 <option value="Immune Boost">Immune Boost</option>
                 <option value="Energize">Energizer</option>
               </select>
-              <select class="form-select" aria-label="Filter by Type" v-model="filterType">
+              <select class="form-select me-2 text-success" aria-label="Filter by Type" v-model="filterType">
                 <option value="">Filter by Type</option>
                 <option value="Juices">Juice</option>
                 <option value="Smoothies">Smoothies</option>
@@ -70,8 +73,8 @@
                   </ul>
                 </div>
                 <div class="part-2">
-                  <h3 class="product-title">{{ product.prodName }}</h3>
-                  <h4>R{{ product.price }}</h4>
+                  <h3 class="product-title text-success">{{ product.prodName }}</h3>
+                  <h4 class="text-success">R{{ product.price }}</h4>
                 </div>
               </div>
             </div>
@@ -157,7 +160,7 @@
   
 /* products */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -169,10 +172,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(-45deg, #d6ade2, #ec9ebc, #e9b5ee, #f1b9d0);
-  background-size: 300% 300%;
-  animation: gradient 15s ease infinite; */
-  
+  font-family: "Muli";
+  padding: 0;
 }
 @keyframes gradient {
 	0% {
@@ -204,7 +205,7 @@ a:hover {
 }
 
 .section-products {
-    padding: 80px 0 54px;
+    padding: 5px 0 54px;
 }
 
 .section-products .header2 {
@@ -245,23 +246,6 @@ a:hover {
 		height: 100%;
 		z-index: -1;
 		transition: all 0.3s;
-}
-
-.section-products .single-product .part-1 .discount,
-.section-products .single-product .part-1 .new {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    color: #ffffff;
-    background-color: #fe302f;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
-.section-products .single-product .part-1 .new {
-    left: 0;
-    background-color: #444444;
 }
 
 .section-products .single-product .part-1 ul {
@@ -317,6 +301,20 @@ a:hover {
   backdrop-filter: blur(15px);
   /* z-index: -1; */
 }
+
+.form-select{
+ width: 205px;
+ background-color: rgba(255, 255, 255, 0.1);
+ backdrop-filter: blur(15px);
+}
+
+.form-control{
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+
+
 
 </style>
   

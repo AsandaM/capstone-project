@@ -29,16 +29,16 @@
         <div class="slideshow-container">
           <div class="slides">
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/home1.png" alt="home" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/home1.png" alt="home1" class="w-90 h-90 object-cover">
             </div>
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/h8.png" alt="Image 1" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/h8.png" alt="home2" class="w-90 h-90 object-cover">
             </div>
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/h7.png" alt="Image 2" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/h7.png" alt="home3" class="w-90 h-90 object-cover">
             </div>
             <div class="image-container">
-              <img src="https://asandam.github.io/images/images_capstone/h10.png" alt="Image 2" class="w-100 h-100 object-cover">
+              <img src="https://asandam.github.io/images/images_capstone/h10.png" alt="home4" class="w-90 h-90 object-cover">
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
   
   #home {
     font-family: "Muli";
-    /* background-image: url('https://asandam.github.io/images/images_capstone/image9.jpg');
+    /* background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; */
@@ -59,7 +59,7 @@
   
   .h2 {
     position: relative;
-    z-index: 1; /* Ensures the text stays above the blurred background */
+    z-index: 1;
   }
   
   .w-100 {
@@ -87,15 +87,8 @@
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
-    backdrop-filter: blur(5px); /* Blur effect */
-    z-index: -1; /* Places the blurred background behind the text */
-    border-radius: 10px; /* Optional: matches container's rounded corners */
   }
   
-  img {
-    border: 50px solid rgba(255, 255, 255, 0.1);
-  }
 .slideshow-container {
   position: relative;
   overflow: hidden; /* Ensure that the sliding images stay within the container */

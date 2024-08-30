@@ -1,6 +1,6 @@
 <template>
   <section>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -61,15 +61,16 @@ export default {
 
 section {
   height: 100%;
-  /* border-bottom: 2px solid rgb(217, 247, 144); */
-  /* background-color: aquamarine; */
+}
+.navbar-collapse {
+  justify-content: center;
 }
 
+
 nav {
-  max-width: 800px;
   margin: 0 auto;
   padding: 0px 0;
-  background-color: azure;
+  background-color: transparent;
   border-radius: 50px;
 }
 
@@ -79,14 +80,14 @@ nav ul {
 
 nav ul li {
   display: inline-block;
+  font-weight: 100;
 }
 
 .nav-link {
   padding: 18px;
   font-family: "Muli";
   text-transform: uppercase;
-  color: rgb(74, 73, 73);
-  font-size: 18px;
+  font-size: 20px;
   text-decoration: none;
   display: block;
 }
