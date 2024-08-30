@@ -51,11 +51,16 @@
   
   #home {
     font-family: "Muli";
-    /* background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
+    background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center; */
+    background-position: center;
   }
+
+  nav {
+  padding: 40px;
+}
+
   
   .h2 {
     position: relative;
