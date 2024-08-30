@@ -39,16 +39,26 @@ const getProductDb = async (id) => {
     return data;
 };
 
-// delete git branch --set-upstream-to=origin/<branch> backend
+const getPackageDb = async (id) => {
+    let [[data]] = await pool.query("SELECT * FROM packages WHERE packageID = ?", [id]);
+    return data;
+};
+
+// delete item
 const deleteProductDb = async (id) => {
     await pool.query("DELETE FROM products WHERE prodID = ?", [id]);
 };
 
 // insert
-
 const insertProductDb = async (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions) => {
     let [data] = await pool.query(`INSERT INTO products (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions) VALUES (?,?,?,?,?,?,?,?)`,
         [prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions]);
+    return data;
+};
+
+const insertPackageDb = async (packageName, price, packageDesc, image, category, duration, usage_instructions) => {
+    let [data] = await pool.query(`INSERT INTO packages (packageName, price, packageDesc, image, category, duration, usage_instructions) VALUES (?,?,?,?,?,?,?)`,
+        [packageName, price, packageDesc, image, category, duration, usage_instructions]);
     return data;
 };
 
@@ -61,4 +71,4 @@ const editProductDb = async (prodName, price, prodDesc, image, category, quantit
 };
 
 
-export {getProductsDb, getProductDb, deleteProductDb, insertProductDb, editProductDb};
+export {getProductsDb, getProductDb, deleteProductDb, insertProductDb, editProductDb, insertPackageDb, getPackageDb};

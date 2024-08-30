@@ -1,7 +1,17 @@
-import {getProductsDb, getProductDb, deleteProductDb, insertProductDb, editProductDb} from '../model/productsDb.js'
+import {getProductsDb, getProductDb, deleteProductDb, insertProductDb, editProductDb, insertPackageDb, getPackageDb} from '../model/productsDb.js'
 
 // get all products
 const getProducts = async(req, res)=>{
+    try{
+        res.status(200).json(await getProductsDb())
+    } catch(err){
+        res.status(500).send('Error fetching products')
+        throw err
+        
+    }
+}
+
+const getPackage = async(req, res)=>{
     try{
         res.status(200).json(await getProductsDb())
     } catch(err){
@@ -33,6 +43,20 @@ const insertProduct = async(req, res)=>{
         
     } catch (err) {
         res.status(500).send('Error inserting a product')
+        throw err
+        
+    }
+}
+
+const insertPackage = async(req, res)=>{
+    let {packageName, price, packageDesc, image, category, duration, usage_instructions} = req.body
+
+    try {
+        await insertPackageDb(packageName, price, packageDesc, image, category, duration, usage_instructions)
+        res.status(200).json(await getPackageDb())
+        
+    } catch (err) {
+        res.status(500).send('Error inserting a packageuct')
         throw err
         
     }
@@ -82,4 +106,4 @@ const editProduct = async(req, res)=>{
 }
 
 
-export {getProducts, getProduct, insertProduct, deleteProduct, editProduct}
+export {getProducts, getProduct, insertProduct, deleteProduct, editProduct, insertPackage, getPackage}

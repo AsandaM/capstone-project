@@ -1,10 +1,11 @@
 import express from 'express'
-import { getProducts, getProduct, insertProduct, deleteProduct, editProduct} from '../controller/productsController.js'
+import { getProducts, getProduct, insertProduct, deleteProduct, editProduct, insertPackage} from '../controller/productsController.js'
 
 const router = express.Router()
 
 router.get('/',  getProducts)
 router.post('/', insertProduct)
+router.post('/package', insertPackage)
 
 router
     .route('/:id')
