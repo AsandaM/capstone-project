@@ -26,7 +26,7 @@
             <!-- Empty Column to Push Sort and Filter to the Right -->
             <div class="col-md-4"></div>
             <!-- Sort and Filter Options on the Right -->
-            <div class="col-md-4 d-flex justify-content-end mb-3">
+            <div class="col-md-4 d-flex justify-content-end mb-3"> 
               <!-- Sort Option -->
               <select class="form-select me-2 text-success" aria-label="Sort by" v-model="sortOption">
                 <option value="">Sort by</option>
@@ -174,6 +174,10 @@
   align-items: center;
   font-family: "Muli";
   padding: 0;
+  background-image: url('https://asandam.github.io/images/images_capstone/p7.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 @keyframes gradient {
 	0% {
@@ -311,6 +315,20 @@ a:hover {
 .form-control{
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
+}
+
+
+/* Media query for screens 560px and below */
+@media (max-width: 1125px) {
+  .col-md-4.d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .col-md-4.d-flex .form-select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 
 

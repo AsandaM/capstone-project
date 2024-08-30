@@ -1,6 +1,6 @@
 <template>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-success table-striped-columns">
           <thead>
             <tr>
               <th v-for="header in headers" :key="header.value">{{ header.text }}</th>
@@ -19,13 +19,13 @@
               <td colspan="4">
                 <nav aria-label="Page navigation example">
                   <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                      <a class="page-link" @click="prevPage" :disabled="page === 1">
+                    <li class="page-item w-10 h-10">
+                      <a class="page-link bg-success text-white" @click="prevPage" :disabled="page === 1">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" @click="nextPage" :disabled="page === totalPages">
+                    <li class="page-item w-10 h-10">
+                      <a class="page-link bg-success text-white" href="#" @click="nextPage" :disabled="page === totalPages">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
@@ -88,18 +88,25 @@
   
   <style scoped>
   table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f0f0f0;
-  }
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+  width: 25%; /* Ensures each column takes up an equal portion of the table */
+}
+
+.pagination .page-item .page-link {
+  font-size: 24px;
+}
   </style>
   

@@ -1,124 +1,102 @@
 <template>
-
     <div class="checkout">
         <header class="header">
-            <h3>Checkout</h3>
+            <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-3 ">Checkout</h1>
+            <div class="w-25 h-2 bg-success my-3"></div>
         </header>    
         <main class="main">
-            <section class="checkout-form">
-                <form action="#!" method="get" id="form">
-                    <h6>Contact information</h6>
-                    <div class="form-control">
-                        <label for="checkout-email"><span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-slate-700">
-                            Email</span>
-                        </label>
-                        <div>
-                            <span class="fa fa-envelope"></span>
-                            <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email...">
-                        </div>
-                    </div>
-                    <div class="form-control">
-                        <label for="checkout-phone">Phone</label>
-                        <div>
-                            <span class="fa fa-phone"></span>
-                            <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone...">
-                        </div>
-                    </div>
-                    <br>
-                    <h6>Shipping address</h6>
-                    <div class="form-control">
-                        <label for="checkout-name">Full name</label>
-                        <div>
-                            <span class="fa fa-user-circle"></span>
-                            <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name...">
-                        </div>
-                    </div>
-                    <div class="form-control">
-                        <label for="checkout-address">Address</label>
-                        <div>
-                            <span class="fa fa-home"></span>
-                            <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address...">
-                        </div>
-                    </div>
-                    <div class="form-control">
-                        <label for="checkout-city">City</label>
-                        <div>
-                            <span class="fa fa-building"></span>
-                            <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city...">
-                        </div>
-                    </div>
-                    <div class="form-group">
+            <div class="checkout-container">
+                <section class="checkout-form">
+                    <form action="#!" method="get" id="form">
+                        <h6>Contact information</h6>
                         <div class="form-control">
-                            <label for="checkout-country">Country</label>
+                            <label for="checkout-email font-weight-bold"><span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-slate-700">
+                                Email</span>
+                            </label>
                             <div>
-                                <span class="fa fa-globe"></span>
-                                <input type="text" name="checkout-country" id="checkout-country" placeholder="Your country..." list="country-list">
-                                <datalist id="country-list">
-                                    <option value="India"></option>
-                                    <option value="USA"></option>
-                                    <option value="Russia"></option>
-                                    <option value="Japan"></option>
-                                    <option value="Egypt"></option>
-                                </datalist>
+                                <span class="fa fa-envelope"></span>
+                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email...">
                             </div>
                         </div>
                         <div class="form-control">
-                            <label for="checkout-postal">Postal code</label>
+                            <label for="checkout-phone">Phone</label>
                             <div>
-                                <span class="fa fa-archive"></span>
-                                <input type="numeric" name="checkout-postal" id="checkout-postal" placeholder="Your postal code...">
-                </div>
+                                <span class="fa fa-phone"></span>
+                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone...">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-control checkbox-control">
-                        <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox">
-                        <label for="checkout-checkbox">Save this information for next time</label>
-                    </div>
-                    <div class="form-control-btn">
-                        <button>Continue</button>
-                    </div>
-                </form>
-            </section>
-    
-            <section class="checkout-details">
-                <div class="checkout-details-inner">
-                    <div class="checkout-lists">
-                        <div class="card">
-                            <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png" alt=""></div>
-                            <div class="card-details">
-                                <div class="card-name">Vintage Backbag</div>
-                                <div class="card-price">R54.99</div>
-                                <div class="card-wheel">
-                                    <button>-</button>
-                                    <span>1</span>
-                                    <button>+</button>
+                        <br>
+                        <h6>Shipping address</h6>
+                        <div class="form-control">
+                            <label for="checkout-name">Full name</label>
+                            <div>
+                                <span class="fa fa-user-circle"></span>
+                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name...">
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="checkout-address">Address</label>
+                            <div>
+                                <span class="fa fa-home"></span>
+                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address...">
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="checkout-city">City</label>
+                            <div>
+                                <span class="fa fa-building"></span>
+                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city...">
+                            </div>
+                        </div>
+                        <div class="form-control checkbox-control">
+                            <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox">
+                            <label for="checkout-checkbox">Save this information for next time</label>
+                        </div>
+                        <div class="form-control-btn">
+                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">Continue</button>
+                        </div>
+                    </form>
+                </section>
+        
+                <section class="checkout-details">
+                    <div class="checkout-details-inner">
+                        <div class="checkout-lists">
+                            <div class="card">
+                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png" alt=""></div>
+                                <div class="card-details">
+                                    <div class="card-name">Vintage Backbag</div>
+                                    <div class="card-price text-success">R54.99</div>
+                                    <div class="card-wheel">
+                                        <button>-</button>
+                                        <span>1</span>
+                                        <button>+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png" alt=""></div>
+                                <div class="card-details">
+                                    <div class="card-name">Levi Shoes</div>
+                                    <div class="card-price text-success">R74.99</div>
+                                    <div class="card-wheel">
+                                        <button>-</button>
+                                        <span>1</span>
+                                        <button>+</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png" alt=""></div>
-                            <div class="card-details">
-                                <div class="card-name">Levi Shoes</div>
-                                <div class="card-price">R74.99</div>
-                                <div class="card-wheel">
-                                    <button>-</button>
-                                    <span>1</span>
-                                    <button>+</button>
-                                </div>
-                            </div>
+                        <div class="checkout-shipping">
+                            <h6>Shipping</h6>
+                            <p>R19</p>
+                        </div>
+                        <div class="checkout-total">
+                            <h6>Total</h6>
+                            <p>R148.98</p>
                         </div>
                     </div>
-                    <div class="checkout-shipping">
-                        <h6>Shipping</h6>
-                        <p>R19</p>
-                    </div>
-                    <div class="checkout-total">
-                        <h6>Total</h6>
-                        <p>R148.98</p>
-                    </div>
-                </div>
-            </section>
-    
+                </section>
+            </div>
         </main>
     </div>
 </template>
@@ -130,22 +108,25 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
 }
-
 
 .checkout {
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
     width: 100%; 
-    background-color: #d3f1a4;
+    background-image: url('https://asandam.github.io/images/images_capstone/cart2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     color: #4E5150;
     margin: 0 auto;
     padding: 50px 0 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
-    height: 5%;
+    height: 10%;
     margin-bottom: 30px;
 }
 
@@ -156,20 +137,45 @@
 }
 
 .main {
-    height: 85%;
+    flex: 1;
     display: flex;
-    column-gap: 100px;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    height: calc(100vh - 10% - 50px); /* Adjust the height to leave space for the header and footer */
+}
+
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .checkout-container {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.checkout-form, .checkout-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .checkout-form {
-    width: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 20px;
 }
 
 #form h6 {
     font-size: 20px;
     font-weight: 500;
+    background-color: #F2994A;
+    padding: 5px;
+    border-radius: 20px;
 }
 
 .checkout-form .form-control {
@@ -181,10 +187,10 @@
 }
 
 .checkout-form .form-control label:not([for="checkout-checkbox"]) {
-    /* display: block; */
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 19px;
+    font-weight: 500;
     margin-bottom: 2px;
+    color: black;
 }
 
 .checkout-form .form-control input:not([type="checkbox"]) {
@@ -192,7 +198,7 @@
     padding: 10px 10px 10px 40px;
     border-radius: 10px;
     outline: none;
-    border: 0.2px solid #26846485;
+    border: 1.2px solid #26846485;
     font-size: 10px;
     font-weight: 700;
 }
@@ -227,9 +233,7 @@
 
 .checkout-form .form-control-btn button {
     padding: 10px 25px;
-    font-size: 12px;
-    color: #fff;
-    background: #F2994A;
+    font-size: 13px;
     border: 0;
     border-radius: 7px;
     letter-spacing: 0.5px;
@@ -238,13 +242,14 @@
     margin-bottom: 20px;
 }
 
-
 .checkout-details .checkout-details-inner {
-    background: #dcf1d6;
+    background: transparent;
+    border: 1px solid #145103;
     border-radius: 10px;
     padding: 20px;
     width: 100%;
     margin: 0 auto;
+    height: 100%;
 }
 
 .checkout-details .checkout-lists {
@@ -278,7 +283,7 @@
 .checkout-details .checkout-lists .card .card-details {
     display: flex;
     flex-direction: column;
-    margin: 5px 20px 10px ;
+    margin: 5px 20px 10px;
     justify-content: center;
     align-items: center;
 }
@@ -295,7 +300,6 @@
     margin-top: 5px;
     text-align: center;
 }
-
 
 .card-wheel {
     margin-top: 17px;
@@ -327,14 +331,22 @@
     display: flex;
     font-size: 16px;
     padding: 5px 0;
-    border-top: 1px solid #BDBDBD;
+    border-top: 1px solid #036528;
     justify-content: space-between;
 }
 
 .checkout-details .checkout-shipping p,
 .checkout-details .checkout-total p {
     font-size: 20px;
-    font-weight: 500;
+    color: rgb(9, 9, 9);
+    margin: 10px;
+}
+
+.checkout-details .checkout-shipping h6,
+.checkout-details .checkout-total h6 {
+    font-size: 20px;
+    color: rgb(9, 9, 9);
+    margin: 10px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -367,5 +379,4 @@
         width: 100%;
     }
 }
-
 </style>

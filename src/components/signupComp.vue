@@ -10,8 +10,6 @@
           <h1 id="account">Create Your Account and Shop Wellness</h1>
           <input type="text" v-model="username" placeholder="Firstname" required />
           <input type="text" v-model="email" placeholder="Lastname" required />
-          <input type="number" v-model="password" placeholder="Age" required />
-          <input type="text" v-model="username" placeholder="Gender" required />
           <input type="email" v-model="email" placeholder="Email" required />
           <input type="password" v-model="password" placeholder="Password" required />
           <button type="submit">Sign Up</button>
@@ -275,8 +273,7 @@ input {
 }
 
 .overlay {
-  background: -webkit-linear-gradient(to right, #165e2c, #165e2c);
-  background: linear-gradient(to right, #165e2c, #165e2c);
+  background-image: url('https://asandam.github.io/images/images_capstone/p15.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -324,5 +321,6 @@ input {
 .container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
+
 
 </style>
