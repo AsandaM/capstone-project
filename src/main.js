@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import VueCookies from 'vue-cookies'
 
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).use(store).use(router).use(VueCookies, {expire: '3h'}).mount('#app')

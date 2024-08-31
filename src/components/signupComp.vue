@@ -8,11 +8,11 @@
       <div class="form-container sign-up-container">
         <form @submit.prevent="register" id="register">
           <h1 id="account">Create Your Account and Shop Wellness</h1>
-          <input type="text" v-model="username" placeholder="Firstname" required />
-          <input type="text" v-model="email" placeholder="Lastname" required />
-          <input type="email" v-model="email" placeholder="Email" required />
-          <input type="password" v-model="password" placeholder="Password" required />
-          <button type="submit">Sign Up</button>
+          <input type="text" v-model="firstName" placeholder="Firstname" required />
+          <input type="text" v-model="lastName" placeholder="Lastname" required />
+          <input type="email" v-model="emailAdd" placeholder="Email" required />
+          <input type="password" v-model="userPass" placeholder="Password" required />
+          <button type="submit" @click="register">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -21,7 +21,7 @@
           <input type="email" v-model="email" placeholder="Email" required />
           <input type="password" v-model="password" placeholder="Password" required />
           <a href="#">Forgot your password?</a>
-          <button type="submit">Sign In</button>
+          <button type="submit" @click="signIn">Sign In</button>
         </form>
       </div>
       <div class="overlay-container">
@@ -47,10 +47,16 @@ export default {
   name: 'SignupLogin',
   data() {
     return {
-      email: '',
-      username: '',
-      password: '',
+      firstName: '',
+      lastName: '',
+      emailAdd: '',
+      userPass: '',
     };
+  },
+  computed:{
+    users(){
+      return this.$store.state.users || [];
+    },
   },
   methods: {
     togglePanel() {
@@ -61,9 +67,12 @@ export default {
       this.$emit('close');
     },
     register() {
+      this.$store.dispatch('addUsers', this.$data);
       alert('Register');
+      this.closeModal();
     },
     signIn() {
+      this.$store.dispatch('login', { email: this.email, password: this.password });
       alert('Sign In');
     },
   },
