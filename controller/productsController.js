@@ -35,10 +35,10 @@ const getProduct = async(req, res)=>{
 // insert product
 
 const insertProduct = async(req, res)=>{
-    let {prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions} = req.body
+    let {prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients} = req.body
 
     try {
-        await insertProductDb(prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions)
+        await insertProductDb(prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients)
         res.status(200).json(await getProductDb())
         
     } catch (err) {
@@ -77,29 +77,29 @@ const deleteProduct = async(req, res)=>{
 
 // update product
 const editProduct = async(req, res)=>{
-    let {prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions} = req.body
+    let {prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients} = req.body
     let product = await getProductDb(req.params.id)
-
-    console.log(product);
     
-
     if(!product){
         res.status(404).send('Product not found')
     }
     
     prodName? prodName = prodName: prodName = product.prodName
-    quantity? quantity = quantity: quantity = product.quantity
-    price? price = price: price = product.price
-    category? category = category: category = product.category
-    image? image = image: image = product.image
     prodDesc? prodDesc = prodDesc: prodDesc = product.prodDesc
+    type? type = type: type = product.type
+    image? image = image: image = product.image
+    category? category = category: category = product.category
+    price? price = price: price = product.price
+    duration_days? duration_days = duration_days: duration_days = product.duration_days
+    calories? calories = calories: calories = product.calories
+    benefits? benefits = benefits: benefits = product.benefits
     ingredients? ingredients = ingredients: ingredients = product.ingredients
-    usage_instructions? usage_instructions = usage_instructions: usage_instructions = product.usage_instructions
+    instructions? instructions = instructions: instructions = instructions
 
     try {
-        await editProductDb(prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions, req.params.id)    
+        await editProductDb(prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients, req.params.id)    
         res.status(200).send(await getProductsDb())
-    } catch (error) {
+    } catch (err) {
         res.status(500).send('Error editing a product')
         throw err
     }

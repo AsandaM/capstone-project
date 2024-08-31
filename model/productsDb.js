@@ -3,32 +3,7 @@ import { pool } from "../config/config.js";
 // get all
 
 const getProductsDb = async () => {
-    let [data] = await pool.query(`SELECT 
-            *
-        FROM 
-            products p
-
-        UNION
-
-        SELECT 
-            pk.packageID AS id, 
-            pk.packageName AS name, 
-            pk.price, 
-            pk.packageDesc AS description, 
-            pk.image, 
-            pk.category, 
-            NULL AS quantity, 
-            GROUP_CONCAT(p.prodName SEPARATOR ', ') AS ingredients,
-            pk.usage_instructions, 
-            'package' AS type 
-        FROM 
-            packages pk
-        LEFT JOIN 
-            package_products pp ON pk.packageID = pp.package_id
-        LEFT JOIN 
-            products p ON pp.product_id = p.prodID
-        GROUP BY 
-            pk.packageID;`);
+    let [data] = await pool.query(`SELECT * FROM products`);
         return data;
 };
 
@@ -50,9 +25,9 @@ const deleteProductDb = async (id) => {
 };
 
 // insert
-const insertProductDb = async (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions) => {
-    let [data] = await pool.query(`INSERT INTO products (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions) VALUES (?,?,?,?,?,?,?,?)`,
-        [prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions]);
+const insertProductDb = async (prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients) => {
+    let [data] = await pool.query(`INSERT INTO products (prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+        [prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients]);
     return data;
 };
 
@@ -64,10 +39,10 @@ const insertPackageDb = async (packageName, price, packageDesc, image, category,
 
 // update
 
-const editProductDb = async (prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions, id) => {
-    await pool.query(`UPDATE products  SET prodName = ?, price = ?, prodDesc = ?, image = ?, category = ?, 
-                    quantity = ?, ingredients = ?, usage_instructions = ? WHERE prodID = ?`, 
-                    [prodName, price, prodDesc, image, category, quantity, ingredients, usage_instructions, id,]);
+const editProductDb = async (prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients, id) => {
+    await pool.query(`UPDATE products  SET prodName = ?, prodDesc = ?, type = ?, image = ?, category = ?, price = ?,
+                    duration_days = ?, calories = ?, benefits = ?, instructions = ?, ingredients = ? WHERE prodID = ?`, 
+                    [prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients, id,]);
 };
 
 

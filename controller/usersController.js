@@ -24,7 +24,12 @@ const getUser = async(req, res)=>{
 }
 
 const insertUser = async (req, res) => {
-    let { firstName, lastName, userAge, gender, emailAdd, userPass, userProfile } = req.body;
+    let { firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole } = req.body;
+
+    // Assign default profile image if none is provided
+    if (userProfile === undefined) {
+        userProfile = "https://codjoelmayer.github.io/projectImages/images/profile-Image.png";
+    }
     
     try {
         // Check if the user already exists
@@ -36,7 +41,7 @@ const insertUser = async (req, res) => {
         // Hash the password and insert the new user
         hash(userPass, 10, async (err, hashedP) => {
             if (err) throw err;
-            await insertUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile);
+            await insertUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole);
             res.status(200).json(await getUsersDb());
         });
     } catch (error) {
@@ -63,7 +68,7 @@ const deleteUser = async(req, res)=>{
 }
 
 const editUser = async(req, res)=>{
-    let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile} = req.body
+    let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole} = req.body
     let user = await getUserDb(req.params.id)
 
     if(!user){
@@ -74,20 +79,21 @@ const editUser = async(req, res)=>{
     firstName? firstName = firstName: firstName = user.firstName
     lastName? lastName = lastName: lastName = user.lastName
     userAge? userAge = userAge: userAge = user.userAge
-    gender? gender = gender: gender = user.gender  = use
+    gender? gender = gender: gender = user.gender
     emailAdd? emailAdd = emailAdd: emailAdd = user.emailAdd
     userProfile? userProfile = userProfile: userProfile = user.userProfile
+    userRole? userRole = userRole: userRole = user.userRole
     
     try {
         if(userPass!=''){
         hash(userPass, 10, async(err, hashedP)=>{
             if(err) throw err
             userPass = hashedP
-            await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, req.params.id)    
+            await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, req.params.id)    
         })
     }   else{
         userPass = user.userPass
-        await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, req.params.id)    
+        await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)    
     }
          res.status(200).send(await getUsersDb())
         
@@ -100,7 +106,9 @@ const editUser = async(req, res)=>{
 
 const loginUser = (req,res)=>{
     try {
-        res.status(200).json({message:"You have signed in ", token:req.body.token})    
+        res.status(200).json({message:"You have signed in ", token:req.body.token})  
+        console.log(req.body.token);
+          
     } catch (err) {
         res.status(500).send('Error loging in')
     }
