@@ -96,26 +96,19 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 *,
+*,
 ::before,
 ::after {
   box-sizing: border-box;
 }
 
-body {
-  color: #222;
-  line-height: 1.5;
-  margin: 0 auto;
-  max-width: 50rem;
-  padding: 2.5rem 1.25rem;
-}
-
 .tabBlock {
   font-family: "Muli";
-  background-image: url('https://asandam.github.io/images/images_capstone/p11.jpg');
+  background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .tabBlock-tabs {

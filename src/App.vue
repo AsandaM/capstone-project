@@ -1,20 +1,24 @@
 <template>
   <navbarComp/>
   <router-view/>
+  <footerComp/>
 </template>
 
 <script>
 import navbarComp from '@/components/navbarComp.vue'
+import footerComp from '@/components/footerComp.vue'
 export default {
   components: {
-    navbarComp
+    navbarComp,
+    footerComp
   }
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Muli";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

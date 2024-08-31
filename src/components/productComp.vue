@@ -43,11 +43,12 @@
               </select>
               <select class="form-select me-2 text-success" aria-label="Filter by Type" v-model="filterType">
                 <option value="">Filter by Type</option>
-                <option value="Juices">Juice</option>
-                <option value="Smoothies">Smoothies</option>
+                <option value="Juice">Juice</option>
+                <option value="Smoothie">Smoothies</option>
               </select>
             </div>
           </div>
+          <productModal v-if="isModalOpen" :product="selectedProduct" @close="closeModal"></productModal>
           <div class="row">
             <!-- Single Product -->
             <div
@@ -67,7 +68,7 @@
                     <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                       <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                     </svg></a></li>
-                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16" @click="openModal(product)">
                       <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707"/>
                     </svg></a></li>
                   </ul>
@@ -85,13 +86,19 @@
   </template>
   
   <script>
+  import productModal from './productModal.vue';
   export default {
+    components: {
+      productModal
+    },
     data() {
       return {
         searchQuery: '',
         sortOption: '',
         filterCategory: '',
-        filterType: ''
+        filterType: '',
+        isModalOpen: false,
+        selectedProduct: null
       };
     },
     computed: {
@@ -145,6 +152,14 @@
         },
         addToCart(prodID){
             this.$store.dispatch('addToCart', prodID)
+        },
+        openModal(product){
+          this.selectedProduct = product
+            this.isModalOpen = true
+        },
+        closeModal(){
+            this.isModalOpen = false
+            this.selectedProduct = null
         }
     },
     mounted(){
@@ -174,7 +189,7 @@
   align-items: center;
   font-family: "Muli";
   padding: 0;
-  background-image: url('https://asandam.github.io/images/images_capstone/p7.jpg');
+  background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -330,9 +345,5 @@ a:hover {
     margin-bottom: 10px;
   }
 }
-
-
-
-
 </style>
   

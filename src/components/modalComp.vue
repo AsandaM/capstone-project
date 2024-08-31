@@ -67,7 +67,10 @@ export default {
   width: 80%;
   max-width: 920px;
   margin: 100px auto;
-  background: #91b23c;
+  background-image: url('https://asandam.github.io/images/images_capstone/p6.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
   animation-name: modalbox;
   animation-duration: 0.3s;
   animation-timing-function: ease-out;
@@ -96,7 +99,12 @@ button {
   text-decoration: none;
   border: 1px solid #ffc107;
   outline: none;
-  color: #ffc107;
+  color: #fbfbf9;
   cursor: pointer;
+}
+
+button:hover {
+  background: #ffc107;
+  color: black;
 }
 </style>

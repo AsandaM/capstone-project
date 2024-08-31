@@ -1,5 +1,12 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+// import { useCookies } from 'vue-cookies'
+import router from '@/router'
+
+// const { $cookies } = useCookies()
+
+axios.defaults.withCredentials = true
+// axios.defaults.headers = $cookies.get('token')
 
 
 /*eslint-disable */
@@ -9,7 +16,8 @@ export default createStore({
     products:null, 
     users: null,
     cart: null,
-    addProduct: null
+    addProduct: null,
+    addUsers: null,
 
   },
   getters: {
@@ -35,6 +43,9 @@ export default createStore({
     },
     setAddPackage(state, payload){
       state.addPackage = payload
+    },
+    setAddUsers(state, payload){
+      state.addUsers = payload
     }
   },
   actions: {
@@ -78,6 +89,20 @@ export default createStore({
         commit('setEditProduct', data)
         // console.log(data);
       },
+      async addUsers({commit}, user){
+        let {data} = await axios.post('http://localhost:5005/users/signup', user)
+        commit('setAddUsers', data)
+        // console.log(data);
+      },
+      async login({commit}, user){
+        let {data} = await axios.post('http://localhost:5005/users/login', user)
+        commit('setAddUsers', data)
+        console.log(data);
+        // $cookies.set('token', data.token)
+
+        await router.push('/')
+        location.reload()
+      }
   },
   modules: {
   }

@@ -96,9 +96,9 @@
   
 .slideshow-container {
   position: relative;
-  overflow: hidden; /* Ensure that the sliding images stay within the container */
-  width: 100%; /* Set a width that suits your layout */
-  height: 100%; /* Adjust height as needed */
+  overflow: hidden; 
+  width: 100%; 
+  height: 100%; 
 }
 
 .slides {

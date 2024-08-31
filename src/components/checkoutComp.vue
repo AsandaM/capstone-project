@@ -14,15 +14,14 @@
                                 Email</span>
                             </label>
                             <div>
-                                <span class="fa fa-envelope"></span>
-                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email...">
+                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email address">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-phone">Phone</label>
                             <div>
-                                <span class="fa fa-phone"></span>
-                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone...">
+                                
+                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number">
                             </div>
                         </div>
                         <br>
@@ -30,22 +29,19 @@
                         <div class="form-control">
                             <label for="checkout-name">Full name</label>
                             <div>
-                                <span class="fa fa-user-circle"></span>
-                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name...">
+                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-address">Address</label>
                             <div>
-                                <span class="fa fa-home"></span>
-                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address...">
+                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-city">City</label>
                             <div>
-                                <span class="fa fa-building"></span>
-                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city...">
+                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city">
                             </div>
                         </div>
                         <div class="form-control checkbox-control">
@@ -114,7 +110,7 @@
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
     width: 100%; 
-    background-image: url('https://asandam.github.io/images/images_capstone/cart2.jpg');
+    background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
