@@ -17,7 +17,7 @@ export default createStore({
     users: null,
     cart: null,
     addProduct: null,
-    addUsers: null,
+    addUser: null,
 
   },
   getters: {
@@ -32,32 +32,23 @@ export default createStore({
     setEditProduct(state, payload){
       state.products = payload
     },
-    setUsers(state, payload){
-      state.users = payload
-    },
     setCart(state, payload){
       state.cart = payload
     },
     setAddProduct(state, payload){
       state.addProduct = payload
     },
-    setAddPackage(state, payload){
-      state.addPackage = payload
+    setUsers(state, payload){
+      state.users = payload
     },
-    setAddUsers(state, payload){
-      state.addUsers = payload
+    setAddUser(state, payload){
+      state.addUser = payload
     }
   },
   actions: {
    async getProducts({commit}){
       let {data} = await axios.get('http://localhost:5005/products')
       commit('setProducts', data)
-      // console.log(data);
-      
-    },
-   async getUsers({commit}){
-      let {data} = await axios.get('http://localhost:5005/users')
-      commit('setUsers', data)
       // console.log(data);
       
     },
@@ -73,12 +64,6 @@ export default createStore({
         // console.log(data);
         
       },
-      async addPackage({commit}, info){
-        let {data} = await axios.post('http://localhost:5005/products/package', info)
-        commit('setAddPackage', data)
-        // console.log(data);
-        
-      },
       async deleteProduct({commit}, prodID){
         let {data} = await axios.delete(`http://localhost:5005/products/${prodID}`)
         commit('setDeleteProduct', data)
@@ -89,7 +74,12 @@ export default createStore({
         commit('setEditProduct', data)
         // console.log(data);
       },
-      async addUsers({commit}, user){
+      async getUsers({commit}){
+        let {data} = await axios.get('http://localhost:5005/users')
+        commit('setUsers', data)
+        // console.log(data);
+      },
+      async addUser({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/signup', user)
         commit('setAddUsers', data)
         // console.log(data);

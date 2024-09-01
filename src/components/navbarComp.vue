@@ -5,7 +5,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
           <div class="navbar-center">
             <ul class="navbar-nav">
               <li class="nav-item" :class="{ active: $route.path === '/' }">
@@ -31,6 +31,9 @@
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
                 <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
+              </li>
+              <li class="nav-item" :class="{ active: $route.path === '/wishlist' }">
+                <router-link to="/wishlist" class="nav-link text-success"><i class="fas fa-heart me-2"></i></router-link>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/admin' }">
                 <router-link to="/admin" class="nav-link text-success"><i class="fas fa-cogs me-3"></i></router-link>
