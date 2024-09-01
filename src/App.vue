@@ -26,10 +26,6 @@ export default {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center; */
 }
 
 /* nav {
@@ -42,6 +38,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  background-color: #df8910;
 }
 </style>

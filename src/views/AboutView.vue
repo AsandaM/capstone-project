@@ -1,73 +1,75 @@
 <template>
-  <section id="about">
-    <div class="container">
-      <header class="section-header text-center mb-5 pb-2">
-        <h1 class="display-4 display-lg-2 font-weight-bold text-success">About Us</h1>
-        <div class="w-25 h-2 bg-success my-3"></div>
-        <p>
-          Welcome to NutrifyNow, where health meets convenience. We are passionate about empowering individuals to achieve their health and wellness goals through the power of natural, nutrient-rich juices and smoothies.
-        </p>
-      </header>
-
-      <div class="row about-cols">
-        <div class="col-md-4 wow fadeInUp">
-          <div class="about-col bg-success">
-            <div class="img">
-              <img src="" alt="" class="img-fluid" />
-              <div class="icon">
-                <i class="ion-ios-speedometer-outline"></i>
+  <main>
+    <section id="about">
+      <div class="container">
+        <header class="section-header text-center mb-5 pb-2">
+          <h1 class="display-4 display-lg-2 font-weight-bold text-success">About Us</h1>
+          <div class="w-25 h-2 bg-success my-3"></div>
+          <p>
+            Welcome to NutrifyNow, where health meets convenience. We are passionate about empowering individuals to achieve their health and wellness goals through the power of natural, nutrient-rich juices and smoothies.
+          </p>
+        </header>
+  
+        <div class="row about-cols">
+          <div class="col-md-4 wow fadeInUp">
+            <div class="about-col bg-success">
+              <div class="img">
+                <img src="" alt="" class="img-fluid" />
+                <div class="icon">
+                  <i class="ion-ios-speedometer-outline"></i>
+                </div>
               </div>
+              <h2 class="title">Our Mission</h2>
+              <p class="text-center">
+                To provide high-quality, natural products that help you heal, improve performance, lose weight, and gain strength. We believe in the transformative power of clean, healthy living, and we're here to support your journey every step of the way.
+              </p>
             </div>
-            <h2 class="title">Our Mission</h2>
-            <p class="text-center">
-              To provide high-quality, natural products that help you heal, improve performance, lose weight, and gain strength. We believe in the transformative power of clean, healthy living, and we're here to support your journey every step of the way.
-            </p>
           </div>
-        </div>
-
-        <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-          <div class="about-col">
-            <div class="img">
-              <img src="https://asandam.github.io/images/M.png" alt="" class="img-fluid" />
-              <div class="icon">
-                <i class="ion-ios-list-outline"></i>
+  
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="about-col">
+              <div class="img">
+                <img src="https://asandam.github.io/images/M.png" alt="" class="img-fluid" />
+                <div class="icon">
+                  <i class="ion-ios-list-outline"></i>
+                </div>
               </div>
+              <h2 class="title">Our Products</h2>
+              <p class="text-center">
+                We offer natural juices, smoothies, soups, and shakes made from fresh ingredients. Each product is crafted to boost your health and well-being. Enjoy delicious, nutrient-packed options that support your goals.
+              </p>
             </div>
-            <h2 class="title">Our Products</h2>
-            <p class="text-center">
-              We offer natural juices, smoothies, soups, and shakes made from fresh ingredients. Each product is crafted to boost your health and well-being. Enjoy delicious, nutrient-packed options that support your goals.
-            </p>
           </div>
-        </div>
-
-        <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-          <div class="about-col bg-success">
-            <div class="img">
-              <img src="https://asandam.github.io/images/M.png" alt="" class="img-fluid" />
-              <div class="icon">
-                <i class="ion-ios-eye-outline"></i>
+  
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="about-col bg-success">
+              <div class="img">
+                <img src="https://asandam.github.io/images/M.png" alt="" class="img-fluid" />
+                <div class="icon">
+                  <i class="ion-ios-eye-outline"></i>
+                </div>
               </div>
+              <h2 class="title">Why Choose Us?</h2>
+              <p class="text-center">
+                We pride ourselves on delivering more than just products—we offer a commitment to your health and well-being. Our team is passionate about helping you reach your goals through personalized service and expert guidance.
+              </p>
             </div>
-            <h2 class="title">Why Choose Us?</h2>
-            <p class="text-center">
-              We pride ourselves on delivering more than just products—we offer a commitment to your health and well-being. Our team is passionate about helping you reach your goals through personalized service and expert guidance.
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Call To Action Section -->
-  <section id="call-to-action" class="wow fadeIn">
-    <div class="container text-center">
-      <h3 class="text-success">Looking to Improve Your Health and Wellness?</h3>
-      <p class="text-center">
-        Discover our range of nutritious juices and smoothies designed to enhance your well-being, boost your energy, and support your fitness goals.
-      </p>
-      <router-link to="/products" class="cta-btn">Shop Now</router-link>
-    </div>
-  </section>
+    </section>
+  
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="wow fadeIn">
+      <div class="container text-center">
+        <h3 class="text-success">Looking to Improve Your Health and Wellness?</h3>
+        <p class="text-center">
+          Discover our range of nutritious juices and smoothies designed to enhance your well-being, boost your energy, and support your fitness goals.
+        </p>
+        <router-link to="/products" class="cta-btn">Shop Now</router-link>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -77,6 +79,11 @@ export default {
 </script>
 
 <style scoped>
+
+main{
+  background: linear-gradient(rgba(21, 86, 112, 0.1), rgba(0, 0, 0, 0.1)), url('https://asandam.github.io/images/images_capstone/p9.jpg') fixed center center;
+  background-size: cover;
+}
 #about {
   padding: 60px 0 40px 0;
   position: relative;
@@ -89,8 +96,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(rgba(21, 86, 112, 0.1), rgba(0, 0, 0, 0.1)), url('https://asandam.github.io/images/images_capstone/p9.jpg') fixed center center;
-  background-size: cover;
+  background: transparent;
   z-index: 9;
 }
 
@@ -167,7 +173,8 @@ header p{
 }
 
 #call-to-action {
-  background-color: rgb(240, 238, 233);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
   padding: 60px 0;
 }
 
