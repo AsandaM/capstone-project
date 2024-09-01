@@ -6,36 +6,37 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item" :class="{ active: $route.path === '/' }">
+          <div class="navbar-center">
+            <ul class="navbar-nav">
+              <li class="nav-item" :class="{ active: $route.path === '/' }">
               <router-link to="/" class="nav-link text-success">HOME</router-link>
             </li>
             <li class="nav-item" :class="{ active: $route.path === '/about' }">
               <router-link to="/about" class="nav-link text-success">ABOUT</router-link>
             </li>
             <li class="nav-item" :class="{ active: $route.path === '/products' }">
-              <router-link to="/products" class="nav-link text-success">PRODUCTS</router-link>
+              <router-link to="/products" class="nav-link text-success">SHOP</router-link>
             </li>
-            <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
-              <router-link to="/checkout" class="nav-link text-success">CHECKOUT</router-link>
+            <li class="nav-item" :class="{ active: $route.path === '/contact' }">
+              <router-link to="/contact" class="nav-link text-success">contact</router-link>
             </li>
-            <li class="nav-item" :class="{ active: $route.path === '/signup' }">
-              <a v-if="!user.isLoggedIn" href="#" class="nav-link text-success nav-icon-link" @click="showModal">
-                <i class="fas fa-user"></i>
-              </a>
-              <div v-else class="nav-link text-success nav-icon-link user-profile" @click="toggleUserMenu">
-                <img :src="user.profilePicture" alt="User Profile" class="user-image">
-                <span>Welcome, {{ user.name }}</span>
-                <div v-if="isUserMenuVisible" class="user-menu">
-                  <a href="#" @click="editProfile">Edit Profile</a>
-                  <a href="#" @click="logout">Logout</a>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item" :class="{ active: $route.path === '/admin' }">
-              <router-link to="/admin" class="nav-link text-success">ADMIN</router-link>
-            </li>
-          </ul>
+            </ul>
+          </div>
+          <div class="navbar-right">
+            <ul class="navbar-nav">
+              <li class="nav-item" :class="{ active: $route.path === '/signup' }">
+                <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">
+                  <i class="fas fa-user me-2"></i>
+                </a>
+              </li>
+              <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
+                <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
+              </li>
+              <li class="nav-item" :class="{ active: $route.path === '/admin' }">
+                <router-link to="/admin" class="nav-link text-success"><i class="fas fa-cogs me-3"></i></router-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -91,15 +92,22 @@ export default {
 section {
   height: 100%;
 }
-.navbar-collapse {
-  justify-content: center;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0px;
+
 }
 
-nav {
-  margin: 0 auto;
-  padding: 0px 0;
-  background-color: transparent;
-  border-radius: 50px;
+.navbar-left {
+  flex: 1;
+}
+
+.navbar-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
 }
 
 nav ul {
@@ -125,39 +133,4 @@ nav ul li {
   text-decoration-color: rgba(7, 84, 39, 0.5);
 }
 
-.nav-link.active {
-  background-color: seagreen;
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.user-image {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.user-menu {
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.user-menu a {
-  display: block;
-  padding: 5px 10px;
-  color: #333;
-  text-decoration: none;
-}
-
-.user-menu a:hover {
-  background-color: #f0f0f0;
-}
 </style>

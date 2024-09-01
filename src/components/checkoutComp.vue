@@ -58,9 +58,9 @@
                     <div class="checkout-details-inner">
                         <div class="checkout-lists">
                             <div class="card">
-                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo1.png" alt=""></div>
+                                <div class="card-image"><img src="https://asandam.github.io/images/images_capstone/image26.jpg" alt=""></div>
                                 <div class="card-details">
-                                    <div class="card-name">Vintage Backbag</div>
+                                    <div class="card-name">product name</div>
                                     <div class="card-price text-success">R54.99</div>
                                     <div class="card-wheel">
                                         <button>-</button>
@@ -69,10 +69,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-image"><img src="https://rvs-checkout-page.onrender.com/photo2.png" alt=""></div>
+                            <!-- <div class="card">
+                                <div class="card-image"><img src="https://asandam.github.io/images/images_capstone/image33.jpg" alt=""></div>
                                 <div class="card-details">
-                                    <div class="card-name">Levi Shoes</div>
+                                    <div class="card-name">product name</div>
                                     <div class="card-price text-success">R74.99</div>
                                     <div class="card-wheel">
                                         <button>-</button>
@@ -80,10 +80,10 @@
                                         <button>+</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="checkout-shipping">
-                            <h6>Shipping</h6>
+                            <h6>Delivery</h6>
                             <p>R19</p>
                         </div>
                         <div class="checkout-total">

@@ -36,7 +36,7 @@
                           </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body">{{ product.prodDesc }}</div>
+                          <div class="accordion-body text-start">{{ product.prodDesc }}</div>
                         </div>
                       </div>
                       <div class="accordion-item">
@@ -46,7 +46,7 @@
                           </button>
                         </h2>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body">{{ product.instructions }}</div>
+                          <div class="accordion-body text-start">{{ product.instructions }}</div>
                         </div>
                       </div>
                       <div class="accordion-item">
@@ -56,7 +56,7 @@
                           </button>
                         </h2>
                         <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body">{{ product.ingredients }}</div>
+                          <div class="accordion-body text-start">{{ product.ingredients }}</div>
                         </div>
                       </div>
                     </div>
