@@ -24,10 +24,11 @@ const checkUser = async(req, res, next)=>{
     let userInfo =await loginDb(emailAdd)
     let hashedPassword = userInfo.userPass
     let userRole = userInfo.userRole
+    let userID = userInfo.userID
    
     compare(userPass, hashedPassword, (err, result)=>{
         if(result == true){
-            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole}, process.env.SECRET_KEY, {expiresIn: '1h'})
+            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole, userID:userID}, process.env.SECRET_KEY, {expiresIn: '1h'})
             req.body.token = token
             next()
             return
