@@ -8,6 +8,8 @@ config()
 
 const emailCheck = async(req, res, next)=>{
     const {emailAdd} = req.body
+    console.log(req.body);
+    
     let user = await loginDb(emailAdd)
     if(user){
         next()
@@ -19,11 +21,13 @@ const emailCheck = async(req, res, next)=>{
 
 const checkUser = async(req, res, next)=>{
     const {emailAdd, userPass} = req.body
-    let hashedPassword = (await loginDb(emailAdd)).userPass
+    let userInfo =await loginDb(emailAdd)
+    let hashedPassword = userInfo.userPass
+    let userRole = userInfo.userRole
    
     compare(userPass, hashedPassword, (err, result)=>{
         if(result == true){
-            let token = jwt.sign({emailAdd:emailAdd}, process.env.SECRET_KEY, {expiresIn: '1h'})
+            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole}, process.env.SECRET_KEY, {expiresIn: '1h'})
             req.body.token = token
             next()
             return

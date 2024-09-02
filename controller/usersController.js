@@ -30,6 +30,9 @@ const insertUser = async (req, res) => {
     if (userProfile === undefined) {
         userProfile = "https://codjoelmayer.github.io/projectImages/images/profile-Image.png";
     }
+    if (userRole === undefined) {
+        userRole = "user";
+    }
     
     try {
         // Check if the user already exists
