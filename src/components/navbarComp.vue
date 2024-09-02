@@ -1,4 +1,4 @@
-<template>
+<template> 
   <section>
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
@@ -28,10 +28,10 @@
                 <a href="#" class="nav-link text-success nav-icon-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fas fa-user me-2"></i></a>
                 <ul class="dropdown-menu">
                   <li class="nav-item">
-                    <a href="#" class="dropdown-item" @click="logout">logout</a>
+                    <a href="#" class="dropdown-item" @click="logout">Logout</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="dropdown-item">Edit profile</a>
+                    <router-link to="/profile" href="#" class="dropdown-item">View profile</router-link>
                   </li>
                 </ul>
               </div>
@@ -63,7 +63,7 @@
         </div>
       </div>
     </nav>
-    <signup-comp v-if="isModalVisible" @close="closeModal" />
+    <signup-comp v-if="isModalVisible" @close="closeModal"/>
   </section>
 </template>
 
@@ -105,6 +105,12 @@ export default {
       // Logic to logout
       this.$cookies.remove('token')
       this.$cookies.remove('userRole')
+      Swal.fire({
+        icon: 'success',
+        title: 'Sip back later!',
+        showConfirmButton: false,
+        timer: 1500
+      });
     },
     showAdminAlert() {
       Swal.fire({
@@ -122,6 +128,11 @@ export default {
           confirmButton: 'custom-swal-confirm-button' // Custom class for the confirm button
         }
       });
+    },
+    openSignInModal(){
+      this.isModalVisible = true;
+      const container = document.getElementById('container');
+      container.classList.toggle('right-panel-active');
     }
   },
   computed:{

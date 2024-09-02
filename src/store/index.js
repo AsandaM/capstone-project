@@ -80,9 +80,14 @@ export default createStore({
         commit('setUsers', data)
         // console.log(data);
       },
+      async getUser({commit}, userID){
+        let {data} = await axios.get(`http://localhost:5005/users/${userID}`)
+        commit('setUser', data)
+        // console.log(data);
+      },
       async addUser({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/signup', user)
-        commit('setAddUsers', data)
+        commit('setAddUser', data)
         // console.log(data);
       },
       async login({commit}, user){
@@ -92,8 +97,8 @@ export default createStore({
         $cookies.set('token', data.token)
         let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
         $cookies.set('userRole', userRole.userRole)
-        // console.log(userRole.userRole);
-        // console.log(userRole.userRole == 'user');
+        $cookies.set('userID', data.userID)
+      
         
         
 
