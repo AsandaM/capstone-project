@@ -71,8 +71,8 @@ export default {
       alert('Register');
       this.closeModal();
     },
-    signIn() {
-      this.$store.dispatch('login', { email: this.email, password: this.password });
+   async signIn() {
+     await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
       alert('Sign In');
     },
   },

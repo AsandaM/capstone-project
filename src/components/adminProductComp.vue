@@ -1,5 +1,6 @@
 <template>
   <button type="button" class="btn btn-success flex-container" @click="openAddProductModal(product)">Add new product</button>
+  <!-- Admin table -->
   <div class="table-responsive">
     <table class="table table-success table-striped-columns">
       <thead>
@@ -53,6 +54,7 @@
       </tfoot>
     </table>
 
+    <!-- Add new product -->
     <modal-comp :isModalOpen="isAddProductModalOpen" @close="closeModal" @submit="addProduct">
       <template #modal-header>
         <h2>Add New Product</h2>
@@ -62,28 +64,29 @@
         <div class="row gy-2 gx-3 align-items-center">
           <div class="col-auto">
             <label class="visually-hidden" for="prodName">Product Name</label>
-            <input v-model="formData.prodName" type="text" class="form-control" id="prodName" placeholder="Product Name"/>
+            <input v-model="form.prodName" type="text" class="form-control" id="prodName" placeholder="Product Name"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="prodDesc">Description</label>
-            <input v-model="formData.prodDesc" type="text" class="form-control" id="prodDesc" placeholder="Product Description"/>
+            <input v-model="form.prodDesc" type="text" class="form-control" id="prodDesc" placeholder="Product Description"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="type">Type</label>
-            <select v-model="formData.type" class="form-select" id="type" placeholder="Type">
+            <select v-model="form.type" class="form-select" id="type" aria-label="Type">
+              <option value="">Type</option>
               <option value="juice">Juice</option>
               <option value="smoothie">Smoothie</option>
             </select>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="image">Image</label>
-            <input v-model="formData.image" type="text" class="form-control" id="image" placeholder="Image URL"/>
+            <input v-model="form.image" type="text" class="form-control" id="image" placeholder="Image URL"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="category">Category</label>
-            <select  class="form-select" aria-label="Category" v-model="formData.category">
-              <option selected>Category</option>
-              <option value="detox">Detox</option>
+            <select  class="form-select" aria-label="Category" v-model="form.category">
+              <option value="">Category</option>
+              <option value="Detox">Detox</option>
               <option value="Weight Loss">Weight Loss</option>
               <option value="Immune Boost">Immune Boost</option>
               <option value="Performance">Performance</option>
@@ -94,34 +97,33 @@
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="price">Price</label>
-            <input v-model="formData.price" type="decimal" class="form-control" id="price" placeholder="Price"/>
+            <input v-model="form.price" type="decimal" class="form-control" id="price" placeholder="Price"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="duration_days">Duration days</label>
-            <input v-model="formData.duration_days" type="number" class="form-control" id="duration_days" placeholder="Duration days"/>
+            <input v-model="form.duration_days" type="number" class="form-control" id="duration_days" placeholder="Duration days"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="calories">Calories</label>
-            <input v-model="formData.calories" type="number" class="form-control" id="calories" placeholder="Calories"/>
+            <input v-model="form.calories" type="number" class="form-control" id="calories" placeholder="Calories"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="benefits">Benefits</label>
-            <input v-model="formData.benefits" type="text" class="form-control" id="benefits" placeholder="Benefits"/>
+            <input v-model="form.benefits" type="text" class="form-control" id="benefits" placeholder="Benefits"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="quantity">Instructions</label>
-            <input v-model="formData.instructions" type="text" class="form-control" id="instructions" placeholder="Instructions"/>
+            <input v-model="form.instructions" type="text" class="form-control" id="instructions" placeholder="Instructions"/>
           </div>
           <div class="col-auto">
             <label class="visually-hidden" for="quantity">Ingredients</label>
-            <input v-model="formData.ingredients" type="text" class="form-control" id="ingredients" placeholder="Ingredients"/>
+            <input v-model="form.ingredients" type="text" class="form-control" id="ingredients" placeholder="Ingredients"/>
           </div>  
         </div>
       </template>
     </modal-comp>
 
     <!-- Edit products -->
-
     <modal-comp :isModalOpen="isEditProductModalOpen" @close="closeModal" @submit="editProduct">
       <template #modal-header>
         <h2>Edit Product</h2>
@@ -140,8 +142,8 @@
           <div class="col-auto">
             <label class="visually-hidden" for="type">Type</label>
             <select v-model="formData.type" class="form-select" id="type" placeholder="Type">
-              <option value="juice">Juice</option>
-              <option value="smoothie">Smoothie</option>
+              <option value="Juice">Juice</option>
+              <option value="Smoothie">Smoothie</option>
             </select>
           </div>
           <div class="col-auto">
@@ -151,14 +153,13 @@
           <div class="col-auto">
             <label class="visually-hidden" for="category">Category</label>
             <select  class="form-select" aria-label="Category" v-model="formData.category">
-              <option selected>Category</option>
-              <option value="detox">Detox</option>
-              <option value="weight_loss">Weight Loss</option>
-              <option value="immune_boost">Immune Boost</option>
-              <option value="performance">Performance</option>
-              <option value="muscle_gain">Muscle Gain</option>
-              <option value="maintain_weight">Maintain Weight</option>
-              <option value="stay_clean">Stay Clean</option>
+              <option value="Detox">Detox</option>
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Immune Boost">Immune Boost</option>
+              <option value="Performance">Performance</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="Maintain Weight">Maintain Weight</option>
+              <option value="Stay Clean">Stay Clean</option>
             </select>
           </div>
           <div class="col-auto">
@@ -224,6 +225,19 @@ export default {
         instructions: '',
         ingredients: ''
       },
+      form:{
+        prodName: '',
+        prodDesc: '',
+        type: '',
+        image: '',
+        category: '',
+        price: '',
+        duration_days: '',
+        calories: '',
+        benefits: '',
+        instructions: '',
+        ingredients: ''
+      }
     };
   },
   computed: {
@@ -269,7 +283,7 @@ export default {
       this.isEditProductModalOpen = false;
     },
     addProduct() {
-      this.$store.dispatch('addProduct', this.formData);
+      this.$store.dispatch('addProduct', this.form);
       this.closeModal();
     },
     editProduct() {

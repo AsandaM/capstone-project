@@ -24,20 +24,43 @@
           </div>
           <div class="navbar-right">
             <ul class="navbar-nav">
-              <li class="nav-item" :class="{ active: $route.path === '/signup' }">
-                <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">
-                  <i class="fas fa-user me-2"></i>
-                </a>
-              </li>
+              <div v-if="$cookies.get('token')">
+               <li>
+                  <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown link
+                    </a>
+
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </div>
+              <div v-else>
+                <li class="nav-item" :class="{ active: $route.path === '/signup' }">
+                  <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">
+                    <i class="fas fa-user me-2"></i>
+                  </a>
+                </li>
+              </div>
               <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
                 <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/wishlist' }">
                 <router-link to="/wishlist" class="nav-link text-success"><i class="fas fa-heart me-2"></i></router-link>
               </li>
-              <li class="nav-item" :class="{ active: $route.path === '/admin' }">
+              <div v-if="$cookies.get('userRole')">
+                hello
+              </div>
+              <div v-else>
+                <li class="nav-item" :class="{ active: $route.path === '/admin' }">
                 <router-link to="/admin" class="nav-link text-success"><i class="fas fa-cogs me-3"></i></router-link>
               </li>
+              </div>
+              
             </ul>
           </div>
         </div>

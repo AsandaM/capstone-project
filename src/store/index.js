@@ -1,15 +1,16 @@
+/*eslint-disable */
 import { createStore } from 'vuex'
 import axios from 'axios'
-// import { useCookies } from 'vue-cookies'
+import { useCookies } from 'vue-cookies'
 import router from '@/router'
 
 // const { $cookies } = useCookies()
 
 axios.defaults.withCredentials = true
-// axios.defaults.headers = $cookies.get('token')
+axios.defaults.headers = $cookies.get('token')
 
 
-/*eslint-disable */
+
 
 export default createStore({
   state: {
@@ -86,12 +87,16 @@ export default createStore({
       },
       async login({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/login', user)
-        commit('setAddUsers', data)
+        commit('setAddUser', data)
         console.log(data);
-        // $cookies.set('token', data.token)
+        $cookies.set('token', data.token)
+        let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
+        $cookies.set('useRole', userRole.userRole)
+        console.log(userRole.userRole);
+        
 
         await router.push('/')
-        location.reload()
+        // location.reload()
       }
   },
   modules: {
