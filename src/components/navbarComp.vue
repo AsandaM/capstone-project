@@ -54,7 +54,7 @@
                 </div>
                 <div v-else>
                   <li class="nav-item">
-                    <a href="#" class="nav-link text-success nav-icon-link"><i class="fas fa-cogs me-3"></i></a>
+                    <a href="#" class="nav-link text-success nav-icon-link" @click="showAdminAlert"><i class="fas fa-cogs me-3"></i></a>
                   </li>
                 </div>
               </li>
@@ -69,6 +69,7 @@
 
 <script>
 import signupComp from './signupComp.vue';
+import Swal from 'sweetalert2'
 
 export default {
   components: {
@@ -104,13 +105,30 @@ export default {
       // Logic to logout
       this.$cookies.remove('token')
       this.$cookies.remove('userRole')
+    },
+    showAdminAlert() {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Access Denied',
+        text: 'Only admins can access this page. Please log in as an admin.',
+        confirmButtonText: 'OK',
+        background: '#f8d7da', // Custom background color
+        iconColor: '#721c24', // Custom icon color
+        confirmButtonColor: '#d33', // Custom button color
+        customClass: {
+          popup: 'custom-swal-popup', // Custom class for the popup
+          title: 'custom-swal-title', // Custom class for the title
+          content: 'custom-swal-content', // Custom class for the content
+          confirmButton: 'custom-swal-confirm-button' // Custom class for the confirm button
+        }
+      });
     }
   },
   computed:{
     isAdmin(){
       return this.$cookies.get('userRole') == 'admin'
     },
-  }
+  },
 };
 </script>
 
@@ -160,5 +178,21 @@ nav ul li {
   text-decoration: underline;
   text-decoration-color: rgba(7, 84, 39, 0.5);
 }
+/* Custom SweetAlert2 styles */
+.custom-swal-popup {
+  border: 2px solid #721c24;
+}
 
+.custom-swal-title {
+  color: #721c24;
+}
+
+.custom-swal-content {
+  color: #721c24;
+}
+
+.custom-swal-confirm-button {
+  background-color: #d33;
+  color: #fff;
+}
 </style>

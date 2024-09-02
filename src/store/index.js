@@ -88,12 +88,12 @@ export default createStore({
       async login({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/login', user)
         commit('setAddUser', data)
-        console.log(data);
+        // console.log(data);
         $cookies.set('token', data.token)
         let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
         $cookies.set('userRole', userRole.userRole)
-        console.log(userRole.userRole);
-        console.log(userRole.userRole == 'user');
+        // console.log(userRole.userRole);
+        // console.log(userRole.userRole == 'user');
         
         
 
