@@ -91,8 +91,10 @@ export default createStore({
         console.log(data);
         $cookies.set('token', data.token)
         let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
-        $cookies.set('useRole', userRole.userRole)
+        $cookies.set('userRole', userRole.userRole)
         console.log(userRole.userRole);
+        console.log(userRole.userRole == 'user');
+        
         
 
         await router.push('/')
