@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
   name: 'SignupLogin',
   data() {
@@ -67,13 +68,20 @@ export default {
       this.$emit('close');
     },
     register() {
-      this.$store.dispatch('addUsers', this.$data);
-      alert('Register');
+      this.$store.dispatch('addUser', this.$data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Account Created',
+        text: 'You have successfully created an account. Please log in.',
+        confirmButtonText: 'OK'
+      })
       this.closeModal();
+      location.reload();
     },
    async signIn() {
      await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
-      alert('Sign In');
+     this.closeModal();
+     location.reload();
     },
   },
 };
