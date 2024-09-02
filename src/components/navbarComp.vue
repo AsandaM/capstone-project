@@ -24,20 +24,16 @@
           </div>
           <div class="navbar-right">
             <ul class="navbar-nav">
-              <div v-if="$cookies.get('token')">
-               <li>
-                  <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown link
-                    </a>
-
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </div>
-                </li>
+              <div v-if="$cookies.get('token')" class="dropdown-center">
+                <a href="#" class="nav-link text-success nav-icon-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fas fa-user me-2"></i></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item" @click="logout">logout</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">Edit profile</a>
+                  </li>
+                </ul>
               </div>
               <div v-else>
                 <li class="nav-item" :class="{ active: $route.path === '/signup' }">
@@ -52,15 +48,16 @@
               <li class="nav-item" :class="{ active: $route.path === '/wishlist' }">
                 <router-link to="/wishlist" class="nav-link text-success"><i class="fas fa-heart me-2"></i></router-link>
               </li>
-              <div v-if="$cookies.get('userRole')">
-                hello
-              </div>
-              <div v-else>
-                <li class="nav-item" :class="{ active: $route.path === '/admin' }">
-                <router-link to="/admin" class="nav-link text-success"><i class="fas fa-cogs me-3"></i></router-link>
+              <li class="nav-item" :class="{ active: $route.path === '/admin' }">
+                <div v-if="isAdmin">
+                  <router-link to="/admin" class="nav-link text-success" :disabled="!isAdmin"><i class="fas fa-cogs me-3"></i></router-link>
+                </div>
+                <div v-else>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link text-success nav-icon-link"><i class="fas fa-cogs me-3"></i></a>
+                  </li>
+                </div>
               </li>
-              </div>
-              
             </ul>
           </div>
         </div>
@@ -105,9 +102,14 @@ export default {
     },
     logout() {
       // Logic to logout
-      this.user.isLoggedIn = false;
-      this.isUserMenuVisible = false;
+      this.$cookies.remove('token')
+      this.$cookies.remove('userRole')
     }
+  },
+  computed:{
+    isAdmin(){
+      return this.$cookies.get('userRole') == 'admin'
+    },
   }
 };
 </script>
