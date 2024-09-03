@@ -12,12 +12,12 @@ axios.defaults.headers = $cookies.get('token')
 export default createStore({
   state: {
     products:null, 
+    addProduct: null,
     users: null,
     user: null,
-    cart: null,
-    addProduct: null,
     addUser: null,
-    userProfile: null
+    userProfile: null,
+    cart: null
 
   },
   getters: {
@@ -62,14 +62,16 @@ export default createStore({
       
     },
    async addToCart({commit}, prodID){
-      let {data} = await axios.post('http://localhost:5005/products/cart', {prodID})
+    console.log(prodID);
+    
+      let {data} = await axios.post('http://localhost:5005/cart', {prodID})
       commit('setCart', data)
-      // console.log(data);
+      console.log(data);
       
     },
     async addProduct({commit}, product){
         let {data} = await axios.post('http://localhost:5005/products', product)
-        commit('setAddProduct', data)
+        commit('setProducts', data)
         // console.log(data);
         
       },
@@ -96,7 +98,7 @@ export default createStore({
       },
       async addUser({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/signup', user)
-        commit('setAddUser', data)
+        commit('setUsers', data)
         // console.log(data);
       },
       async login({commit}, user){
@@ -108,21 +110,26 @@ export default createStore({
         $cookies.set('userRole', userRole.userRole)
         // $cookies.set('userID', data.userID)
         // console.log(data.userID);
-        
-      
-        
-        
-
+   
         await router.push('/')
         // location.reload()
       },
-      async editUser({commit}, user){
-        console.log(user);
+      async editUser({commit}, data){
+
+        let {userID, info} = data
         
-        let {data} = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
+         await axios.patch(`http://localhost:5005/users/${userID}`, info)
         console.log(data);
-        commit('setEditUser', data)
+        console.log(info);
+        
+        commit('setUsers', data)
+      },
+      async deleteUser({commit}, userID){
+        let {data} = await axios.delete(`http://localhost:5005/users/${userID}`)
+        commit('setUsers', data)
+        // console.log(data);
       }
+      
   },
   modules: {
   }
