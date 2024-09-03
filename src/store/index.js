@@ -9,16 +9,15 @@ import router from '@/router'
 axios.defaults.withCredentials = true
 axios.defaults.headers = $cookies.get('token')
 
-
-
-
 export default createStore({
   state: {
     products:null, 
     users: null,
+    user: null,
     cart: null,
     addProduct: null,
     addUser: null,
+    userProfile: null
 
   },
   getters: {
@@ -39,11 +38,20 @@ export default createStore({
     setAddProduct(state, payload){
       state.addProduct = payload
     },
+    setUser(state, payload){
+      state.user = payload
+    },
     setUsers(state, payload){
       state.users = payload
     },
+    setProfile(state, payload){
+      state.userProfile = payload
+    },
     setAddUser(state, payload){
       state.addUser = payload
+    },
+    setEditUser(state, payload){
+      state.user = payload
     }
   },
   actions: {
@@ -76,13 +84,14 @@ export default createStore({
         // console.log(data);
       },
       async getUsers({commit}){
-        let {data} = await axios.get('http://localhost:5005/users')
+        let {data} = await axios.get(`http://localhost:5005/users/`)
         commit('setUsers', data)
         // console.log(data);
       },
-      async getUser({commit}, userID){
-        let {data} = await axios.get(`http://localhost:5005/users/${userID}`)
-        commit('setUser', data)
+      async userProfile({commit}){
+
+        let {data} = await axios.get(`http://localhost:5005/users/profile`)
+        commit('setProfile', data)
         // console.log(data);
       },
       async addUser({commit}, user){
@@ -97,13 +106,22 @@ export default createStore({
         $cookies.set('token', data.token)
         let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
         $cookies.set('userRole', userRole.userRole)
-        $cookies.set('userID', data.userID)
+        // $cookies.set('userID', data.userID)
+        // console.log(data.userID);
+        
       
         
         
 
         await router.push('/')
         // location.reload()
+      },
+      async editUser({commit}, user){
+        console.log(user);
+        
+        let {data} = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
+        console.log(data);
+        commit('setEditUser', data)
       }
   },
   modules: {
