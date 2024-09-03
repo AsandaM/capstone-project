@@ -1,4 +1,4 @@
-import {getUsersDb, getUserDb, deleteUserDb, insertUserDb, editUserDb, getUserByEmailDb} from '../model/usersDb.js'
+import {getUsersDb, getUserDb, deleteUserDb, insertUserDb, editUserDb, getUserByEmailDb, loginDb} from '../model/usersDb.js'
 import {hash} from 'bcrypt'
 
 const getUsers = async(req, res)=>{
@@ -22,6 +22,19 @@ const getUser = async(req, res)=>{
         throw err
     }
 }
+const fetchUser = async(req, res)=>{
+    try{
+
+        const user = await loginDb(req.user);
+        console.log(user);
+        
+        res.send(await getUserDb(user.userID));   
+    } catch(err){
+        res.status(500).send('Error fetching products')
+        throw err
+    }
+}
+
 
 const insertUser = async (req, res) => {
     let { firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole } = req.body;
@@ -74,6 +87,9 @@ const editUser = async(req, res)=>{
     let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole} = req.body
     let user = await getUserDb(req.params.id)
 
+    console.log(user);
+    
+
     if(!user){
         res.status(404).send('User not found')
     }
@@ -84,8 +100,12 @@ const editUser = async(req, res)=>{
     userAge? userAge = userAge: userAge = user.userAge
     gender? gender = gender: gender = user.gender
     emailAdd? emailAdd = emailAdd: emailAdd = user.emailAdd
+    userPass? userPass = userPass: userPass = user.userPass
     userProfile? userProfile = userProfile: userProfile = user.userProfile
     userRole? userRole = userRole: userRole = user.userRole
+
+    // await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)  
+    // res.send('Okay')
     
     try {
         if(userPass!=''){
@@ -110,11 +130,11 @@ const editUser = async(req, res)=>{
 const loginUser = (req,res)=>{
     try {
         res.status(200).json({message:"You have signed in ", token:req.body.token})  
-        console.log(req.body.token);
+        // console.log(req.body.token);
           
     } catch (err) {
         res.status(500).send('Error loging in')
     }
 }
 
-export {getUsers, getUser, insertUser, deleteUser, editUser, loginUser}
+export {getUsers, getUser, insertUser, deleteUser, editUser, loginUser, fetchUser}

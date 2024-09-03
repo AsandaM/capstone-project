@@ -8,7 +8,7 @@ config()
 
 const emailCheck = async(req, res, next)=>{
     const {emailAdd} = req.body
-    console.log(req.body);
+    // console.log(req.body);
     
     let user = await loginDb(emailAdd)
     if(user){
@@ -24,11 +24,11 @@ const checkUser = async(req, res, next)=>{
     let userInfo =await loginDb(emailAdd)
     let hashedPassword = userInfo.userPass
     let userRole = userInfo.userRole
-    let userID = userInfo.userID
+    // let userID = userInfo.userID
    
     compare(userPass, hashedPassword, (err, result)=>{
         if(result == true){
-            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole, userID:userID}, process.env.SECRET_KEY, {expiresIn: '1h'})
+            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole}, process.env.SECRET_KEY, {expiresIn: '1h'})
             req.body.token = token
             next()
             return
@@ -39,4 +39,27 @@ const checkUser = async(req, res, next)=>{
 
 }
 
-export {checkUser, emailCheck}
+const verifyAToken = (req, res, next)=>{
+    let {cookie} = req.headers
+    //checks if the token exits first
+    let token = cookie && cookie.split('=')[1]
+    console.log(token.split(';')[0])
+    let token1 = token.split(';')[0]
+
+
+    jwt.verify(token1, process.env.SECRET_KEY, (err, decoded)=>{
+        // console.log(token);
+        
+        if(err){
+            res.json({message: 'Token is invalid'})
+            return
+        }
+        // req.body.username = decoded.username
+        // req.body = decoded.username
+        req.user = decoded.emailAdd
+        console.log(req.user);
+        next()       
+    })
+}
+
+export {checkUser, emailCheck, verifyAToken}
