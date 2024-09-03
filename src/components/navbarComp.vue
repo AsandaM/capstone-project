@@ -46,7 +46,7 @@
                 <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/wishlist' }">
-                <router-link to="/wishlist" class="nav-link text-success"><i class="fas fa-heart me-2"></i></router-link>
+                <a to="/wishlist" class="nav-link text-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ><i class="fas fa-heart me-2"></i></a>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/admin' }">
                 <div v-if="isAdmin">
@@ -63,6 +63,37 @@
         </div>
       </div>
     </nav>
+
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Offcanva for wishlist -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        ...
+      </div>
+    </div>
     <signup-comp v-if="isModalVisible" @close="closeModal"/>
   </section>
 </template>
