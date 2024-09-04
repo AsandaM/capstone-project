@@ -3,6 +3,8 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import { useCookies } from 'vue-cookies'
 import router from '@/router'
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 // const { $cookies } = useCookies()
 
@@ -17,7 +19,8 @@ export default createStore({
     user: null,
     addUser: null,
     userProfile: null,
-    cart: null
+    cart: null,
+    userCart: null
 
   },
   getters: {
@@ -32,11 +35,14 @@ export default createStore({
     setEditProduct(state, payload){
       state.products = payload
     },
+    setAddProduct(state, payload){
+      state.addProduct = payload
+    },
     setCart(state, payload){
       state.cart = payload
     },
-    setAddProduct(state, payload){
-      state.addProduct = payload
+    setUserCart(state, payload){
+      state.userCart = payload
     },
     setUser(state, payload){
       state.user = payload
@@ -61,12 +67,17 @@ export default createStore({
       // console.log(data);
       
     },
+   async getCart({commit}, userID){
+      let {data} = await axios.get(`http://localhost:5005/cart/${userID}`)
+      commit('setUserCart', data)
+      // console.log(data);
+      
+    },
    async addToCart({commit}, prodID){
-    console.log(prodID);
-    
+
       let {data} = await axios.post('http://localhost:5005/cart', {prodID})
       commit('setCart', data)
-      console.log(data);
+      // console.log(data);
       
     },
     async addProduct({commit}, product){
@@ -104,6 +115,8 @@ export default createStore({
       async login({commit}, user){
         let {data} = await axios.post('http://localhost:5005/users/login', user)
         commit('setAddUser', data)
+        console.log(data);
+        
         // console.log(data);
         $cookies.set('token', data.token)
         let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
