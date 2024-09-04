@@ -143,7 +143,10 @@ export default {
         title: 'Sip back later!',
         showConfirmButton: false,
         timer: 1500
-      });
+      }).then(() => {
+        this.$router.push('/')
+        location.reload()
+      })
     },
     showAdminAlert() {
       Swal.fire({
