@@ -91,7 +91,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        ...
+        <offcanva-comp/>
       </div>
     </div>
     <signup-comp v-if="isModalVisible" @close="closeModal"/>
@@ -101,10 +101,12 @@
 <script>
 import signupComp from './signupComp.vue';
 import Swal from 'sweetalert2'
+import offcanvaComp from './offcanvaComp.vue';
 
 export default {
   components: {
-    signupComp
+    signupComp,
+    offcanvaComp
   },
   data() {
     return {

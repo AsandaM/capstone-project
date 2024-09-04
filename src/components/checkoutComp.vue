@@ -55,30 +55,18 @@
                 <section class="checkout-details">
                     <div class="checkout-details-inner">
                         <div class="checkout-lists">
-                            <div class="card">
-                                <div class="card-image"><img src="https://asandam.github.io/images/images_capstone/image26.jpg" alt=""></div>
+                            <div class="card" v-for="cart in userCart" :key="cart.cartID">
+                                <div class="card-image"><img :src="cart.image" alt=""></div>
                                 <div class="card-details">
-                                    <div class="card-name">product name</div>
-                                    <div class="card-price text-success">R54.99</div>
+                                    <div class="card-name">{{ cart.prodName }}</div>
+                                    <div class="card-price text-success">{{ cart.price }}</div>
                                     <div class="card-wheel">
                                         <button>-</button>
-                                        <span>1</span>
+                                        <span>{{cart.quantity}}</span>
                                         <button>+</button>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="card">
-                                <div class="card-image"><img src="https://asandam.github.io/images/images_capstone/image33.jpg" alt=""></div>
-                                <div class="card-details">
-                                    <div class="card-name">product name</div>
-                                    <div class="card-price text-success">R74.99</div>
-                                    <div class="card-wheel">
-                                        <button>-</button>
-                                        <span>1</span>
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="checkout-shipping">
                             <h6>Delivery</h6>
@@ -86,7 +74,7 @@
                         </div>
                         <div class="checkout-total">
                             <h6>Total</h6>
-                            <p>R148.98</p>
+                            <p>R</p>
                         </div>
                     </div>
                 </section>
@@ -94,6 +82,29 @@
         </main>
     </div>
 </template>
+
+<script>
+export default{
+    computed:{
+        userCart(){
+          return this.$store.state.userCart
+      },
+    //   totalPrice(){
+    //     return this.$store.state.userCart.reduce((total, item)=>{
+    //         return total + item.price * item.quantity;
+    //     }, 0)
+    },
+    methods: {
+        getUserCart(){
+            this.$store.dispatch('getCart', this.userID)
+        }
+    },
+
+    mounted() {
+        this.getUserCart()
+    },
+}
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
