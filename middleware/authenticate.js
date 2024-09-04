@@ -24,11 +24,11 @@ const checkUser = async(req, res, next)=>{
     let userInfo =await loginDb(emailAdd)
     let hashedPassword = userInfo.userPass
     let userRole = userInfo.userRole
-    // let userID = userInfo.userID
+    let userID = userInfo.userID
    
     compare(userPass, hashedPassword, (err, result)=>{
         if(result == true){
-            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole}, process.env.SECRET_KEY, {expiresIn: '1h'})
+            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole,userID:userID}, process.env.SECRET_KEY, {expiresIn: '1h'})
             req.body.token = token
             next()
             return
@@ -43,7 +43,9 @@ const verifyAToken = (req, res, next)=>{
     let {cookie} = req.headers
     //checks if the token exits first
     let token = cookie && cookie.split('=')[1]
-    console.log(token.split(';')[0])
+    console.log(token);
+    
+    // console.log(token.split(';')[0])
     let token1 = token.split(';')[0]
 
 
@@ -56,6 +58,9 @@ const verifyAToken = (req, res, next)=>{
         }
         // req.body.username = decoded.username
         // req.body = decoded.username
+        req.body.userID = decoded.userID
+        console.log(decoded);
+        
         req.user = decoded.emailAdd
         console.log(req.user);
         next()       

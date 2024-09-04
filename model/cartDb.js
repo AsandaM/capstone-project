@@ -6,7 +6,12 @@ const getCartDb = async()=>{
 }
 
 const getCartByUserDb = async(userID)=>{
-    let [data] = await pool.query('SELECT * FROM cart WHERE userID = ?', [userID])
+    let [data] = await pool.query(`select c.cartID, c.prodID, p.prodName, p.price, p.image, c.quantity
+                                        from cart c
+                                        join 
+                                        products p on c.prodID = p.prodID
+                                        where c.userID = ?
+                                        order by c.cartID;`, [userID])
     return data
 }
 

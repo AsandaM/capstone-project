@@ -1,4 +1,5 @@
 import {getCartDb, getCartByUserDb, getCartByProductDb, editCArtDb, deleteCartDb, insertCartDb} from '../model/cartDb.js'
+import { loginDb } from '../model/usersDb.js'
 
 // get all cart
 const getCart = async(req, res)=>{
@@ -14,7 +15,9 @@ const getCart = async(req, res)=>{
 // get cart by user
 const getCartByUser = async(req, res)=>{
     try {
-        res.status(200).json(await getCartByUserDb(req.params.userID))
+        const user = await loginDb(req.user)
+
+        res.status(200).json(await getCartByUserDb(user.userID))
         
     } catch (err) {
         res.status(500).send('Error fetching a single cart')
@@ -36,7 +39,9 @@ const getCartByProduct = async(req, res)=>{
 // insert cart
 const insertCart = async(req, res)=>{
     let {userID, prodID, quantity} = req.body
-
+    if (!quantity) {
+        quantity=1
+    } 
     try {
         await insertCartDb(userID, prodID, quantity)
         res.status(200).json(await getCartDb())

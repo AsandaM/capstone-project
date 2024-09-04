@@ -26,7 +26,7 @@ const fetchUser = async(req, res)=>{
     try{
 
         const user = await loginDb(req.user);
-        console.log(user);
+        // console.log(user);
         
         res.send(await getUserDb(user.userID));   
     } catch(err){
@@ -87,7 +87,7 @@ const editUser = async(req, res)=>{
     let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole} = req.body
     let user = await getUserDb(req.params.id)
 
-    console.log(user);
+    // console.log(user);
     
 
     if(!user){
@@ -100,7 +100,7 @@ const editUser = async(req, res)=>{
     userAge? userAge = userAge: userAge = user.userAge
     gender? gender = gender: gender = user.gender
     emailAdd? emailAdd = emailAdd: emailAdd = user.emailAdd
-    userPass? userPass = userPass: userPass = user.userPass
+    // userPass? userPass = userPass: userPass = user.userPass
     userProfile? userProfile = userProfile: userProfile = user.userProfile
     userRole? userRole = userRole: userRole = user.userRole
 
@@ -109,12 +109,15 @@ const editUser = async(req, res)=>{
     
     try {
         if(userPass!=''){
+            console.log(userPass+1);
         hash(userPass, 10, async(err, hashedP)=>{
             if(err) throw err
             userPass = hashedP
             await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, req.params.id)    
         })
     }   else{
+        console.log(userPass+2);
+        
         userPass = user.userPass
         await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)    
     }
