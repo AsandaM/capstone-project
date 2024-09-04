@@ -1,4 +1,4 @@
-import {getCartDb, getCartByUserDb, getCartByProductDb, editCArtDb, deleteCartDb, insertCartDb} from '../model/cartDb.js'
+import {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb} from '../model/cartDb.js'
 import { loginDb } from '../model/usersDb.js'
 
 // get all cart
@@ -6,7 +6,7 @@ const getCart = async(req, res)=>{
     try{
         res.status(200).json(await getCartDb())
     } catch(err){
-        res.status(500).send('Error fetching cart')
+        res.status(500).send({message:'Error fetching cart'})
         throw err
         
     }
@@ -20,7 +20,7 @@ const getCartByUser = async(req, res)=>{
         res.status(200).json(await getCartByUserDb(user.userID))
         
     } catch (err) {
-        res.status(500).send('Error fetching a single cart')
+        res.status(500).send({message:'Error fetching a single cart'})
         throw err
     }
 }
@@ -31,34 +31,52 @@ const getCartByProduct = async(req, res)=>{
         res.status(200).json(await getCartByProductDb(req.params.prodID))
         
     } catch (err) {
-        res.status(500).send('Error fetching a single cart')
+        res.status(500).send({message:'Error fetching a single cart'})
         throw err
     }
 }
 
 // insert cart
-const insertCart = async(req, res)=>{
-    let {userID, prodID, quantity} = req.body
+const insertCart = async(req, res) => {
+    let {userID, prodID, quantity} = req.body;
     if (!quantity) {
-        quantity=1
-    } 
+        quantity = 1;
+    }
+
     try {
-        await insertCartDb(userID, prodID, quantity)
-        res.status(200).json(await getCartDb())
-        
+        // Check if the product is already in the cart for this user
+        const cartItems = await getCartByUserDb(userID);
+        const existingProduct = cartItems.find(item => item.prodID === prodID);
+
+        if (existingProduct) {
+            // If the product exists, increment the quantity
+            const newQuantity = existingProduct.quantity + quantity;
+            await editCartDb(newQuantity, existingProduct.prodID);
+            console.log(`Incremented product quantity: ${existingProduct.prodID} to ${newQuantity}`);
+        } else {
+            // If the product does not exist, insert it into the cart
+            await insertCartDb(userID, prodID, quantity);
+            console.log(`Inserted new product: ${prodID} for user: ${userID}`);
+        }
+
+        // Return the updated cart
+        res.status(200).json(await getCartByUserDb(userID));
+
     } catch (err) {
-        res.status(500).send('Error inserting a cart')
-        throw err
-        
+        res.status(500).send('Error inserting/updating a cart');
+        console.error('Error:', err);
+        throw err;
     }
 }
+
+
 
 // edit cart
 const editCart = async(req, res)=>{
     let {quantity} = req.body
 
     try {
-        await editCArtDb(quantity, req.params.id)
+        await editCartDb(quantity, req.params.id)
         res.status(200).json(await getCartDb())
         
     } catch (err) {

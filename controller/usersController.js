@@ -5,7 +5,7 @@ const getUsers = async(req, res)=>{
     try {
         res.status(200).json(await getUsersDb())   
     } catch (err) {
-        res.status(500).send('Error fetching users')
+        res.status(500).send({message:'Error fetching users'})
         throw err
     }
 }
@@ -18,7 +18,7 @@ const getUser = async(req, res)=>{
         }
         res.status(200).json(await getUserDb(req.params.id))   
     } catch(err){
-        res.status(500).send('Error fetching products')
+        res.status(500).send({message:'Error fetching products'})
         throw err
     }
 }
@@ -30,7 +30,7 @@ const fetchUser = async(req, res)=>{
         
         res.send(await getUserDb(user.userID));   
     } catch(err){
-        res.status(500).send('Error fetching products')
+        res.status(500).send({message:'Error fetching products'})
         throw err
     }
 }
@@ -79,7 +79,7 @@ const deleteUser = async(req, res)=>{
         res.status(200).json(await getUsersDb())
         
     } catch (err) {
-        res.status(500).send('Error deleting a user')
+        res.status(500).send({message:'Error deleting a user'})
     }
 }
 
@@ -91,7 +91,7 @@ const editUser = async(req, res)=>{
     
 
     if(!user){
-        res.status(404).send('User not found')
+        res.status(404).send({message:'User not found'})
     }
 
     
@@ -124,7 +124,7 @@ const editUser = async(req, res)=>{
          res.status(200).send(await getUsersDb())
         
     } catch (err) {
-        res.status(500).send('Error fetching products')
+        res.status(500).send({message:'Error fetching products'})
         throw err
     }
 
@@ -136,7 +136,7 @@ const loginUser = (req,res)=>{
         // console.log(req.body.token);
           
     } catch (err) {
-        res.status(500).send('Error loging in')
+        res.status(500).send({message:'Error logging in'})
     }
 }
 

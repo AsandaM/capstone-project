@@ -25,12 +25,12 @@ const getCartByProductDb = async(prodID)=>{
     return data
 }
 
-const editCArtDb = async(quantity, id)=>{
-    await pool.query('UPDATE cart SET quantity = ? WHERE cartID = ?', [quantity, id])
+const editCartDb = async(quantity, id)=>{
+    await pool.query('UPDATE cart SET quantity = ? WHERE prodID = ?', [quantity, id])
 }
 
 const deleteCartDb = async(id)=>{
     await pool.query('DELETE FROM cart WHERE cartID = ?', [id])
 }
 
-export {getCartDb, getCartByUserDb, getCartByProductDb, editCArtDb, deleteCartDb, insertCartDb}
+export {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb}

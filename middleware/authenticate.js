@@ -15,7 +15,7 @@ const emailCheck = async(req, res, next)=>{
         next()
         return
     }
-    res.send('Email not found')
+    res.send({message:'Email not found'})
 }
 
 
@@ -28,12 +28,12 @@ const checkUser = async(req, res, next)=>{
    
     compare(userPass, hashedPassword, (err, result)=>{
         if(result == true){
-            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole,userID:userID}, process.env.SECRET_KEY, {expiresIn: '1h'})
+            let token = jwt.sign({emailAdd:emailAdd,userRole:userRole,userID:userID}, process.env.SECRET_KEY, {expiresIn: '3h'})
             req.body.token = token
             next()
             return
         }
-        res.send('Password incorrect')
+        res.send({message:'Password incorrect'})
 
     })
 
@@ -43,21 +43,15 @@ const verifyAToken = (req, res, next)=>{
     let {cookie} = req.headers
     //checks if the token exits first
     let token = cookie && cookie.split('=')[1]
-    console.log(token);
-    
-    // console.log(token.split(';')[0])
     let token1 = token.split(';')[0]
 
-
     jwt.verify(token1, process.env.SECRET_KEY, (err, decoded)=>{
-        // console.log(token);
-        
+      
         if(err){
-            res.json({message: 'Token is invalid'})
+            res.json({message: 'Token is invalid, please login'})
             return
         }
-        // req.body.username = decoded.username
-        // req.body = decoded.username
+       
         req.body.userID = decoded.userID
         console.log(decoded);
         
