@@ -4,7 +4,7 @@
             <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-3 ">Checkout</h1>
             <div class="w-25 h-2 bg-success my-3"></div>
         </header>    
-        <main class="main">
+        <main class="main" v-if="userCart && userCart.length > 0">
             <div class="checkout-container">
                 <section class="checkout-form">
                     <form action="#!" method="get" id="form">
@@ -61,9 +61,9 @@
                                     <div class="card-name">{{ cart.prodName }}</div>
                                     <div class="card-price text-success">{{ cart.price }}</div>
                                     <div class="card-wheel">
-                                        <button>-</button>
+                                        <button @click="decreaseQuantity(cart)">-</button>
                                         <span>{{cart.quantity}}</span>
-                                        <button>+</button>
+                                        <button @click="increaseQuantity(cart)">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -74,12 +74,16 @@
                         </div>
                         <div class="checkout-total">
                             <h6>Total</h6>
-                            <p>R</p>
+                            <p>R {{ totalCart }}</p>
                         </div>
                     </div>
                 </section>
             </div>
         </main>
+        <div v-else>
+        <!-- Display empty cart message -->
+        <p>Your cart is empty.</p>
+  </div>
     </div>
 </template>
 
@@ -89,15 +93,24 @@ export default{
         userCart(){
           return this.$store.state.userCart
       },
-    //   totalPrice(){
-    //     return this.$store.state.userCart.reduce((total, item)=>{
-    //         return total + item.price * item.quantity;
-    //     }, 0)
+        totalCart(){
+            return this.$store.state.totalCart
+        },
     },
     methods: {
         getUserCart(){
             this.$store.dispatch('getCart', this.userID)
-        }
+        },
+        increaseQuantity(cart) {
+      const newQuantity = cart.quantity + 1;
+      this.$store.dispatch('updateQuantity', { prodID: cart.prodID, quantity: newQuantity });
+    },
+    decreaseQuantity(cart) {
+      if (cart.quantity > 1) {
+        const newQuantity = cart.quantity - 1;
+        this.$store.dispatch('updateQuantity', { prodID: cart.prodID, quantity: newQuantity });
+      }
+    },
     },
 
     mounted() {

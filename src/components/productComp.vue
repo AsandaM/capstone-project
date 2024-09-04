@@ -49,6 +49,23 @@
             </div>
           </div>
           <productModal v-if="isModalOpen" :product="selectedProduct" @close="closeModal"></productModal>
+          <div v-if="productNotFound">
+            <div class="container1">
+              <div class="boo-wrapper">
+                <div class="boo">
+                  <div class="face">🙁</div>
+                </div>
+                <div class="shadow"></div>
+
+                <h1>Whoops!</h1>
+                <p>
+                  We couldn't find the item you
+                  <br />
+                  were looking for.
+                </p>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <!-- Single Product -->
             <div
@@ -84,9 +101,10 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   import productModal from './productModal.vue';
+  import Swal from 'sweetalert2';
   export default {
     components: {
       productModal
@@ -98,12 +116,12 @@
         filterCategory: '',
         filterType: '',
         isModalOpen: false,
-        selectedProduct: null
+        selectedProduct: null,
       };
     },
     computed: {
       filteredAndSortedProducts() {
-        let filteredProducts = this.$store.state.products;
+        let filteredProducts = this.$store.state.products || [];
   
         // Filter by search query
         if (this.searchQuery) {
@@ -135,6 +153,9 @@
         }
   
         return filteredProducts;
+      },
+      productNotFound() {
+        return this.filteredAndSortedProducts.length === 0;
       }
     },
     methods:{
@@ -152,6 +173,14 @@
         },
         addToCart(prodID){
             this.$store.dispatch('addToCart', prodID)
+            Swal.fire({
+                icon: 'success',
+                title: 'Product added to cart',
+                showConfirmButton: false,
+                timer: 3000
+            }).then(() => {
+                this.$router.push('/products')
+            })
         },
         openModal(product){
           this.selectedProduct = product
@@ -345,5 +374,123 @@ a:hover {
     margin-bottom: 10px;
   }
 }
+
+@keyframes floating {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    transform: translate3d(0, -10%, 0);
+  }
+  55% {
+    transform: translate3d(0, -10%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes floatingShadow {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.85);
+  }
+  55% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+.container1 {
+  font-family: 'Varela Round', sans-serif;
+  color: #141515;
+  position: relative;
+  height: 70vh;
+  text-align: center;
+  font-size: 18px; /* Adjust this to match $jaggedDistance / 2 */
+}
+
+.container1 h1 {
+  font-size: 32px; /* Adjust this to match $jaggedDistance */
+  margin-top: 32px;
+}
+
+.boo-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 64px; /* $jaggedDistance * 2 */
+  padding-bottom: 64px;
+}
+
+.boo {
+  width: 160px; /* $booSize */
+  height: 80px; /* $booSize + ($booSize * 0.15) */
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 0;
+  overflow: hidden;
+  animation: floating 3s ease-in-out infinite;
+  position: relative;
+}
+
+.boo::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -18.82px; /* -($jaggedDistance / 1.7) */
+  bottom: -8.31px; /* -($jaggedDistance / 3.85) */
+  width: calc(100% + 32px);
+  height: 12px;
+}
+
+.boo .face {
+  width: auto; /* Adjust width to fit the emoji */
+  height: auto; /* Adjust height to fit the emoji */
+  background: none; /* Remove background color */
+  font-size: 48px; /* Set a size for the emoji */
+  position: absolute;
+  left: 50%;
+  bottom: 20px; /* Adjust position as needed */
+  transform: translateX(-50%);
+  line-height: 1; /* Ensure proper line height for the emoji */
+}
+
+/* Remove the pseudo-elements as they are not needed anymore */
+.boo .face::before,
+.boo .face::after {
+  content: none;
+}
+
+
+.boo .face::before {
+  left: -24px; /* -$booFaceSize */
+}
+
+.boo .face::after {
+  right: -24px;
+}
+
+.shadow {
+  width: 128px; /* $booSize - $jaggedDistance */
+  height: 16px; /* $jaggedDistance / 2 */
+  background-color: rgba(237, 237, 237, 0.75);
+  margin-top: 40px; /* $jaggedDistance * 1.25 */
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+  animation: floatingShadow 3s ease-in-out infinite;
+}
+
 </style>
   
