@@ -138,13 +138,13 @@ export default {
       // Logic to logout
       this.$cookies.remove('token')
       this.$cookies.remove('userRole')
+      this.$router.push('/')
       Swal.fire({
         icon: 'success',
         title: 'Sip back later!',
         showConfirmButton: false,
         timer: 1500
       }).then(() => {
-        this.$router.push('/')
         location.reload()
       })
     },

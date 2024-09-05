@@ -80,10 +80,10 @@
                 </section>
             </div>
         </main>
-        <div v-else>
+        <div class="container" style="height: 200px;" v-else>
         <!-- Display empty cart message -->
-        <p>Your cart is empty.</p>
-  </div>
+            <p>Your cart is empty.</p>
+        </div>
     </div>
 </template>
 
@@ -100,6 +100,8 @@ export default{
     methods: {
         getUserCart(){
             this.$store.dispatch('getCart', this.userID)
+            console.log(this.userID);
+            
         },
         increaseQuantity(cart) {
       const newQuantity = cart.quantity + 1;
@@ -142,6 +144,9 @@ export default{
     display: flex;
     flex-direction: column;
 }
+.container{
+    height: calc(100vh - 10% - 50px);
+}
 
 .header {
     height: 10%;
@@ -161,7 +166,7 @@ export default{
     justify-content: center;
     align-items: center;
     padding: 20px;
-    height: calc(100vh - 10% - 50px); /* Adjust the height to leave space for the header and footer */
+    height: calc(100vh - 10% - 50px); 
 }
 
 .checkout-container {

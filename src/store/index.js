@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useCookies } from 'vue-cookies'
 import router from '@/router'
 import { toast } from "vue3-toastify";
+import Swal from 'sweetalert2';
 import "vue3-toastify/dist/index.css";
 
 axios.defaults.withCredentials = true
@@ -100,24 +101,24 @@ export default createStore({
     async getCart({ commit }, userID) {
       try {
         let { data } = await axios.get(`http://localhost:5005/cart/${userID}`)
+        console.log(userID);
+        
         
         if (data.length === 0) {
           // If the cart is empty, set userCart to an empty array and totalCart to 0
-          commit('setUserCart', [])
+          commit('setUserCart', data)
           commit('setTotalCart', 0)
         } else {
           // If the cart is not empty, calculate the total and commit the data
           commit('setUserCart', data)
-    
           let totalCart = data.reduce((acc, item) => {
             return acc + item.price * item.quantity
           }, 0)
-    
           commit('setTotalCart', totalCart)
         }
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 })
-        router.push('/')
+        console.log(e);
+        
       }
     },
     async updateQuantity({ commit }, data) {
@@ -157,25 +158,60 @@ export default createStore({
     },
     async login({ commit }, user) {
       try {
-        let { data } = await axios.post('http://localhost:5005/users/login', user)
+        let data = await (await axios.post('http://localhost:5005/users/login', user)).data
         commit('setAddUser', data)
+        console.log(data);
+        if(!data.err) {
+          $cookies.set('token', data.token)
+          let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
+          $cookies.set('userRole', userRole.userRole)
+          Swal.fire({
+            icon: 'success',
+            title: 'Welcome back!',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          // .then(() => {
+          //   this.closeModal();
+          //   router.push('/');
+          // });
+        }else {
+          Swal.fire({
+            icon: 'err',
+            title: `${data.err}`,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }
 
-        $cookies.set('token', data.token)
-        let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
-        $cookies.set('userRole', userRole.userRole)
 
-        await router.push('/')
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 5000 });
+        
       }
     },
-    async editUser({ commit }, data) {
+    async updateProfile({ commit }, data) {
       try {
         let { userID, info } = data
         await axios.patch(`http://localhost:5005/users/${userID}`, info)
-        commit('setEditUser', data)
+        commit('setUsers', data)
+        $cookies.set('userRole', info.userRole)
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 5000 });
+        
+      }
+    },
+    async editUser({ commit }, data) {
+      console.log(data);
+      
+      try {
+        let { userID, info } = data
+        await axios.patch(`http://localhost:5005/users/${userID}`, info)
+        commit('setUsers', data)
+      } catch (e) {
+        toast.error(`${e.message}`, { autoClose: 5000 });
+        console.log(e);
+        
       }
     },
     async deleteUser({ commit }, userID) {
