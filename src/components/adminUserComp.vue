@@ -103,7 +103,7 @@
     </modal-comp>
 
     <!-- Edit user -->
-    <modal-comp :isModalOpen="isEditUserModalOpen" @close="closeModal" @submit="editUser">
+    <modal-comp :isModalOpen="isEditUserModalOpen" @close="closeModal" @submit="editUser(userID)">
       <template #modal-header>
         <h2>Edit User</h2>
       </template>
@@ -233,8 +233,10 @@ export default {
       this.$store.dispatch('addUser', this.form);
       this.closeModal();
     },
-    editUser() {
-      this.$store.dispatch('editUser', this.formData);
+    editUser(userID) {
+      console.log(userID);
+      
+      this.$store.dispatch('editUser', {userID: userID, info: this.formData});
       this.closeModal();
     },
   },
