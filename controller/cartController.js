@@ -52,19 +52,16 @@ const insertCart = async(req, res) => {
             // If the product exists, increment the quantity
             const newQuantity = existingProduct.quantity + quantity;
             await editCartDb(newQuantity, existingProduct.prodID);
-            console.log(`Incremented product quantity: ${existingProduct.prodID} to ${newQuantity}`);
         } else {
             // If the product does not exist, insert it into the cart
             await insertCartDb(userID, prodID, quantity);
-            console.log(`Inserted new product: ${prodID} for user: ${userID}`);
         }
 
         // Return the updated cart
         res.status(200).json(await getCartByUserDb(userID));
 
     } catch (err) {
-        res.status(500).send('Error inserting/updating a cart');
-        console.error('Error:', err);
+        res.status(500).send({message:'Error inserting/updating a cart'});
         throw err;
     }
 }
@@ -80,7 +77,7 @@ const editCart = async(req, res)=>{
         res.status(200).json(await getCartDb())
         
     } catch (err) {
-        res.status(500).send('Error updating a cart')
+        res.status(500).send({message:'Error updating a cart'})
         throw err
         
     }
@@ -93,7 +90,7 @@ const deleteCart = async(req, res)=>{
         res.status(200).json(await getCartDb())
         
     } catch (err) {
-        res.status(500).send('Error deleting a cart')
+        res.status(500).send({message:'Error deleting a cart'})
         throw err
     }
 }

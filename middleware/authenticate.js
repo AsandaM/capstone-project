@@ -15,7 +15,7 @@ const emailCheck = async(req, res, next)=>{
         next()
         return
     }
-    res.send({message:'Email not found'})
+    res.send({err:'Email not found'})
 }
 
 
@@ -31,9 +31,9 @@ const checkUser = async(req, res, next)=>{
             let token = jwt.sign({emailAdd:emailAdd,userRole:userRole,userID:userID}, process.env.SECRET_KEY, {expiresIn: '3h'})
             req.body.token = token
             next()
-            return
+            return 
         }
-        res.send({message:'Password incorrect'})
+        res.send({err:'Password incorrect'})
 
     })
 
@@ -41,6 +41,12 @@ const checkUser = async(req, res, next)=>{
 
 const verifyAToken = (req, res, next)=>{
     let {cookie} = req.headers
+
+    // Check if cookie exists
+    if (!cookie) {
+        return res.json({ error: 'No token provided' });
+    }
+
     //checks if the token exits first
     let token = cookie && cookie.split('=')[1]
     let token1 = token.split(';')[0]
@@ -53,10 +59,7 @@ const verifyAToken = (req, res, next)=>{
         }
        
         req.body.userID = decoded.userID
-        console.log(decoded);
-        
         req.user = decoded.emailAdd
-        console.log(req.user);
         next()       
     })
 }

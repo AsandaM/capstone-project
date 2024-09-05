@@ -86,10 +86,7 @@ const deleteUser = async(req, res)=>{
 const editUser = async(req, res)=>{
     let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole} = req.body
     let user = await getUserDb(req.params.id)
-
-    // console.log(user);
     
-
     if(!user){
         res.status(404).send({message:'User not found'})
     }
@@ -100,23 +97,17 @@ const editUser = async(req, res)=>{
     userAge? userAge = userAge: userAge = user.userAge
     gender? gender = gender: gender = user.gender
     emailAdd? emailAdd = emailAdd: emailAdd = user.emailAdd
-    // userPass? userPass = userPass: userPass = user.userPass
     userProfile? userProfile = userProfile: userProfile = user.userProfile
     userRole? userRole = userRole: userRole = user.userRole
 
-    // await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)  
-    // res.send('Okay')
-    
     try {
         if(userPass!=''){
-            console.log(userPass+1);
         hash(userPass, 10, async(err, hashedP)=>{
             if(err) throw err
             userPass = hashedP
             await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, req.params.id)    
         })
     }   else{
-        console.log(userPass+2);
         
         userPass = user.userPass
         await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)    
@@ -133,8 +124,7 @@ const editUser = async(req, res)=>{
 const loginUser = (req,res)=>{
     try {
         res.status(200).json({message:"You have signed in ", token:req.body.token})  
-        // console.log(req.body.token);
-          
+        
     } catch (err) {
         res.status(500).send({message:'Error logging in'})
     }
