@@ -165,7 +165,7 @@ export default createStore({
     async addUser({ commit }, user) {
       try {
         let { data } = await axios.post('http://localhost:5005/users/signup', user)
-        commit('setAddUser', data)
+        commit('setusers', data)
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 5000 });
       }
@@ -216,8 +216,6 @@ export default createStore({
       }
     },
     async editUser({ commit }, data) {
-      console.log(data);
-      
       try {
         let { userID, info } = data
         await axios.patch(`http://localhost:5005/users/${userID}`, info)
