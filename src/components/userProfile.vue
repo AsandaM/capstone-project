@@ -7,7 +7,7 @@
           width="100" />
         <h2>{{user.firstName}} {{user.lastName}}</h2>
         <p>{{user.userRole}}</p>
-        <button @click="editUser(user.userID)"> Edit profile </button>
+        <button @click="updateProfile(user.userID)"> Edit profile </button>
         <button @click="deleteUser(user.userID)"> Delete account </button>
       </div>
       <div class="content">
@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3 text-start">
           <label for="gender" class="form-label">Gender:</label>
-          <input type="text" class="form-control" id="lastName" v-model="gender">
+          <input type="text" class="form-control" id="gender" v-model="gender">
         </div>
         <div class="mb-3 text-start">
           <label for="emailAdd" class="form-label">Email Address:</label>
@@ -73,9 +73,9 @@ export default{
       getProfile(){
           this.$store.dispatch('userProfile')
       }, 
-      async editUser(userID) {
+      async updateProfile(userID) {
       try {
-        await this.$store.dispatch('editUser', { userID: userID, info: this.$data });
+        await this.$store.dispatch('updateProfile', { userID: userID, info: this.$data });
         Swal.fire({
           title: 'Success!',
           text: 'Profile updated successfully',
@@ -83,6 +83,7 @@ export default{
           confirmButtonText: 'OK'
         }).then(() => {
           this.$router.push('/profile');
+          location.reload()
         });
       } catch (error) {
         console.error(error);
@@ -127,7 +128,7 @@ export default{
   },
   mounted(){
       this.getProfile()
-      // this.editUser()
+      // this.updateProfile()
   }
 
 }

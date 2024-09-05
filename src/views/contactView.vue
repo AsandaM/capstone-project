@@ -62,7 +62,7 @@
 section {
     background: linear-gradient(rgba(21, 86, 112, 0.1), rgba(0, 0, 0, 0.1)), url('https://asandam.github.io/images/images_capstone/p9.jpg') fixed center center;
     background-size: cover;
-    height: 100vh; 
+    /* height: 100vh;  */
     display: flex;
     flex-direction: column;
     justify-content: center; 

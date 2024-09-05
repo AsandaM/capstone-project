@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import router from '@/router';
+// import router from '@/router';
 import Swal from 'sweetalert2';
 export default {
   name: 'SignupLogin',
@@ -80,19 +80,14 @@ export default {
       });
     },
    async signIn() {
-     await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
-     Swal.fire({
-       icon: 'success',
-       title: 'Welcome back!',
-       showConfirmButton: false,
-       timer: 2000
-     }).then(() => {
-       this.closeModal();
-       router.push('/');
-     });
-
-    },
-  },
+    try {
+    await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
+    
+  } catch (e) {
+    // Handle error response
+    console.error(e.message);
+  }
+  }}
 };
 </script>
 
