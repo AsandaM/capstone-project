@@ -49,7 +49,7 @@
             </div>
           </div>
           <productModal v-if="isModalOpen" :product="selectedProduct" @close="closeModal"></productModal>
-          <div v-if="productNotFound">
+          <!-- <div v-if="productNotFound">
             <div class="container1">
               <div class="boo-wrapper">
                 <div class="boo">
@@ -65,7 +65,7 @@
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <!-- Single Product -->
             <div
@@ -172,7 +172,7 @@
             }
         },
         addToCart(prodID){
-            this.$store.dispatch('addToCart', prodID)
+            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 })
             Swal.fire({
                 icon: 'success',
                 title: 'Product added to cart',
@@ -180,7 +180,7 @@
                 timer: 3000
             }).then(() => {
                 this.$router.push('/products')
-            })
+            })    
         },
         openModal(product){
           this.selectedProduct = product

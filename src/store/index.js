@@ -121,6 +121,20 @@ export default createStore({
         
       }
     },
+    async addToCart({commit}, data) { 
+      console.log(data);
+      
+      try {
+        let {userID, prodID,  quantity } = data
+        console.log(data);
+        
+        await axios.post('http://localhost:5005/cart', {userID, prodID,  quantity })
+        commit('setCart', data)
+      } catch (e) {
+        toast.error(`${e.message}`, { autoClose: 5000 });
+        console.log(e);
+      }
+    },
     async updateQuantity({ commit }, data) {
       try {
         let { prodID, userID, quantity } = data
