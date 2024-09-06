@@ -88,7 +88,6 @@ export default {
         this.isEditVisible = false;
       });
     }catch(err){
-      console.log(err);
       Swal.fire({
         title: 'Error',
         text: 'An error occurred while updating your profile',

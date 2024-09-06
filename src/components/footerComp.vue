@@ -6,21 +6,21 @@
             <img src="https://asandam.github.io/images/images_capstone/logo.png" alt="Logo">
           </div>
           <div class="footer-social-icons">
-            <a href="#"><i class="fab fa-facebook-f text-success"></i></a>
-            <a href="#"><i class="fab fa-twitter text-success"></i></a>
-            <a href="#"><i class="fab fa-instagram text-success"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f text-success"></i></a>
+            <a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp text-success"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram text-success"></i></a>
           </div>
           <div class="footer-newsletter">
             <p class="text-success">Subscribe to our newsletter</p>
-            <form>
+            <form action="https://formcarry.com/s/SpSXqcRRU7e" method="POST" enctype="multipart/form-data">
               <input type="email" placeholder="Email Address" id="input">
-              <button><i class="fas fa-paper-plane text-success"></i></button>
+              <button type="submit"><i class="fas fa-paper-plane text-success"></i></button>
             </form>
           </div>
         </div>
         <div class="footer-widget d-flex justify-content-center align-items-center">
           <div class="copyright-text">
-            <p class="text-success">Copyright &copy; 2024, All Rights Reserved</p>
+            <p class="text-success">Copyright &copy; {{year}}, All Rights Reserved</p>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
   export default {
     data() {
       return {
-        footerMenu: ['Home', 'Main', 'About', 'Service', 'Contact'],
+        year: new Date().getFullYear()
       };
     },
   };
@@ -42,6 +42,8 @@
     color: #170101;
     padding: 20px 0;
     position: relative;
+    background-color: #fff;
+    border-top: green 1px solid ;
   }
   
   .footer-logo img {
@@ -61,13 +63,13 @@
   }
   
   .footer-social-icons a {
-    color: #ffffff;
     margin: 0 10px;
-    font-size: 18px;
+    font-size: 19px;
   }
   
-  .footer-social-icons a:hover {
+  .footer-social-icons  a:hover {
     color: #ff5e14;
+    background-color: #ff5e14;
   }
   
   .footer-newsletter p {
