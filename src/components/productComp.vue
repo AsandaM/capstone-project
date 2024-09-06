@@ -49,7 +49,7 @@
             </div>
           </div>
           <productModal v-if="isModalOpen" :product="selectedProduct" @close="closeModal"></productModal>
-          <!-- <div v-if="productNotFound">
+          <div v-if="productNotFound">
             <div class="container1">
               <div class="boo-wrapper">
                 <div class="boo">
@@ -65,7 +65,7 @@
                 </p>
               </div>
             </div>
-          </div> -->
+          </div>
           <div class="row">
             <!-- Single Product -->
             <div

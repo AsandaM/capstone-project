@@ -4,7 +4,7 @@
             <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-3 ">Checkout</h1>
             <div class="w-25 h-2 bg-success my-3"></div>
         </header>    
-        <main class="main" v-if="userCart">
+        <main class="main" v-if="userCart && userCart.length > 0">
             <div class="checkout-container">
                 <section class="checkout-form">
                     <form action="#!" method="get" id="form">
@@ -80,9 +80,9 @@
                 </section>
             </div>
         </main>
-        <!-- <div class="container" style="height: 200px;" v-else>
+        <div class="container" style="height: 200px;" v-else>
             <p>Your cart is empty.</p>
-        </div> -->
+        </div>
     </div>
 </template>
 

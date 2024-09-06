@@ -6,11 +6,11 @@
       <div class="modal-box">
         <div class="modal-body">
           <slot name="modal-header"></slot>
-          <form @submit.prevent="submitForm">
+          <div @submit="submitForm">
             <slot name="modal-content"></slot>
-            <button type="submit">Save</button>
+            <button type="submit" @click="submitForm">Save</button>
             <button type="button" @click="closeModal">Close</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -30,6 +30,7 @@ export default {
       this.$emit('close');
     },
     submitForm() {
+      console.log('hehehehehe');
       this.$emit('submit');
       this.closeModal();
     },

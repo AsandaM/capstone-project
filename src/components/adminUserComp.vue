@@ -103,7 +103,7 @@
     </modal-comp>
 
     <!-- Edit user -->
-    <modal-comp :isModalOpen="isEditUserModalOpen" @close="closeModal" @submit="editUser(userID)">
+    <modal-comp :isModalOpen="isEditUserModalOpen" @close="closeModal" @submit="editUser()">
       <template #modal-header>
         <h2>Edit User</h2>
       </template>
@@ -216,6 +216,7 @@ export default {
     },
     deleteUser(id) {
       this.$store.dispatch('deleteUser', id);
+      
     },
     openAddUserModal(user) {
       this.formData = { ...user };
@@ -233,11 +234,10 @@ export default {
       this.$store.dispatch('addUser', this.form);
       this.closeModal();
     },
-    editUser(userID) {
-      console.log(userID);
-      
-      this.$store.dispatch('editUser', {userID: userID, info: this.formData});
+    editUser() {
+      this.$store.dispatch('editUser', this.formData);
       this.closeModal();
+      location.reload();
     },
   },
   mounted() {

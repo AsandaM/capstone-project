@@ -69,7 +69,7 @@ export default createStore({
         let { data } = await axios.get('http://localhost:5005/products')
         commit('setProducts', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 3000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
       }
     },
     async addProduct({ commit }, product) {
@@ -77,7 +77,7 @@ export default createStore({
         let { data } = await axios.post('http://localhost:5005/products', product)
         commit('setAddProduct', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 3000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
       }
     },
     async deleteProduct({ commit }, prodID) {
@@ -85,7 +85,7 @@ export default createStore({
         let { data } = await axios.delete(`http://localhost:5005/products/${prodID}`)
         commit('setDeleteProduct', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 3000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
       }
     },
     async editProduct({ commit }, product) {
@@ -93,16 +93,20 @@ export default createStore({
         let { data } = await axios.patch(`http://localhost:5005/products/${product.prodID}`, product)
         commit('setEditProduct', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
 
     // cart actions
     async getCart({ commit }, userID) {
-      try {
+      // try {
         let { data } = await axios.get(`http://localhost:5005/cart/${userID}`)
-        console.log(userID);
-        
+        console.log(data);
+        let totalCart =await data?.reduce((acc, item) => {
+          let total = (acc + item.price * item.quantity)
+           return total
+         }, 0).toFixed(2)
+         
         
         if (data.length === 0) {
           // If the cart is empty, set userCart to an empty array and totalCart to 0
@@ -111,15 +115,18 @@ export default createStore({
         } else {
           // If the cart is not empty, calculate the total and commit the data
           commit('setUserCart', data)
-          let totalCart = data.reduce((acc, item) => {
-            return acc + item.price * item.quantity
-          }, 0)
+          // console.log('hehe'+data);
+          // let totalCart = data.reduce((acc, item) => {
+          //  let total = (acc + item.price * item.quantity).toFixed(2)
+          //   return total
+          // }, 0)
           commit('setTotalCart', totalCart)
         }
-      } catch (e) {
-        console.log(e);
+      // } catch (e) {
+      //   console.log(e);
+      //   toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
-      }
+      // }
     },
     async addToCart({commit}, data) { 
       console.log(data);
@@ -131,7 +138,7 @@ export default createStore({
         await axios.post('http://localhost:5005/cart', {userID, prodID,  quantity })
         commit('setCart', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         console.log(e);
       }
     },
@@ -141,7 +148,7 @@ export default createStore({
         await axios.patch(`http://localhost:5005/cart/${prodID}`, { userID, quantity })
         commit('setCart', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
 
@@ -151,7 +158,7 @@ export default createStore({
         let { data } = await axios.get(`http://localhost:5005/users/`)
         commit('setUsers', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
     async userProfile({ commit }) {
@@ -159,22 +166,30 @@ export default createStore({
         let { data } = await axios.get(`http://localhost:5005/users/profile`)
         commit('setProfile', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
     async addUser({ commit }, user) {
       try {
+        console.log('hehe I am here');
         let { data } = await axios.post('http://localhost:5005/users/signup', user)
-        commit('setusers', data)
+        commit('setAddUser', data)
+        if(!data.message){
+          Swal.fire({
+            icon: 'success',
+            title: 'Account Created',
+            text: 'You have successfully created an account. Please log in.',
+            confirmButtonText: 'OK'
+          })
+        } 
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
     async login({ commit }, user) {
       try {
         let data = await (await axios.post('http://localhost:5005/users/login', user)).data
         commit('setAddUser', data)
-        console.log(data);
         if(!data.err) {
           $cookies.set('token', data.token)
           let userRole = JSON.parse(window.atob(data.token.split('.')[1]))
@@ -184,11 +199,10 @@ export default createStore({
             title: 'Welcome back!',
             showConfirmButton: false,
             timer: 2000
-          })
-          // .then(() => {
-          //   this.closeModal();
-          //   router.push('/');
-          // });
+          }).then(() => {
+            location.reload()
+            router.push('/');
+          });
         }else {
           Swal.fire({
             icon: 'err',
@@ -200,7 +214,7 @@ export default createStore({
 
 
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
       }
     },
@@ -210,19 +224,19 @@ export default createStore({
         await axios.patch(`http://localhost:5005/users/${userID}`, info)
         commit('setUsers', data)
         $cookies.set('userRole', info.userRole)
+        location.reload()
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
       }
     },
-    async editUser({ commit }, data) {
+    async editUser({ commit }, user) {
+
       try {
-        let { userID, info } = data
-        await axios.patch(`http://localhost:5005/users/${userID}`, info)
-        commit('setUsers', data)
+        let data = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
+        commit('setEditUser', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
-        console.log(e);
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
       }
     },
@@ -231,7 +245,7 @@ export default createStore({
         let { data } = await axios.delete(`http://localhost:5005/users/${userID}`)
         commit('setUsers', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     }
   },

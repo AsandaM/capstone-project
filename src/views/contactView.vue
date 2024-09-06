@@ -20,23 +20,23 @@
                             <i class="fas fa-mobile-alt text-success"></i>
                             <h4 class="d-inline-block">PHONE :
                                 <br>
-                                <span class="text-black">+12457836913</span></h4>
+                                <span class="text-black">+27 21 606 6464</span></h4>
                         </div>
                         <div class="info">
                             <i class="far fa-envelope text-success"></i>
                             <h4 class="d-inline-block">EMAIL :
                                 <br>
-                                <span class="text-black">example@info.com</span></h4>
+                                <span class="text-black">nitrifyNow@info.com</span></h4>
                         </div>
                         <div class="info">
                             <i class="fas fa-map-marker-alt text-success"></i>
                             <h4 class="d-inline-block">ADDRESS :<br>
-                                <span class="text-black">6743 last street , Abcd, Xyz</span></h4>
+                                <span class="text-black">6743 Clarendon street , Cape Town, 8000</span></h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <form>
+                    <form action="https://formcarry.com/s/SpSXqcRRU7e" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" placeholder="Name">

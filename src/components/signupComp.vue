@@ -2,9 +2,9 @@
   <div class="modal-backdrop">
     <div class="container" id="container">
       <button class="close-button" @click="closeModal"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-</svg></button>
+        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+      </svg></button>
       <div class="form-container sign-up-container">
         <form @submit.prevent="register" id="register">
           <h1 id="account">Create Your Account and Shop Wellness</h1>
@@ -20,7 +20,7 @@
           <h1>Sign in</h1>
           <input type="email" v-model="email" placeholder="Email" required />
           <input type="password" v-model="password" placeholder="Password" required />
-          <a href="#">Forgot your password?</a>
+          <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your password?</a>
           <button type="submit" @click="signIn">Sign In</button>
         </form>
       </div>
@@ -36,6 +36,36 @@
             <p>Unlock a healthier you! Sign-up now to enjoy top-notch juices, smoothies, and start your health journey now!</p>
             <button class="ghost" id="signUp" @click="togglePanel">Sign Up</button>
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Change password</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control-plaintext" id="staticEmail" v-model="emailAdd">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" v-model="userPass">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" @click="updateProfile(userID)">Save changes</button>
         </div>
       </div>
     </div>
@@ -58,7 +88,7 @@ export default {
   computed:{
     users(){
       return this.$store.state.users || [];
-    },
+    }
   },
   methods: {
     togglePanel() {
@@ -69,25 +99,38 @@ export default {
       this.$emit('close');
     },
     register() {
-      this.$store.dispatch('addUser', this.$data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Account Created',
-        text: 'You have successfully created an account. Please log in.',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        this.openModal();
-      });
+      this.$store.dispatch('addUser', this.$data); 
     },
    async signIn() {
     try {
     await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
     
   } catch (e) {
-    // Handle error response
     console.error(e.message);
   }
-  }}
+  },
+  async updateProfile(userID){
+    try{
+      await this.$store.dispatch('updateProfile', {userID: userID, info: this.userPass});
+      Swal.fire({
+        title: 'Profile Updated',
+        text: 'Your profile has been updated successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        this.getProfile();
+        this.isEditVisible = false;
+      });
+    }catch(err){
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred while updating your profile',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  },
+}
 };
 </script>
 
