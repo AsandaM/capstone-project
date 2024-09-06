@@ -38,4 +38,8 @@ const editUserDb = async(firstName, lastName, userAge, gender, emailAdd, userPas
         WHERE userID = ?`, [firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, id])
 }
 
-export {getUsersDb, getUserDb, deleteUserDb, insertUserDb, editUserDb, loginDb, getUserByEmailDb}
+const updatePasswordDb = async (password, emailAdd) => {
+    await pool.query('UPDATE users SET userPass = ? WHERE emailAdd = ?', [password, emailAdd]);
+}
+
+export {getUsersDb, getUserDb, deleteUserDb, insertUserDb, editUserDb, loginDb, getUserByEmailDb, updatePasswordDb}
