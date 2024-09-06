@@ -65,7 +65,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="updateProfile(userID)">Save changes</button>
+          <button type="button" class="btn btn-primary" @click="updatePassword()">Save changes</button>
         </div>
       </div>
     </div>
@@ -99,7 +99,8 @@ export default {
       this.$emit('close');
     },
     register() {
-      this.$store.dispatch('addUser', this.$data); 
+      this.$store.dispatch('addUser', this.$data);
+      this.togglePanel(); 
     },
    async signIn() {
     try {
@@ -109,27 +110,20 @@ export default {
     console.error(e.message);
   }
   },
-  async updateProfile(userID){
-    try{
-      await this.$store.dispatch('updateProfile', {userID: userID, info: this.userPass});
+  async updatePassword() {
+    try {
+      await this.$store.dispatch('updatePassword', { userPass: this.userPass, emailAdd: this.emailAdd });
       Swal.fire({
-        title: 'Profile Updated',
-        text: 'Your profile has been updated successfully',
         icon: 'success',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        this.getProfile();
-        this.isEditVisible = false;
+        title: 'Password updated successfully',
+        showConfirmButton: false,
+        timer: 1500
       });
-    }catch(err){
-      Swal.fire({
-        title: 'Error',
-        text: 'An error occurred while updating your profile',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
+    } catch (e) {
+      console.error(e.message);
     }
-  },
+  }
+  
 }
 };
 </script>

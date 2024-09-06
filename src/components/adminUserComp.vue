@@ -148,6 +148,7 @@
 
 <script>
 import modalComp from './modalComp.vue';
+import Swal from 'sweetalert2';
 
 export default {
   components: {
@@ -216,6 +217,13 @@ export default {
     },
     deleteUser(id) {
       this.$store.dispatch('deleteUser', id);
+      Swal.fire({
+        icon: 'success',
+        title: 'User deleted successfully',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.getUsers();
       
     },
     openAddUserModal(user) {
@@ -233,11 +241,12 @@ export default {
     addUser() {
       this.$store.dispatch('addUser', this.form);
       this.closeModal();
+      this.getUsers();
     },
     editUser() {
       this.$store.dispatch('editUser', this.formData);
       this.closeModal();
-      location.reload();
+      this.getUsers();
     },
   },
   mounted() {

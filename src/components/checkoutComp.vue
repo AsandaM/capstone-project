@@ -99,17 +99,18 @@ export default{
     methods: {
         getUserCart(){
             this.$store.dispatch('getCart', this.userID)
-            console.log(this.userID);
             
         },
-        increaseQuantity(cart) {
+    increaseQuantity(cart) {
       const newQuantity = cart.quantity + 1;
       this.$store.dispatch('updateQuantity', { prodID: cart.prodID, quantity: newQuantity });
+      this.getUserCart();
     },
     decreaseQuantity(cart) {
       if (cart.quantity > 1) {
         const newQuantity = cart.quantity - 1;
         this.$store.dispatch('updateQuantity', { prodID: cart.prodID, quantity: newQuantity });
+        this.getUserCart();
       }
     },
     },

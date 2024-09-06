@@ -76,25 +76,16 @@ export default {
     this.$store.dispatch('userProfile');
   },
   async updateProfile(userID){
-    try{
       await this.$store.dispatch('updateProfile', {userID: userID, info: this.editProfile});
       Swal.fire({
-        title: 'Profile Updated',
-        text: 'Your profile has been updated successfully',
         icon: 'success',
-        confirmButtonText: 'OK'
+        title: 'Profile updated successfully',
+        showConfirmButton: false,
+        timer: 1500
       }).then(() => {
         this.getProfile();
         this.isEditVisible = false;
       });
-    }catch(err){
-      Swal.fire({
-        title: 'Error',
-        text: 'An error occurred while updating your profile',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    }
   },
   deleteUser(id){
       Swal.fire({
