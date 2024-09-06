@@ -61,14 +61,14 @@ const insertUser = async (req, res) => {
             res.status(200).json(await getUsersDb());
         });
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ err: 'Internal server error' });
         throw error
     }
 }
 
 
 const deleteUser = async(req, res)=>{
-    try {
+    // try {
 
         const user = await getUserDb(req.params.id);
         if(!user){
@@ -78,9 +78,9 @@ const deleteUser = async(req, res)=>{
         await deleteUserDb(req.params.id)
         res.status(200).json(await getUsersDb())
         
-    } catch (err) {
-        res.status(500).send({message:'Error deleting a user'})
-    }
+    // } catch (err) {
+    //     res.status(500).send({message:'Error deleting a user'})
+    // }
 }
 
 const editUser = async(req, res)=>{

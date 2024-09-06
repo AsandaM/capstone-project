@@ -8,7 +8,6 @@ config()
 
 const emailCheck = async(req, res, next)=>{
     const {emailAdd} = req.body
-    // console.log(req.body);
     
     let user = await loginDb(emailAdd)
     if(user){
@@ -44,7 +43,7 @@ const verifyAToken = (req, res, next)=>{
 
     // Check if cookie exists
     if (!cookie) {
-        return res.json({ error: 'No token provided' });
+        return res.json({ err: 'No token provided' });
     }
 
     //checks if the token exits first
@@ -54,7 +53,7 @@ const verifyAToken = (req, res, next)=>{
     jwt.verify(token1, process.env.SECRET_KEY, (err, decoded)=>{
       
         if(err){
-            res.json({message: 'Token is invalid, please login'})
+            res.json({err: 'Token is invalid, please login'})
             return
         }
        
