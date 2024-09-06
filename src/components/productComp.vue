@@ -104,7 +104,6 @@
 
   <script>
   import productModal from './productModal.vue';
-  import Swal from 'sweetalert2';
   export default {
     components: {
       productModal
@@ -172,15 +171,8 @@
             }
         },
         addToCart(prodID){
-            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 })
-            Swal.fire({
-                icon: 'success',
-                title: 'Product added to cart',
-                showConfirmButton: false,
-                timer: 3000
-            }).then(() => {
-                this.$router.push('/products')
-            })    
+            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
+
         },
         openModal(product){
           this.selectedProduct = product

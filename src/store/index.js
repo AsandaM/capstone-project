@@ -76,6 +76,12 @@ export default createStore({
       try {
         let { data } = await axios.post('http://localhost:5005/products', product)
         commit('setAddProduct', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Product Added',
+          text: 'You have successfully added a new product to the store.',
+          confirmButtonText: 'OK'
+        })
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 3000 });
       }
@@ -84,6 +90,12 @@ export default createStore({
       try {
         let { data } = await axios.delete(`http://localhost:5005/products/${prodID}`)
         commit('setDeleteProduct', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Product Deleted',
+          text: 'You have successfully deleted the product from the store.',
+          confirmButtonText: 'OK'
+        });
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 3000 });
       }
@@ -92,6 +104,12 @@ export default createStore({
       try {
         let { data } = await axios.patch(`http://localhost:5005/products/${product.prodID}`, product)
         commit('setEditProduct', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Product Updated',
+          text: 'You have successfully updated the product.',
+          confirmButtonText: 'OK'
+        });
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -99,9 +117,8 @@ export default createStore({
 
     // cart actions
     async getCart({ commit }, userID) {
-      // try {
+      try {
         let { data } = await axios.get(`http://localhost:5005/cart/${userID}`)
-        console.log(data);
         let totalCart =await data?.reduce((acc, item) => {
           let total = (acc + item.price * item.quantity)
            return total
@@ -115,28 +132,29 @@ export default createStore({
         } else {
           // If the cart is not empty, calculate the total and commit the data
           commit('setUserCart', data)
-          // console.log('hehe'+data);
-          // let totalCart = data.reduce((acc, item) => {
-          //  let total = (acc + item.price * item.quantity).toFixed(2)
-          //   return total
-          // }, 0)
           commit('setTotalCart', totalCart)
         }
-      // } catch (e) {
-      //   console.log(e);
-      //   toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      } catch (e) {
+        console.log(e);
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
-      // }
+      }
     },
     async addToCart({commit}, data) { 
-      console.log(data);
       
       try {
         let {userID, prodID,  quantity } = data
-        console.log(data);
         
         await axios.post('http://localhost:5005/cart', {userID, prodID,  quantity })
         commit('setCart', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to cart',
+          showConfirmButton: false,
+          timer: 3000
+      }).then(() => {
+          router.push('/products')
+      }) 
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         console.log(e);
@@ -235,6 +253,12 @@ export default createStore({
       try {
         let data = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
         commit('setEditUser', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'User Updated',
+          text: 'You have successfully updated the user.',
+          confirmButtonText: 'OK'
+        });
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
@@ -246,6 +270,20 @@ export default createStore({
         commit('setUsers', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async updatePassword({ commit }, { userPass, emailAdd }) {
+      try {
+        let  {data} = await axios.patch(`http://localhost:5005/users//updatepassword`, { userPass, emailAdd })
+        commit('setUsers', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Password Updated',
+          text: `${data.message}`,
+          confirmButtonText: 'OK'
+        })
+      } catch (e) {
+        toast.error(`${e.response ? e.response.data.message : e.message}`, { autoClose: 5000 });
       }
     }
   },

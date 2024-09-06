@@ -78,8 +78,8 @@
       </div>
     </div>
   </template>
+
   <script>
-  import Swal from 'sweetalert2'
   export default {
     props: {
       product: {
@@ -92,22 +92,11 @@
             this.$store.dispatch('getProducts')
         },
       addToCart(prodID){
-            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: this.quantity })
-            console.log(prodID);
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'Product added to cart',
-                showConfirmButton: false,
-                timer: 3000
-            }).then(() => {
-                this.$emit('close');
-                this.$router.push('/products');
-            })
+            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: this.quantity }) 
         },
         navigateToProducts(){
           this.$emit('close');
-            this.$router.push('/products');
+          this.$router.push('/products');
         }
     },
   };
