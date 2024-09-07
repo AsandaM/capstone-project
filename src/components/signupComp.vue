@@ -8,10 +8,15 @@
       <div class="form-container sign-up-container">
         <form @submit.prevent="register" id="register">
           <h1 id="account">Create Your Account and Shop Wellness</h1>
-          <input type="text" v-model="firstName" placeholder="Firstname" required />
-          <input type="text" v-model="lastName" placeholder="Lastname" required />
-          <input type="email" v-model="emailAdd" placeholder="Email" required />
-          <input type="password" v-model="userPass" placeholder="Password" required />
+          <input class="form-control form-control-sm" type="text"  v-model="firstName" placeholder="Firstname" required />
+          <input class="form-control form-control-sm" type="text" v-model="lastName" placeholder="Lastname" required />
+          <input class="form-control form-control-sm" type="email" v-model="emailAdd" placeholder="Email" required />
+          <input class="form-control form-control-sm" type="password" v-model="userPass" placeholder="Password" required />
+          <select type="password" class="form-select form-select-sm m-2" aria-label="Small select example" v-model="userRole">
+            <option value="" disabled selected>Select Role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
           <button type="submit" @click="register">Sign Up</button>
         </form>
       </div>
@@ -83,6 +88,7 @@ export default {
       lastName: '',
       emailAdd: '',
       userPass: '',
+      userRole: ''
     };
   },
   computed:{
@@ -99,8 +105,8 @@ export default {
       this.$emit('close');
     },
     register() {
-      this.$store.dispatch('addUser', this.$data);
-      this.togglePanel(); 
+      this.$store.dispatch('addUser', this.$data); 
+
     },
    async signIn() {
     try {
@@ -129,7 +135,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 
 * {
@@ -211,9 +216,17 @@ button:focus {
   outline: none;
 }
 
+button:hover {
+  color: rgb(13, 13, 13);
+}
+
 button.ghost {
   background-color: transparent;
   border-color: #FFFFFF;
+}
+
+button.ghost:hover {
+  color: #165e2c;
 }
 
 form {

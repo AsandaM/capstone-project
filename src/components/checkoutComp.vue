@@ -1,8 +1,7 @@
 <template>
     <div class="checkout">
         <header class="header">
-            <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-3 ">Checkout</h1>
-            <div class="w-25 h-2 bg-success my-3"></div>
+            <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-5">Checkout</h1>
         </header>    
         <main class="main" v-if="userCart && userCart.length > 0">
             <div class="checkout-container">
@@ -51,7 +50,6 @@
                         </div>
                     </form>
                 </section>
-        
                 <section class="checkout-details">
                     <div class="checkout-details-inner">
                         <div class="checkout-lists">
@@ -80,8 +78,11 @@
                 </section>
             </div>
         </main>
-        <div class="container" style="height: 200px;" v-else>
-            <p>Your cart is empty.</p>
+        <div class="container" v-else>
+            <img alt="empty cart" src="https://asandam.github.io/images/images_capstone/cart.png"/>
+            <h1> YOUR BAG IS EMPTY. </h1>
+            <p> Haven't added anything yet?<br> Add some fresh juices or smoothies to boost your day!  </p>
+            <router-link to="/products" class="cta-btn">Shop Now</router-link>
         </div>
     </div>
 </template>
@@ -131,7 +132,6 @@ export default{
 }
 
 .checkout {
-    font-family: "Poppins", sans-serif;
     min-height: 100vh;
     width: 100%; 
     background-image: url('https://asandam.github.io/images/images_capstone/p9.jpg');
@@ -140,17 +140,14 @@ export default{
     background-position: center;
     color: #4E5150;
     margin: 0 auto;
-    padding: 50px 0 0;
+    padding: 10px 0 0;
     display: flex;
     flex-direction: column;
-}
-.container{
-    height: calc(100vh - 10% - 50px);
 }
 
 .header {
     height: 10%;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .header h3 {
@@ -401,5 +398,55 @@ export default{
     .checkout-details {
         width: 100%;
     }
+}
+
+.container {
+    text-align: center;
+}
+
+.container img {
+    width: 100px;
+    height: auto;
+}
+
+.container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px 0 10px;
+}
+
+.container p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.cta-btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 25px;
+  transition: 0.5s;
+  margin-top: 5px;
+  border: 1px solid #000;
+  color: #000;
+  background: #09650f;
+}
+
+.cta-btn:hover {
+  border: 2px solid #09650f;
+  color: #fff;
+}
+
+.container img {
+    width: 250px; 
+    height: auto; 
+}
+
+.container img:hover{
+    transform: scale(1.8); 
+
 }
 </style>

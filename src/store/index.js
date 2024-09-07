@@ -119,25 +119,18 @@ export default createStore({
     async getCart({ commit }, userID) {
       try {
         let { data } = await axios.get(`http://localhost:5005/cart/${userID}`)
-        let totalCart =await data?.reduce((acc, item) => {
+
+        let cartItems = Array.isArray(data) ? data : [];
+        
+        let totalCart = await cartItems.reduce((acc, item) => {
           let total = (acc + item.price * item.quantity)
            return total
          }, 0).toFixed(2)
-         
-        
-        if (data.length === 0) {
-          // If the cart is empty, set userCart to an empty array and totalCart to 0
-          commit('setUserCart', data)
-          commit('setTotalCart', 0)
-        } else {
-          // If the cart is not empty, calculate the total and commit the data
+
           commit('setUserCart', data)
           commit('setTotalCart', totalCart)
-        }
       } catch (e) {
-        console.log(e);
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
-        
+        toast.error(`${e.data.err}`, { autoClose: 5000 }); 
       }
     },
     async addToCart({commit}, data) { 
@@ -189,7 +182,6 @@ export default createStore({
     },
     async addUser({ commit }, user) {
       try {
-        console.log('hehe I am here');
         let { data } = await axios.post('http://localhost:5005/users/signup', user)
         commit('setAddUser', data)
         if(!data.message){
@@ -198,7 +190,9 @@ export default createStore({
             title: 'Account Created',
             text: 'You have successfully created an account. Please log in.',
             confirmButtonText: 'OK'
-          })
+          }).then(() => {
+            router.push('/');
+          });
         } 
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
