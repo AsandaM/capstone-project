@@ -67,11 +67,11 @@
     <!-- Offcanva for wishlist -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">WISHLIST</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <offcanva-comp/>
+        <wishlist-comp/>
       </div>
     </div>
     <signup-comp v-if="isModalVisible" @close="closeModal"/>
@@ -81,12 +81,12 @@
 <script>
 import signupComp from './signupComp.vue';
 import Swal from 'sweetalert2'
-import offcanvaComp from './offcanvaComp.vue';
+import wishlistComp from './wishlistComp.vue';
 
 export default {
   components: {
     signupComp,
-    offcanvaComp
+    wishlistComp
   },
   data() {
     return {

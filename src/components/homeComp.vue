@@ -107,10 +107,10 @@
 }
 
 .image-container {
-  min-width: 100%; /* Ensure each image takes up the full container width */
-  position: relative; /* Important for the 'right' animation to work */
+  min-width: 100%; 
+  position: relative;
   transition: transform 0.5s ease-in-out;
-  animation: imageSlide 18s ease-in-out infinite; /* Updated animation duration */
+  animation: imageSlide 18s ease-in-out infinite; 
 }
 
 @keyframes imageSlide {
@@ -128,4 +128,17 @@
   }
 }
 
-  </style>
+@media screen and (max-width: 768px) {
+.h5{
+  font-size: 16px;
+}
+.w-90{
+  height: 65%;
+  margin-top: 40px;
+}  
+.h-100{
+  padding: 0 !important;
+}
+}
+
+</style>

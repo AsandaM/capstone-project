@@ -1,16 +1,31 @@
 <template>
   <navbarComp/>
+  <!-- <spinnerComp v-if="loading"></spinnerComp> -->
   <router-view/>
+  <!-- <template>
+  </template> -->
   <footerComp/>
 </template>
 
 <script>
 import navbarComp from '@/components/navbarComp.vue'
 import footerComp from '@/components/footerComp.vue'
+// import spinnerComp from './components/spinnerComp.vue';
 export default {
   components: {
     navbarComp,
     footerComp
+    // spinnerComp
+  },
+  data() {
+    return {
+      loading: true
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000)
   }
 }
 </script>

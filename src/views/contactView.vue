@@ -4,7 +4,7 @@
             <header class="section-header text-center mb-5 pb-2">
                 <h1 class="display-4 display-lg-2 font-weight-bold text-success">Contact Us</h1>
                 <div class="w-25 h-2 bg-success my-3"></div>
-                <p class="text-black fs-5">
+                <p class="text-black fs-5" id="message">
                     We're here to help you on your journey to better health! 
                     Whether you have questions about our products, need recommendations for your specific health goals, 
                     or just want to say hello, we'd love to hear from you.
@@ -120,4 +120,13 @@ section {
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
 }
+
+@media screen and (max-width: 768px) {
+   #message {
+       font-size: 18px !important;
+   }
+
+   
+}
+
 </style>

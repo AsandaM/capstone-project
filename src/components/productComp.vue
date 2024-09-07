@@ -49,24 +49,7 @@
             </div>
           </div>
           <productModal v-if="isModalOpen" :product="selectedProduct" @close="closeModal"></productModal>
-          <div v-if="productNotFound">
-            <div class="container1">
-              <div class="boo-wrapper">
-                <div class="boo">
-                  <div class="face">🙁</div>
-                </div>
-                <div class="shadow"></div>
-
-                <h1>Whoops!</h1>
-                <p>
-                  We couldn't find the item you
-                  <br />
-                  were looking for.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
+          <div class="row" v-if="filteredAndSortedProducts.length > 0">
             <!-- Single Product -->
             <div
               v-for="product in filteredAndSortedProducts"
@@ -91,9 +74,29 @@
                   </ul>
                 </div>
                 <div class="part-2">
-                  <h3 class="product-title text-success">{{ product.prodName }}</h3>
-                  <h4 class="text-success">R{{ product.price }}</h4>
+                  <h3 class="product-title text-black">{{ product.prodName }}</h3>
+                  <h4 class="text-black">R{{ product.price }}</h4>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div v-else-if="isLoading">
+            <spinnerComp></spinnerComp>
+          </div>
+          <div v-else-if="searchQuery && productNotFound">
+            <div class="container1">
+              <div class="boo-wrapper">
+                <div class="boo">
+                  <div class="face">🙁</div>
+                </div>
+                <div class="shadow"></div>
+
+                <h1>Whoops!</h1>
+                <p>
+                  We couldn't find the item you
+                  <br />
+                  were looking for.
+                </p>
               </div>
             </div>
           </div>
@@ -104,9 +107,11 @@
 
   <script>
   import productModal from './productModal.vue';
+  import spinnerComp from './spinnerComp.vue';
   export default {
     components: {
-      productModal
+      productModal,
+      spinnerComp
     },
     data() {
       return {
@@ -116,6 +121,7 @@
         filterType: '',
         isModalOpen: false,
         selectedProduct: null,
+        isLoading: true
       };
     },
     computed: {
@@ -160,14 +166,16 @@
     methods:{
         getProducts(){
             this.$store.dispatch('getProducts')
+            this.isLoading = false;
         },
         getProductStyle(product){
             return {
               backgroundImage: `url(${product.image})`,
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              transition: 'all 0.3s'
+              // backgroundSize: 'cover',
+              transition: 'all 0.3s',
+              // backgroundSize: 'contain'
             }
         },
         addToCart(prodID){
@@ -192,15 +200,12 @@
   </script>
 
   
-<style scoped>
-  
+<style scoped>  
 /* products */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
 
 .section-products {
   width: 100%;
@@ -275,6 +280,8 @@ a:hover {
     margin-bottom: 20px;
     overflow: hidden;
     z-index: 2;
+    background-size: cover; 
+    background-position: center; 
 }
 
 .section-products .single-product .part-1::before {
@@ -339,7 +346,7 @@ a:hover {
 .container{
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
-  /* z-index: -1; */
+  
 }
 
 .form-select{
@@ -364,6 +371,17 @@ a:hover {
   .col-md-4.d-flex .form-select {
     width: 100%;
     margin-bottom: 10px;
+  }
+}
+
+/* Media query for screens between 356px and 762px */
+@media (min-width: 356px) and (max-width: 762px) {
+
+
+  .section-products .single-product .part-1 {
+
+    height: 300px; /* Adjust the height as needed */
+    background-size: contain !important;
   }
 }
 
@@ -397,9 +415,6 @@ a:hover {
   }
 }
 
-body {
-  background-color: #f7f7f7;
-}
 
 .container1 {
   font-family: 'Varela Round', sans-serif;
@@ -407,11 +422,11 @@ body {
   position: relative;
   height: 70vh;
   text-align: center;
-  font-size: 18px; /* Adjust this to match $jaggedDistance / 2 */
+  font-size: 18px; 
 }
 
 .container1 h1 {
-  font-size: 32px; /* Adjust this to match $jaggedDistance */
+  font-size: 32px; 
   margin-top: 32px;
 }
 
@@ -421,13 +436,13 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-top: 64px; /* $jaggedDistance * 2 */
+  padding-top: 64px; 
   padding-bottom: 64px;
 }
 
 .boo {
-  width: 160px; /* $booSize */
-  height: 80px; /* $booSize + ($booSize * 0.15) */
+  width: 160px; 
+  height: 80px; 
   margin-left: auto;
   margin-right: auto;
   border-bottom: 0;
@@ -440,25 +455,25 @@ body {
   content: '';
   display: block;
   position: absolute;
-  left: -18.82px; /* -($jaggedDistance / 1.7) */
-  bottom: -8.31px; /* -($jaggedDistance / 3.85) */
+  left: -18.82px; 
+  bottom: -8.31px; 
   width: calc(100% + 32px);
   height: 12px;
 }
 
 .boo .face {
-  width: auto; /* Adjust width to fit the emoji */
-  height: auto; /* Adjust height to fit the emoji */
-  background: none; /* Remove background color */
-  font-size: 48px; /* Set a size for the emoji */
+  width: auto; 
+  height: auto; 
+  background: none; 
+  font-size: 48px; 
   position: absolute;
   left: 50%;
-  bottom: 20px; /* Adjust position as needed */
+  bottom: 20px; 
   transform: translateX(-50%);
-  line-height: 1; /* Ensure proper line height for the emoji */
+  line-height: 1; 
 }
 
-/* Remove the pseudo-elements as they are not needed anymore */
+
 .boo .face::before,
 .boo .face::after {
   content: none;
@@ -466,7 +481,7 @@ body {
 
 
 .boo .face::before {
-  left: -24px; /* -$booFaceSize */
+  left: -24px; 
 }
 
 .boo .face::after {
@@ -474,10 +489,10 @@ body {
 }
 
 .shadow {
-  width: 128px; /* $booSize - $jaggedDistance */
-  height: 16px; /* $jaggedDistance / 2 */
+  width: 128px; 
+  height: 16px;
   background-color: rgba(237, 237, 237, 0.75);
-  margin-top: 40px; /* $jaggedDistance * 1.25 */
+  margin-top: 40px; 
   margin-right: auto;
   margin-left: auto;
   border-radius: 50%;
