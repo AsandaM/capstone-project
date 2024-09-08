@@ -60,7 +60,6 @@
         <h2>Add New User</h2>
       </template>
       <template #modal-content>
-        <!-- Add Product Form -->
         <div class="row gy-2 gx-3 align-items-center">
           <div class="col-auto">
             <label class="visually-hidden" for="firstName">First Name</label>
@@ -98,6 +97,14 @@
               <option value="user">user</option>
             </select>
           </div>
+          <div class="col-auto">
+            <label class="visually-hidden" for="address">Address</label>
+            <input v-model="form.address" type="text" class="form-control" id="address" placeholder="Address"/>
+          </div>
+          <div class="col-auto">
+            <label class="visually-hidden" for="phone_number">Phone Number</label>
+            <input v-model="form.phone_number" type="text" class="form-control" id="phone_number" placeholder="Phone Number"/>
+          </div>  
         </div>
       </template>
     </modal-comp>
@@ -140,6 +147,14 @@
               <option value="user">User</option>
             </select>
           </div>
+          <div class="col-auto">
+            <label class="visually-hidden" for="address">Address</label>
+            <input v-model="formData.address" type="text" class="form-control" id="address" placeholder="Address"/>
+          </div>
+          <div class="col-auto">
+            <label class="visually-hidden" for="phone_number">Phone Number</label>
+            <input v-model="formData.phone_number" type="text" class="form-control" id="phone_number" placeholder="Phone Number"/>
+          </div>
         </div>
       </template>
     </modal-comp>
@@ -159,7 +174,7 @@ export default {
       headers: [
         { text: "Fist Name", value: "firstName" },
         { text: "Last Name", value: "lastName" },
-        { text: "Age", value: "userAge" },
+        { text: "Gender", value: "gender" },
         { text: "Role", value: "userRole" },
         { text: "Actions", value: "actions" }
       ],
@@ -175,7 +190,9 @@ export default {
         emailAdd: '',
         userPass: '',
         image: '',
-        userRole: ''
+        userRole: '',
+        address: '',
+        phone_number: ''
       },
       form:{
         firstName: '',
@@ -184,7 +201,9 @@ export default {
         gender: '',
         userPass: '',
         image: '',
-        userRole: ''
+        userRole: '',
+        address: '',
+        phone_number: ''
       }
     };
   },
@@ -239,19 +258,28 @@ export default {
       this.isEditUserModalOpen = false;
     },
     addUser() {
-      this.$store.dispatch('addUser', this.form);
-      this.closeModal();
-      this.getUsers();
+      this.$store.dispatch('addUser', this.form).then(() => {
+        this.closeModal();
+        this.getUsers();
+      });
     },
     editUser() {
-      this.$store.dispatch('editUser', this.formData);
-      this.closeModal();
-      this.getUsers();
+      this.$store.dispatch('editUser', this.formData).then(() => {
+        this.closeModal();
+        this.getUsers();
+      });
     },
   },
   mounted() {
     this.getUsers();
   },
+  watch: {
+  users(newUsers) {
+    // Force a refresh when users data changes
+    this.paginatedUsers = newUsers;
+  }
+}
+
 };
 </script>
 

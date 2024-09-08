@@ -12,9 +12,10 @@
       <div class="profile-right text-start">
         <h1>User Profile</h1>
         <div class="info">
-          <p><span>Phone:</span> {{ userProfile.phone }}</p>
           <p><span>Email:</span> {{ user.emailAdd }}</p>
           <p><span>Age:</span> {{ user.userAge }}</p>
+          <p><span>Phone:</span> {{ user.phone_number }}</p>
+          <p><span>Home Address: </span> {{ user.address }}</p>
         </div>
         <div class="edit-delete-container">
           <div class="edit-profile" @click="toggleEditForm">
@@ -33,9 +34,14 @@
           <input v-model="editProfile.userPass" type="password" placeholder="Password" />
           <input v-model="editProfile.gender" type="text" placeholder="Gender" />
           <input v-model="editProfile.userProfile" type="url" placeholder="Profile Image URL" />
+          <input v-model="editProfile.address" type="text" placeholder="Home Address" />
+          <input v-model="editProfile.phone_number" type="text" placeholder="Phone Number" />
           <button @click="updateProfile(user.userID)">Save Changes</button>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <p>Please sign up or log in see your profile</p>
     </div>
   </main>
 
@@ -46,14 +52,6 @@ import Swal from 'sweetalert2';
 export default {
   data() {
     return {
-      userProfile: {
-        firstName: '',
-        lastName: '',
-        phone: '+1 (714) 298-3082',
-        emailAdd: '',
-        birthday: '1996-08-07',
-        userProfile: ''
-      },
       isEditVisible: false,
       editProfile: {
         firstName: '',
@@ -62,7 +60,9 @@ export default {
           userPass: '',
           userRole: '',
           gender: '',
-          userProfile: ''
+          userProfile: '',
+          address: '',
+          phone_number: ''
       }
     };
   },
@@ -84,7 +84,7 @@ export default {
         icon: 'success',
         title: 'Profile updated successfully',
         showConfirmButton: false,
-        timer: 1500
+        timer: 5000
       }).then(() => {
         this.getProfile();
         this.isEditVisible = false;

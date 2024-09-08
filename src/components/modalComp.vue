@@ -30,7 +30,6 @@ export default {
       this.$emit('close');
     },
     submitForm() {
-      console.log('hehehehehe');
       this.$emit('submit');
       this.closeModal();
     },

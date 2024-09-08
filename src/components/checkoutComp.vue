@@ -63,6 +63,7 @@
                                         <span>{{cart.quantity}}</span>
                                         <button @click="increaseQuantity(cart)">+</button>
                                     </div>
+                                    <button @click="deleteItem(cart)" class="btn-delete">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -114,8 +115,15 @@ export default{
         this.getUserCart();
       }
     },
-    },
+    deleteItem(cart) {
 
+        console.log(cart);
+        
+      this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
+    //   this.getUserCart();
+    }
+    
+    },
     mounted() {
         this.getUserCart()
     },
@@ -309,7 +317,7 @@ export default{
 }
 
 .card-name {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -448,5 +456,20 @@ export default{
 .container img:hover{
     transform: scale(1.8); 
 
+}
+
+.btn-delete {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-delete:hover {
+  background-color: #cc0000;
 }
 </style>
