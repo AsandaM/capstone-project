@@ -66,10 +66,10 @@ const insertWishlist = async(req, res) => {
 
 // edit wishlist
 const editWishlist = async(req, res) => {
-    const {quantity, prodID} = req.body;
+    const {quantity} = req.body;
     try {
-        await editWishlistDb(quantity, prodID);
-        res.status(200).json(await getWishlistByUserDb(req.user.userID));
+        await editWishlistDb(quantity, req.params.id);
+        res.status(200).json(await getWishlistDb());
     } catch (err) {
         res.status(500).send({message:'Error editing a wishlist'})
         throw err
