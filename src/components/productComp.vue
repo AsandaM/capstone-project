@@ -6,7 +6,7 @@
           <div class="row justify-content-center text-center">
             <div class="col-md-8 col-lg-6">
               <div class="header2">
-                <h2 class="display-4 display-lg-2 font-weight-bold">
+                <h2 class="display-4 display-lg-2 font-weight-bold mt-3">
                   Juice and Smoothies for a <span class="text-success">Healthier</span> You!
               </h2>
               <div class="w-35 h-2 bg-success my-3"></div>
