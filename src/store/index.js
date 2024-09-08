@@ -20,7 +20,9 @@ export default createStore({
     userProfile: null,
     cart: null,
     userCart: null,
-    totalCart: null
+    totalCart: null,
+    userWishlist: null,
+    wishlist: null
 
   },
   getters: {
@@ -46,6 +48,12 @@ export default createStore({
     },
     setUserCart(state, payload) {
       state.userCart = payload
+    },
+    setWishlist(state, payload) {
+      state.wishlist = payload
+    },
+    setUserWishlist(state, payload) {
+      state.userWishlist = payload
     },
     setUser(state, payload) {
       state.user = payload
@@ -162,6 +170,68 @@ export default createStore({
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
+    async deleteCartItem({ commit }, data) {
+      try {
+        let { prodID, userID } = data
+        await axios.delete(`http://localhost:5005/cart/${userID}/${prodID}`, { data: { userID } })
+        commit('setCart', data)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+
+    // wishlist actions
+    async getWishlist({ commit }, userID) {
+      try {
+        let { data } = await axios.get(`http://localhost:5005/wishlist/${userID}`)
+        commit('setUserWishlist', data)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+
+    async addToWishlist({ commit }, data) {
+      try {
+        let { userID, prodID, quantity } = data
+        await axios.post('http://localhost:5005/wishlist', { userID, prodID, quantity })
+        commit('setWishlist', data)
+        Swal.fire({
+          icon: 'success',
+          title: 'Product added to wishlist',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async deleteWishlistItem({ commit }, data) {
+      try {
+        let { prodID, userID } = data
+        await axios.delete(`http://localhost:5005/wishlist/${userID}/${prodID}`, { data: { userID } })
+        commit('setWishlist', data)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async updateWishlist({ commit }, data) {
+      try {
+        let { prodID, userID, quantity } = data
+        await axios.patch(`http://localhost:5005/wishlist/${prodID}`, { userID, quantity })
+        commit('setWishlist', data)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async clearWishlist({ commit }, {wishlistID}) {
+      try {
+        await axios.delete(`http://localhost:5005/wishlist/${wishlistID}`)
+        commit('setWishlist', null)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+
 
     // users actions
     async getUsers({ commit }) {
@@ -190,9 +260,7 @@ export default createStore({
             title: 'Account Created',
             text: 'You have successfully created an account. Please log in.',
             confirmButtonText: 'OK'
-          }).then(() => {
-            router.push('/');
-          });
+          })
         } 
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });

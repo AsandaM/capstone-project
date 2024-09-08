@@ -13,11 +13,11 @@
           <input class="form-control form-control-sm" type="email" v-model="emailAdd" placeholder="Email" required />
           <input class="form-control form-control-sm" type="password" v-model="userPass" placeholder="Password" required />
           <select type="password" class="form-select form-select-sm m-2" aria-label="Small select example" v-model="userRole">
-            <option value="" disabled selected>Select Role</option>
+            <option value="">Select Role</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
-          <button type="submit" @click="register">Sign Up</button>
+          <button type="submit">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -26,7 +26,7 @@
           <input type="email" v-model="email" placeholder="Email" required />
           <input type="password" v-model="password" placeholder="Password" required />
           <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your password?</a>
-          <button type="submit" @click="signIn">Sign In</button>
+          <button type="submit">Sign In</button>
         </form>
       </div>
       <div class="overlay-container">

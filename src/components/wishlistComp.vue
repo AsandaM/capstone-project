@@ -1,20 +1,19 @@
 <template>
-  <main>
-    <div class="container">
+  <main v-if="userWishlist">
+    <div class="container" >
       <table>
-        <tbody>
+        <tbody v-for="wishlist in userWishlist" :key="wishlist.wishlistID">
           <tr>
             <td class="product-name">
               <img alt="Pink Funnel Collar Puffer Jacket" class="product-image" height="60"
-                src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-BVbpSZmLndA7MfHIxv2ahIKS/user-IBY8IaMXtVn7IVIdZeyvjx16/img-20CWVPXEHcaBh5P1vZv1FNN3.png?st=2024-09-07T06%3A59%3A38Z&amp;se=2024-09-07T08%3A59%3A38Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-06T21%3A23%3A43Z&amp;ske=2024-09-07T21%3A23%3A43Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=bpeeyoNjyuYsiD07Byldv4Nn6EsOJ1GqPXsJqnIcTaI%3D"
-                width="60" />
-              Funnel Collar Puffer Jacket
+                :src="wishlist.image" width="60"/>
+              {{wishlist.prodName}}
             </td>
             <td class="price">
-              $39.00
+              {{wishlist.price}}
             </td>
             <td>
-              <button class="btn">
+              <button class="btn" @click="addToCart(wishlist.prodID)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                 </svg>
@@ -28,7 +27,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="clear-all">Clear All</button>
+      <button class="clear-all" @click="clearWishlist(wishlist.wishlistID)">Clear All</button>
     </div>
   </main>
 </template>
@@ -36,6 +35,27 @@
 <script>
 export default {
   name: 'wishlistComp',
+  computed: {
+    userWishlist() {
+      return this.$store.state.userWishlist;
+    },
+  },
+  methods:{
+    getWishlist(){
+      // get wishlist from local storage
+     this.$store.dispatch('getWishlist', this.userID)
+    },
+    addToCart(prodID){
+      this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
+
+    },
+    clearWishlist(wishlistID){
+      this.$store.dispatch('clearWishlist', {wishlistID})
+    }
+  },
+  mounted(){
+    this.getWishlist()
+  }
 };
 </script>
 
