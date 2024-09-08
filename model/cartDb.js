@@ -33,4 +33,8 @@ const deleteCartDb = async(id)=>{
     await pool.query('DELETE FROM cart WHERE cartID = ?', [id])
 }
 
-export {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb}
+const deleteItemCartDb = async(userID, prodID)=>{
+    await pool.query('DELETE FROM cart WHERE userID = ? AND prodID = ?', [userID, prodID])
+}
+
+export {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb, deleteItemCartDb}

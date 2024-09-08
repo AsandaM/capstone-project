@@ -1,4 +1,4 @@
-import {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb} from '../model/cartDb.js'
+import {getCartDb, getCartByUserDb, getCartByProductDb, editCartDb, deleteCartDb, insertCartDb, deleteItemCartDb} from '../model/cartDb.js'
 import { loginDb } from '../model/usersDb.js'
 
 // get all cart
@@ -95,4 +95,16 @@ const deleteCart = async(req, res)=>{
     }
 }
 
-export {getCart, getCartByUser, getCartByProduct, editCart, deleteCart, insertCart}
+// delete item from cart
+const deleteItemCart = async(req, res)=>{
+    try {
+        await deleteItemCartDb(req.params.userID, req.params.prodID)
+        res.status(200).json(await getCartByUserDb(req.params.userID))
+        
+    } catch (err) {
+        res.status(500).send({message:'Error deleting a cart'})
+        throw err
+    }
+}
+
+export {getCart, getCartByUser, getCartByProduct, editCart, deleteCart, insertCart, deleteItemCart}

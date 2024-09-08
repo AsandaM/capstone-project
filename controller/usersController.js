@@ -18,7 +18,7 @@ const getUser = async(req, res)=>{
         }
         res.status(200).json(await getUserDb(req.params.id))   
     } catch(err){
-        res.status(500).send({message:'Error fetching products'})
+        res.status(500).send({message:'Error fetching user'})
         throw err
     }
 }
@@ -26,18 +26,17 @@ const fetchUser = async(req, res)=>{
     try{
 
         const user = await loginDb(req.user);
-        // console.log(user);
         
         res.send(await getUserDb(user.userID));   
     } catch(err){
-        res.status(500).send({message:'Error fetching products'})
+        res.status(500).send({message:'Please login to view your profile'})
         throw err
     }
 }
 
 
 const insertUser = async (req, res) => {
-    let { firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole } = req.body;
+    let { firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, address, phone_number } = req.body;
 
     // Assign default profile image if none is provided
     if (userProfile === undefined) {
@@ -57,7 +56,7 @@ const insertUser = async (req, res) => {
         // Hash the password and insert the new user
         hash(userPass, 10, async (err, hashedP) => {
             if (err) throw err;
-            await insertUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole);
+            await insertUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, address, phone_number);
             res.status(200).json(await getUsersDb());
         });
     } catch (error) {
@@ -79,7 +78,7 @@ const deleteUser = async(req, res)=>{
 }
 
 const editUser = async(req, res)=>{
-    let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole} = req.body
+    let {firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, address, phone_number} = req.body
     let user = await getUserDb(req.params.id)
     
     if(!user){
@@ -94,23 +93,25 @@ const editUser = async(req, res)=>{
     emailAdd? emailAdd = emailAdd: emailAdd = user.emailAdd
     userProfile? userProfile = userProfile: userProfile = user.userProfile
     userRole? userRole = userRole: userRole = user.userRole
+    address? address = address: address = user.address
+    phone_number? phone_number = phone_number: phone_number = user.phone_number
 
     try {
         if(userPass!=''){
         hash(userPass, 10, async(err, hashedP)=>{
             if(err) throw err
             userPass = hashedP
-            await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, req.params.id)    
+            await editUserDb(firstName, lastName, userAge, gender, emailAdd, hashedP, userProfile, userRole, address, phone_number, req.params.id)    
         })
     }   else{
         
         userPass = user.userPass
-        await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, req.params.id)    
+        await editUserDb(firstName, lastName, userAge, gender, emailAdd, userPass, userProfile, userRole, address, phone_number, req.params.id)    
     }
          res.status(200).send(await getUsersDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching products'})
+        res.status(500).send({message:'Error editing user'})
         throw err
     }
 
