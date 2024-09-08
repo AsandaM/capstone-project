@@ -167,6 +167,8 @@ export default createStore({
         await axios.patch(`http://localhost:5005/cart/${prodID}`, { userID, quantity })
         commit('setCart', data)
       } catch (e) {
+        console.log(e);
+        
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
@@ -182,14 +184,17 @@ export default createStore({
 
     // wishlist actions
     async getWishlist({ commit }, userID) {
+      console.log(userID);
+      
       try {
         let { data } = await axios.get(`http://localhost:5005/wishlist/${userID}`)
         commit('setUserWishlist', data)
       } catch (e) {
+        console.log(e);
+        
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
-
     async addToWishlist({ commit }, data) {
       try {
         let { userID, prodID, quantity } = data
@@ -227,6 +232,17 @@ export default createStore({
       try {
         await axios.delete(`http://localhost:5005/wishlist/${wishlistID}`)
         commit('setWishlist', null)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async wishlistQuantity({ commit }, data) {
+      console.log(data);
+      
+      try {
+        let { prodID, userID, quantity } = data
+        await axios.patch(`http://localhost:5005/wishlist/${prodID}`, { userID, quantity })
+        commit('setWishlist', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
