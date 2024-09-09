@@ -1,18 +1,22 @@
 <template>
   <div class="modal-backdrop">
     <div class="container" id="container">
-      <button class="close-button" @click="closeModal"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-      </svg></button>
+      <button class="close-button" @click="closeModal"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+          fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+          <path
+            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+          <path
+            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+        </svg></button>
       <div class="form-container sign-up-container">
         <form @submit.prevent="register" id="register">
           <h1 id="account">Create Your Account and Shop Wellness</h1>
-          <input class="form-control form-control-sm" type="text"  v-model="firstName" placeholder="Firstname" required />
-          <input class="form-control form-control-sm" type="text" v-model="lastName" placeholder="Lastname" required />
-          <input class="form-control form-control-sm" type="email" v-model="emailAdd" placeholder="Email" required />
-          <input class="form-control form-control-sm" type="password" v-model="userPass" placeholder="Password" required />
-          <select type="password" class="form-select form-select-sm m-2" aria-label="Small select example" v-model="userRole">
+          <input class="form-control form-control-sm" type="text" v-model="firstName" placeholder="Firstname"/>
+          <input class="form-control form-control-sm" type="text" v-model="lastName" placeholder="Lastname"/>
+          <input class="form-control form-control-sm" type="email" v-model="emailAdd" placeholder="Email"/>
+          <input class="form-control form-control-sm" type="password" v-model="userPass" placeholder="Password"/>
+          <select type="password" class="form-select form-select-sm m-2" aria-label="Small select example"
+            v-model="userRole">
             <option value="" selected>Select Role</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
@@ -23,9 +27,10 @@
       <div class="form-container sign-in-container">
         <form @submit.prevent="signIn">
           <h1>Sign in</h1>
-          <input type="email" v-model="email" placeholder="Email" required />
-          <input type="password" v-model="password" placeholder="Password" required />
-          <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your password?</a>
+          <input type="email" v-model="email" placeholder="Email"/>
+          <input type="password" v-model="password" placeholder="Password"/>
+          <a href="#" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your
+            password?</a>
           <button type="submit">Sign In</button>
         </form>
       </div>
@@ -38,7 +43,8 @@
           </div>
           <div class="overlay-panel overlay-right">
             <h1>Say Hello to Better Health!</h1>
-            <p>Unlock a healthier you! Sign-up now to enjoy top-notch juices, smoothies, and start your health journey now!</p>
+            <p>Unlock a healthier you! Sign-up now to enjoy top-notch juices, smoothies, and start your health journey
+              now!</p>
             <button class="ghost" id="signUp" @click="togglePanel">Sign Up</button>
           </div>
         </div>
@@ -78,8 +84,8 @@
 </template>
 
 <script>
-// import router from '@/router';
 import Swal from 'sweetalert2';
+
 export default {
   name: 'SignupLogin',
   data() {
@@ -92,8 +98,8 @@ export default {
       registeredSuccessfully: false
     };
   },
-  computed:{
-    users(){
+  computed: {
+    users() {
       return this.$store.state.users || [];
     }
   },
@@ -106,36 +112,59 @@ export default {
       this.$emit('close');
     },
     register() {
-      if(this.userRole == ''){
+      if(!this.firstName || !this.lastName || !this.emailAdd || !this.userPass || !this.userRole) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please fill in all fields!',
+        });
+        return;
+      }
+      if (this.userRole == '') {
         this.userRole = 'user'
       }
-      this.$store.dispatch('addUser', this.$data).then(()=>{
+      this.$store.dispatch('addUser', this.$data).then(() => {
         this.togglePanel()
       })
     },
-   async signIn() {
-    try {
-    await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
-    
-  } catch (e) {
-    console.error(e.message);
-  }
-  },
-  async updatePassword() {
-    try {
-      await this.$store.dispatch('updatePassword', { userPass: this.userPass, emailAdd: this.emailAdd });
-      Swal.fire({
-        icon: 'success',
-        title: 'Password updated successfully',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } catch (e) {
-      console.error(e.message);
+    async signIn() {
+
+      if(!this.email || !this.password) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please fill in all fields!',
+        });
+        return;
+      }
+
+      try {
+        await this.$store.dispatch('login', { emailAdd: this.email, userPass: this.password });
+
+      } catch (e) {
+        console.error(e.message);
+      }
+    },
+    async updatePassword() {
+
+      if(!this.emailAdd || !this.userPass) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please fill in all fields!',
+        });
+        return;
+      }
+      try {
+        await this.$store.dispatch('updatePassword', { userPass: this.userPass, emailAdd: this.emailAdd }).then(() => {
+          this.togglePanel()
+        });
+      } catch (e) {
+        console.error(e.message);
+      }
     }
+
   }
-  
-}
 };
 </script>
 
@@ -152,7 +181,7 @@ h1 {
   margin: 0;
 }
 
-#account{
+#account {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
@@ -179,7 +208,7 @@ a {
   margin: 15px 0;
 }
 
-a:hover{
+a:hover {
   text-decoration-line: underline;
   text-decoration-color: #0f6367;
 }
@@ -255,13 +284,13 @@ input {
   width: 100%;
 }
 
-#register input{
+#register input {
   background-color: #eee;
   border: #165e2c 1px solid;
   border-radius: 20px;
   padding: 5px 8px;
-  margin: 4px 0; 
-  width: 100%; 
+  margin: 4px 0;
+  width: 100%;
 }
 
 .modal-backdrop {
@@ -322,12 +351,15 @@ input {
 }
 
 @keyframes show {
-  0%, 49.99% {
+
+  0%,
+  49.99% {
     opacity: 0;
     z-index: 1;
   }
-  
-  50%, 100% {
+
+  50%,
+  100% {
     opacity: 1;
     z-index: 5;
   }
@@ -397,6 +429,4 @@ input {
 .container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
-
-
 </style>

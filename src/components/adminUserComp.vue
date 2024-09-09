@@ -162,9 +162,8 @@
 </template>
 
 <script>
-import modalComp from './modalComp.vue';
 import Swal from 'sweetalert2';
-
+import modalComp from './modalComp.vue';
 export default {
   components: {
     modalComp,
@@ -235,14 +234,9 @@ export default {
       }
     },
     deleteUser(id) {
-      this.$store.dispatch('deleteUser', id);
-      Swal.fire({
-        icon: 'success',
-        title: 'User deleted successfully',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.getUsers();
+      this.$store.dispatch('deleteUser', id).then(()=>{
+        this.getUsers();
+      })
       
     },
     openAddUserModal(user) {
@@ -258,6 +252,15 @@ export default {
       this.isEditUserModalOpen = false;
     },
     addUser() {
+
+      if(!this.formData.firstName || !this.formData.lastName || !this.formData.userAge || !this.formData.emailAdd || !this.formData.userPass || !this.formData.image || !this.formData.userRole || !this.formData.address || !this.formData.phone_number){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please fill in all fields',
+        });
+        return;
+      }
       this.$store.dispatch('addUser', this.form).then(() => {
         this.closeModal();
         this.getUsers();
