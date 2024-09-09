@@ -3,6 +3,10 @@
         <header class="header">
             <h1 class="display-4 display-lg-2 font-weight-bold text-success text-start ms-5">Checkout</h1>
         </header>    
+        <div v-if="!$store.state.userCart">
+            <spinner-comp/>
+
+        </div>
         <main class="main" v-if="userCart && userCart.length > 0">
             <div class="checkout-container">
                 <section class="checkout-form">
@@ -89,7 +93,11 @@
 </template>
 
 <script>
+import spinnerComp from './spinnerComp.vue';
 export default{
+    components:{
+        spinnerComp
+    },
     computed:{
         userCart(){
           return this.$store.state.userCart
@@ -116,11 +124,8 @@ export default{
       }
     },
     deleteItem(cart) {
-
-        console.log(cart);
-        
-      this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
-    //   this.getUserCart();
+    this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
+    this.getUserCart();
     }
     
     },
@@ -193,8 +198,8 @@ export default{
 }
 
 .checkout-form {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    background-color: transparent;
+    /* backdrop-filter: blur(15px); */
     padding: 20px;
 }
 
