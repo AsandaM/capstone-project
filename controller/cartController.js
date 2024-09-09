@@ -98,11 +98,11 @@ const deleteCart = async(req, res)=>{
 // delete item from cart
 const deleteItemCart = async(req, res)=>{
     try {
-        await deleteItemCartDb(req.params.userID, req.params.prodID)
-        res.status(200).json(await getCartByUserDb(req.params.userID))
+        await deleteItemCartDb(req.body.userID, req.params.prodID)
+        res.status(200).json(await getCartByUserDb(req.body.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a cart'})
+        res.status(500).send({message:'Error deleting a item'})
         throw err
     }
 }

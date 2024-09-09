@@ -10,6 +10,6 @@ router.get('/product/:prodID', getWishlistByProduct)
 router.post('/',verifyAToken, insertWishlist)
 router.patch('/:id', editWishlist)
 router.delete('/:id', deleteWishlist)
-router.delete('/:userID/:prodID', deleteItemWishlist)
+router.delete('/:userID/:prodID',verifyAToken, deleteItemWishlist)
 
 export default router

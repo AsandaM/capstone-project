@@ -92,9 +92,8 @@ const deleteWishlist = async(req, res)=>{
 // delete item wishlist
 const deleteItemWishlist = async(req, res)=>{
     try {
-        const user = await loginDb(req.user)
-        await deleteItemWishlistDb(user.userID, req.params.prodID)
-        res.status(200).json(await getWishlistByUserDb(user.userID))
+        await deleteItemWishlistDb(req.body.userID, req.params.prodID)
+        res.status(200).json(await getWishlistByUserDb(req.body.userID))
         
     } catch (err) {
         res.status(500).send({message:'Error deleting an item from wishlist'})
