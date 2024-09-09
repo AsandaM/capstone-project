@@ -20,7 +20,7 @@ const getCartByUser = async(req, res)=>{
         res.status(200).json(await getCartByUserDb(user.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching a single cart'})
+        res.status(500).send({message:'Error fetching a users cart'})
         throw err
     }
 }
