@@ -7,4 +7,4 @@ import VueCookies from 'vue-cookies'
 
 
 
-createApp(App).use(store).use(router).use(VueCookies, {expire: '3h'}).mount('#app')
+createApp(App).use(store).use(router).use(VueCookies, {expire: '1h'}).mount('#app')

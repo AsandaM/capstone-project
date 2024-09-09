@@ -64,7 +64,7 @@
       <div class="container text-center">
         <h3 class="text-success">Looking to Improve Your Health and Wellness?</h3>
         <p class="text-center">
-          Discover our range of nutritious juices and smoothies designed to enhance your well-being, boost your energy, and support your fitness goals.
+          Discover our range of nutritious juices and smoothies designed to enhance your well-being, <br> boost your energy, and support your fitness goals.
         </p>
         <router-link to="/products" class="cta-btn">Shop Now</router-link>
       </div>
@@ -124,10 +124,6 @@ header p{
 #about .about-col .img {
   position: relative;
 }
-
-/* #about .about-col .img img {
-  border-radius: 4px 4px 0 0;
-} */
 
 #about .about-col .icon {
   width: 64px;
@@ -189,7 +185,6 @@ header p{
 }
 
 #call-to-action .cta-btn {
-  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
@@ -199,6 +194,7 @@ header p{
   border-radius: 25px;
   transition: 0.5s;
   margin-top: 10px;
+  /* margin-right: 50px; */
   border: 2px solid #000;
   color: #000;
 }

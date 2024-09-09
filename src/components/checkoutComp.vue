@@ -15,14 +15,14 @@
                         <div class="form-control">
                             <label for="checkout-email font-weight-bold">Email</label>
                             <div>
-                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email address">
+                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email address" v-model="email">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-phone">Phone</label>
                             <div>
                                 
-                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number">
+                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number" v-model="phone">
                             </div>
                         </div>
                         <br>
@@ -30,27 +30,27 @@
                         <div class="form-control">
                             <label for="checkout-name">Full name</label>
                             <div>
-                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name">
+                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name" v-model="fullName">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-address">Address</label>
                             <div>
-                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address">
+                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address" v-model="address">
                             </div>
                         </div>
                         <div class="form-control">
                             <label for="checkout-city">City</label>
                             <div>
-                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city">
+                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city" v-model="city">
                             </div>
                         </div>
                         <div class="form-control checkbox-control">
-                            <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox">
+                            <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox" v-model="saveInfo">
                             <label for="checkout-checkbox">Save this information for next time</label>
                         </div>
                         <div class="form-control-btn">
-                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">Continue</button>
+                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow" @click="placeOrder()">Place your order</button>
                         </div>
                     </form>
                 </section>
@@ -73,11 +73,11 @@
                         </div>
                         <div class="checkout-shipping">
                             <h6>Delivery</h6>
-                            <p>R19</p>
+                            <p>R{{ deliveryFee }}</p>
                         </div>
                         <div class="checkout-total">
                             <h6>Total</h6>
-                            <p>R {{ totalCart }}</p>
+                            <p>R{{ totalCart }}</p>
                         </div>
                     </div>
                 </section>
@@ -98,12 +98,28 @@ export default{
     components:{
         spinnerComp
     },
+    data(){
+        return{
+            email: '',
+            phone: '',
+            fullName: '',
+            address: '',
+            city: '',
+            saveInfo: false
+        }
+    },
     computed:{
         userCart(){
           return this.$store.state.userCart
       },
         totalCart(){
             return this.$store.state.totalCart
+        },
+        deliveryFee(){
+            return this.$store.state.deliveryFee
+        },
+        AddOrders(){
+            return this.$store.state.orders
         },
     },
     methods: {
@@ -126,8 +142,17 @@ export default{
     deleteItem(cart) {
     this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
     this.getUserCart();
+    },
+    placeOrder(){
+        if(this.saveInfo){
+         this.addToOrders();
+        }
+    },
+    addToOrders(){
+        console.log(this.$data);
+        
+        this.$store.dispatch('insertToOrder', {userID: this.userID, data: this.$data});
     }
-    
     },
     mounted() {
         this.getUserCart()

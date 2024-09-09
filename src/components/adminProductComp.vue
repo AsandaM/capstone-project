@@ -193,6 +193,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 import modalComp from './modalComp.vue';
 
 export default {
@@ -283,8 +284,17 @@ export default {
       this.isEditProductModalOpen = false;
     },
     addProduct() {
-      this.$store.dispatch('addProduct', this.form);
-      this.closeModal();
+      if(!this.form.prodName || !this.form.prodDesc || !this.form.type || !this.form.image || !this.form.category || !this.form.price || !this.form.duration_days || !this.form.calories || !this.form.benefits || !this.form.instructions || !this.form.ingredients){
+       Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in all fields',
+      });
+        return;
+      }
+      this.$store.dispatch('addProduct', this.form).then(() => {
+        this.closeModal();
+      });
     },
     editProduct() {
       this.$store.dispatch('editProduct', this.formData);

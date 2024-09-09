@@ -22,7 +22,9 @@ export default createStore({
     userCart: null,
     totalCart: null,
     userWishlist: null,
-    wishlist: null
+    wishlist: null,
+    deliveryFee: 150,
+    orders: null
 
   },
   getters: {
@@ -69,6 +71,12 @@ export default createStore({
     },
     setEditUser(state, payload) {
       state.user = payload
+    },
+    setOrders(state, payload) {
+      state.orders = payload  
+    },
+    setInsertToOrder(state, payload) {
+      state.orders = payload
     }
   },
   actions: {
@@ -132,30 +140,40 @@ export default createStore({
         
         let totalCart = await cartItems.reduce((acc, item) => {
           let total = (acc + item.price * item.quantity)
-           return total
+           return total + this.state.deliveryFee
          }, 0).toFixed(2)
 
           commit('setUserCart', data)
           commit('setTotalCart', totalCart)
       } catch (e) {
-        toast.error(`${e.data.err}`, { autoClose: 5000 }); 
+        toast.error(`${e.data.message}`, { autoClose: 5000 }); 
       }
     },
     async addToCart({commit}, data) { 
-      
       try {
         let {userID, prodID,  quantity } = data
         
         await axios.post('http://localhost:5005/cart', {userID, prodID,  quantity })
         commit('setCart', data)
+
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Product added to cart',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(() => {
+            router.push('/products')
+        })
+      } else {
         Swal.fire({
-          icon: 'success',
-          title: 'Product added to cart',
-          showConfirmButton: false,
-          timer: 3000
-      }).then(() => {
-          router.push('/products')
-      }) 
+          icon: 'error',
+          title: 'Error',
+          text: `${data.err}`,
+          confirmButtonText: 'OK'
+        })
+      }
+          
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         console.log(e);
@@ -177,6 +195,21 @@ export default createStore({
         let { prodID, userID } = data
         await axios.delete(`http://localhost:5005/cart/${userID}/${prodID}`)
         commit('setCart', data)
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Product removed from cart',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -184,15 +217,11 @@ export default createStore({
 
     // wishlist actions
     async getWishlist({ commit }, userID) {
-      console.log(userID);
-      
       try {
         let { data } = await axios.get(`http://localhost:5005/wishlist/${userID}`)
         commit('setUserWishlist', data)
 
       } catch (e) {
-        console.log(e);
-        
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
@@ -201,12 +230,21 @@ export default createStore({
         let { userID, prodID, quantity } = data
         await axios.post('http://localhost:5005/wishlist', { userID, prodID, quantity })
         commit('setWishlist', data)
-        Swal.fire({
-          icon: 'success',
-          title: 'Product added to wishlist',
-          showConfirmButton: false,
-          timer: 3000
-        })
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Product added to wishlist',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -216,6 +254,21 @@ export default createStore({
         let { prodID, userID } = data
         await axios.delete(`http://localhost:5005/wishlist/${userID}/${prodID}`, { data: { userID } })
         commit('setWishlist', data)
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Product removed from wishlist',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        } else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -263,6 +316,14 @@ export default createStore({
       try {
         let { data } = await axios.get(`http://localhost:5005/users/profile`)
         commit('setProfile', data)
+        if(data.err){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -271,14 +332,21 @@ export default createStore({
       try {
         let { data } = await axios.post('http://localhost:5005/users/signup', user)
         commit('setAddUser', data)
-        if(!data.message){
+        if(!data.err){
           Swal.fire({
             icon: 'success',
             title: 'Account Created',
-            text: 'You have successfully created an account. Please log in.',
+            text: `${data.message}`,
             confirmButtonText: 'OK'
           })
-        } 
+        } else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -293,7 +361,7 @@ export default createStore({
           $cookies.set('userRole', userRole.userRole)
           Swal.fire({
             icon: 'success',
-            title: 'Welcome back!',
+            title: `${data.message}`,
             showConfirmButton: false,
             timer: 2000
           }).then(() => {
@@ -321,7 +389,23 @@ export default createStore({
         await axios.patch(`http://localhost:5005/users/${userID}`, info)
         commit('setUsers', data)
         $cookies.set('userRole', info.userRole)
-        location.reload()
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Profile Updated',
+            text: 'You have successfully updated your profile.',
+            confirmButtonText: 'OK'
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.$router.push('/');
+          });
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
         
@@ -347,6 +431,42 @@ export default createStore({
       try {
         let { data } = await axios.delete(`http://localhost:5005/users/${userID}`)
         commit('setUsers', data)
+        if(!data.err){
+          Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this account!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Your account has been deleted.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              }).then(() => {
+                this.$router.push('/');
+                this.$cookies.remove('token');
+              });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire({
+                title: 'Cancelled',
+                text: 'Your account is safe :)',
+                icon: 'error',
+                confirmButtonText: 'OK'
+              });
+            }
+          });
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -355,16 +475,63 @@ export default createStore({
       try {
         let  {data} = await axios.patch(`http://localhost:5005/users//updatepassword`, { userPass, emailAdd })
         commit('setUsers', data)
-        Swal.fire({
-          icon: 'success',
-          title: 'Password Updated',
-          text: `${data.message}`,
-          confirmButtonText: 'OK'
-        })
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Password Updated',
+            text: `${data.message}`,
+            confirmButtonText: 'OK'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
       } catch (e) {
         toast.error(`${e.response ? e.response.data.message : e.message}`, { autoClose: 5000 });
       }
-    }
+    },
+
+
+    // orders actions
+
+    async getOrders({ commit }) {
+      try {
+        let { data } = await axios.get(`http://localhost:5005/orders`)
+        commit('setOrders', data)
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+
+    async insertToOrder({ commit }, data) {
+      console.log(data);
+      try {
+        let {userID, info} = data
+        await axios.post('http://localhost:5005/orders', {userID, info})
+        commit('setInsertToOrder', data)
+        if(!data.err){
+          Swal.fire({
+            icon: 'success',
+            title: 'Order Placed',
+            text: 'You have successfully placed an order.',
+            confirmButtonText: 'OK'
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: `${data.err}`,
+            confirmButtonText: 'OK'
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
   },
   modules: {
   }
