@@ -80,8 +80,8 @@
               </div>
             </div>
           </div>
-          <div v-else-if="isLoading">
-            <spinnerComp></spinnerComp>
+          <div v-else-if="!$store.state.products">
+            <spinnerComp/>
           </div>
           <div v-else-if="searchQuery && productNotFound">
             <div class="container1">
@@ -179,7 +179,8 @@
             }
         },
         addToCart(prodID){
-            this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
+      
+          this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
 
         },
         openModal(product){

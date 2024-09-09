@@ -175,7 +175,7 @@ export default createStore({
     async deleteCartItem({ commit }, data) {
       try {
         let { prodID, userID } = data
-        await axios.delete(`http://localhost:5005/cart/${userID}/${prodID}`, { data: { userID } })
+        await axios.delete(`http://localhost:5005/cart/${userID}/${prodID}`)
         commit('setCart', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
@@ -189,6 +189,7 @@ export default createStore({
       try {
         let { data } = await axios.get(`http://localhost:5005/wishlist/${userID}`)
         commit('setUserWishlist', data)
+
       } catch (e) {
         console.log(e);
         
@@ -327,9 +328,9 @@ export default createStore({
       }
     },
     async editUser({ commit }, user) {
-
+      
       try {
-        let data = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
+        let {data} = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
         commit('setEditUser', data)
         Swal.fire({
           icon: 'success',

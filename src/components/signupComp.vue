@@ -13,7 +13,7 @@
           <input class="form-control form-control-sm" type="email" v-model="emailAdd" placeholder="Email" required />
           <input class="form-control form-control-sm" type="password" v-model="userPass" placeholder="Password" required />
           <select type="password" class="form-select form-select-sm m-2" aria-label="Small select example" v-model="userRole">
-            <option value="">Select Role</option>
+            <option value="" selected>Select Role</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
@@ -88,7 +88,8 @@ export default {
       lastName: '',
       emailAdd: '',
       userPass: '',
-      userRole: ''
+      userRole: '',
+      registeredSuccessfully: false
     };
   },
   computed:{
@@ -105,8 +106,12 @@ export default {
       this.$emit('close');
     },
     register() {
-      this.$store.dispatch('addUser', this.$data); 
-
+      if(this.userRole == ''){
+        this.userRole = 'user'
+      }
+      this.$store.dispatch('addUser', this.$data).then(()=>{
+        this.togglePanel()
+      })
     },
    async signIn() {
     try {
