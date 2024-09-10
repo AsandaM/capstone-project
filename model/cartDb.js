@@ -30,7 +30,7 @@ const editCartDb = async(quantity, id)=>{
 }
 
 const deleteCartDb = async(id)=>{
-    await pool.query('DELETE FROM cart WHERE cartID = ?', [id])
+    await pool.query('DELETE FROM cart WHERE userID = ?', [id])
 }
 
 const deleteItemCartDb = async(userID, prodID)=>{

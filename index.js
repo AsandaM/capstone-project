@@ -4,7 +4,6 @@ import usersRoutes from './routes/usersRoutes.js'
 import productsRoutes from './routes/productsRoutes.js'
 import cartRoutes from './routes/cartRoutes.js'
 import wishlistRoutes from './routes/wishlistRoutes.js'
-import ordersRoutes from './routes/ordersRoutes.js'
 
 
 let port = process.env.PORT || 5005
@@ -16,8 +15,6 @@ app.use('/users', usersRoutes)
 app.use('/products', productsRoutes)
 app.use('/cart', cartRoutes)
 app.use('/wishlist', wishlistRoutes)
-app.use('/orders', ordersRoutes)
-
 app.use(express.static('public'))
 
 

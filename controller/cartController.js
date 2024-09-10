@@ -86,7 +86,7 @@ const editCart = async(req, res)=>{
 // delete cart
 const deleteCart = async(req, res)=>{
     try {
-        await deleteCartDb(req.params.id)
+        await deleteCartDb(req.body.userID)
         res.status(200).json(await getCartDb())
         
     } catch (err) {
