@@ -24,10 +24,9 @@ const getOrdersByUser = async(req, res)=>{
 
 // insert orders
 const insertOrders = async(req, res)=>{
-    let {userID} = req.body.userID
-      let  {email, phone, fullName, address, city, saveInfo, deliveryFee, totalPrice, orderDate} = req.body
+    let  {userID, email, phone, fullName, address, city, deliveryFee, totalPrice, orderDate, cartID} = req.body
     try {
-        await insertOrdersDb(userID, email, phone, fullName, address, city, saveInfo, deliveryFee, totalPrice, orderDate)
+        await insertOrdersDb(userID, email, phone, fullName, address, city, deliveryFee, totalPrice, orderDate, cartID)
         res.status(200).json(await getOrdersDb())
         
     } catch (err) {

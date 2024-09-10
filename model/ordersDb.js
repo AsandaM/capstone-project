@@ -15,8 +15,8 @@ const getOrdersByUserDb = async (userID) => {
                                 return data
 }
 
-const insertOrdersDb = async (userID, email, phone, fullName, address, city, saveInfo, deliveryFee, totalPrice, orderDate) => {
-    let [data] = await pool.query('INSERT INTO orders (userID, email, phone, fullName, address, city, saveInfo, deliveryFee, totalPrice, orderDate) VALUES (?,?,?,?,?,?,?,?,?,?)', [userID, email, phone, fullName, address, city, saveInfo, deliveryFee, totalPrice, orderDate])
+const insertOrdersDb = async (userID, email, phone, fullName, address, city, deliveryFee, totalPrice, orderDate, cartID) => {
+    let [data] = await pool.query('INSERT INTO orders (userID, email, phone, fullName, address, city, deliveryFee, totalPrice, orderDate, cartID) VALUES (?,?,?,?,?,?,?,?,?,?)', [userID, email, phone, fullName, address, city, deliveryFee, totalPrice, orderDate, cartID])
     return data
 }
 
