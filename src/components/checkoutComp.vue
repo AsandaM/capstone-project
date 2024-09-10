@@ -10,7 +10,7 @@
         <main class="main" v-if="userCart && userCart.length > 0">
             <div class="checkout-container">
                 <section class="checkout-form">
-                    <form action="#!" method="get" id="form">
+                    <form @submit.prevent="validateForm" id="form">
                         <h6>Contact information</h6>
                         <div class="form-control">
                             <label for="checkout-email font-weight-bold">Email</label>
@@ -21,7 +21,6 @@
                         <div class="form-control">
                             <label for="checkout-phone">Phone</label>
                             <div>
-                                
                                 <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number" v-model="phone">
                             </div>
                         </div>
@@ -46,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form-control-btn">
-                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow" @click="addToOrders(order)">Place your order</button>
+                            <button type="submit" class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">Place your order</button>
                         </div>
                     </form>
                 </section>
@@ -89,6 +88,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 import spinnerComp from './spinnerComp.vue';
 export default{
     components:{
@@ -101,7 +101,6 @@ export default{
             fullName: '',
             address: '',
             city: '',
-            cartID: this.cartID
         }
     },
     computed:{
@@ -139,9 +138,34 @@ export default{
     this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
     this.getUserCart();
     },
-    addToOrders(){
-        this.$store.dispatch('insertToOrder', {userID: this.userID, data: this.$data});
-    }
+    clearCart(){
+      this.$store.dispatch('clearCart', {userID: this.userID})
+    },
+    validateForm() {
+        this.formSubmitted = true;
+        this.formValid = this.email && this.phone && this.fullName && this.address && this.city;
+
+        if(this.formValid){
+           Swal.fire({
+            title: 'Order Placed!',
+            text: 'Thank you for shopping with us!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+            }).then(()=>{
+                if (this.userCart && this.userCart.length > 0) {
+                this.clearCart(); // Pass the cartID
+                location.reload();
+            }
+            })
+        }else{
+            Swal.fire({
+            title: 'Error!',
+            text: 'Please fill in all fields',
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+        }
+    },
     },
     mounted() {
         this.getUserCart()

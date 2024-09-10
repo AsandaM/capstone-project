@@ -429,4 +429,68 @@ input {
 .container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
+
+@media screen and (max-width: 498px) {
+  .overlay-panel p{
+    font-size: 14px;
+    background-color: #0c0101;
+  }
+
+  .overlay-panel h1{
+    font-size: 20px;
+  }
+
+  .close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #080808;
+  z-index: 1001;
+}
+
+.ghost{
+  font-size: 10px;
+  padding: 8px 20px;
+}
+
+  
+}
+
+@media screen and (max-width: 416px) {
+  .overlay-panel p{
+    font-size: 9px;
+  }
+
+  .overlay-panel h1{
+    font-size: 14px;
+  }
+
+  .ghost{
+  font-size: 8.5px;
+  padding: 8px 18px;
+}
+
+form input{
+  padding: 5px 10px;
+}
+
+form h1{
+  font-size: 18px;
+}
+
+.btn{
+  font-size: 10px;
+  padding: 8px 20px;
+}
+
+form bottom {
+  font-size: 10px;
+  padding: 0%
+};
+}
+
 </style>
