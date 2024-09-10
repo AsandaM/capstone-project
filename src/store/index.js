@@ -23,8 +23,7 @@ export default createStore({
     totalCart: null,
     userWishlist: null,
     wishlist: null,
-    deliveryFee: 150,
-    orders: null
+    deliveryFee: 150
 
   },
   getters: {
@@ -71,12 +70,6 @@ export default createStore({
     },
     setEditUser(state, payload) {
       state.user = payload
-    },
-    setOrders(state, payload) {
-      state.orders = payload  
-    },
-    setInsertToOrder(state, payload) {
-      state.orders = payload
     }
   },
   actions: {
@@ -210,6 +203,14 @@ export default createStore({
             confirmButtonText: 'OK'
           })
         }
+      } catch (e) {
+        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+      }
+    },
+    async clearCart({ commit }, {userID}) {
+      try {
+        await axios.delete(`http://localhost:5005/cart/${userID}`)
+        commit('setCart', null)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -495,43 +496,6 @@ export default createStore({
       }
     },
 
-
-    // orders actions
-
-    async getOrders({ commit }) {
-      try {
-        let { data } = await axios.get(`http://localhost:5005/orders`)
-        commit('setOrders', data)
-      } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
-      }
-    },
-
-    async insertToOrder({ commit }, data) {
-      console.log(data);
-      try {
-        let {userID, info} = data
-        await axios.post('http://localhost:5005/orders', {userID, info})
-        commit('setInsertToOrder', data)
-        if(!data.err){
-          Swal.fire({
-            icon: 'success',
-            title: 'Order Placed',
-            text: 'You have successfully placed an order.',
-            confirmButtonText: 'OK'
-          })
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: `${data.err}`,
-            confirmButtonText: 'OK'
-          })
-        }
-      } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
-      }
-    },
   },
   modules: {
   }
