@@ -7,7 +7,7 @@
           <div class="col-md-8 col-lg-6">
             <div class="header2">
               <h2 class="display-4 display-lg-2 font-weight-bold mt-3">
-                Juice and Smoothies for a <span class="text-success">Healthier</span> You!
+                Juice and Smoothies for a <br><span class="text-success">Healthier</span> You!
               </h2>
               <div class="w-35 h-2 bg-success my-3"></div>
             </div>
@@ -49,6 +49,7 @@
           <div v-for="product in filteredAndSortedProducts" :key="product.id" class="col-md-6 col-lg-4 col-xl-3">
             <div :id="'product-' + product.prodID" class="single-product">
               <div class="part-1" :style="getProductStyle(product)">
+                <!-- <img :src="product.image" alt=""> -->
                 <ul>
                   <li @click="addToCart(product.prodID)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -74,7 +75,7 @@
               </div>
               <div class="part-2">
                 <h3 class="product-title text-black">{{ product.prodName }}</h3>
-                <h4 class="text-black">R{{ product.price }}</h4>
+                <h4 class="text-black fw-bold">R{{ product.price }}</h4>
               </div>
             </div>
           </div>
@@ -263,6 +264,10 @@ export default {
   text-transform: uppercase;
 }
 
+.part-1 img{
+  width: 70%;
+  height: 100%;
+}
 .products>h2 {
   font-size: 40px;
   width: 40%;

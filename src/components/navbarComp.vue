@@ -134,14 +134,14 @@ export default {
         title: 'Access Denied',
         text: 'Only admins can access this page. Please log in as an admin.',
         confirmButtonText: 'OK',
-        background: '#f8d7da', // Custom background color
-        iconColor: '#721c24', // Custom icon color
-        confirmButtonColor: '#d33', // Custom button color
+        background: '#f8d7da', 
+        iconColor: '#721c24',
+        confirmButtonColor: '#d33', 
         customClass: {
-          popup: 'custom-swal-popup', // Custom class for the popup
-          title: 'custom-swal-title', // Custom class for the title
-          content: 'custom-swal-content', // Custom class for the content
-          confirmButton: 'custom-swal-confirm-button' // Custom class for the confirm button
+          popup: 'custom-swal-popup',
+          title: 'custom-swal-title',
+          content: 'custom-swal-content', 
+          confirmButton: 'custom-swal-confirm-button' 
         }
       });
     },
