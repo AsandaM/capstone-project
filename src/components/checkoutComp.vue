@@ -45,12 +45,8 @@
                                 <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city" v-model="city">
                             </div>
                         </div>
-                        <div class="form-control checkbox-control">
-                            <input type="checkbox" name="checkout-checkbox" id="checkout-checkbox" v-model="saveInfo">
-                            <label for="checkout-checkbox">Save this information for next time</label>
-                        </div>
                         <div class="form-control-btn">
-                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow" @click="placeOrder()">Place your order</button>
+                            <button class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow" @click="addToOrders(order)">Place your order</button>
                         </div>
                     </form>
                 </section>
@@ -105,7 +101,7 @@ export default{
             fullName: '',
             address: '',
             city: '',
-            saveInfo: false
+            cartID: this.cartID
         }
     },
     computed:{
@@ -143,14 +139,7 @@ export default{
     this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
     this.getUserCart();
     },
-    placeOrder(){
-        if(this.saveInfo){
-         this.addToOrders();
-        }
-    },
     addToOrders(){
-        console.log(this.$data);
-        
         this.$store.dispatch('insertToOrder', {userID: this.userID, data: this.$data});
     }
     },
