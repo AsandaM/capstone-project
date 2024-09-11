@@ -64,12 +64,6 @@ export default {
           tab_title: "Users",
           tab_content:
             "This is the users page. Here you can see all the users registered in the store."
-        },
-        {
-          tab_title: "Orders",
-          tab_icon: "orders",
-          tab_content:
-            "This is the orders page. Here you can see all the orders placed in the store."
         }
       ]
     };
@@ -188,4 +182,8 @@ export default {
   padding: 1.25rem;
 }
 
+.tabBlock-tabs a:hover{
+  background-color: #0b971b;
+  color: #f0ecec !important;
+}
 </style>

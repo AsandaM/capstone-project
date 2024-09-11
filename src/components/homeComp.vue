@@ -121,6 +121,7 @@ nav {
 
 .btn:hover{
   background-color: #df8910;
+  transform: scale(1.2); 
 }
 
 @keyframes imageSlide {

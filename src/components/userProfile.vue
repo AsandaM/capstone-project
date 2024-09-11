@@ -87,7 +87,7 @@ export default {
     deleteUser(id) {
 
       this.$store.dispatch('deleteUser', id);
-
+      this.$router.push('/');
     }
   },
   mounted() {

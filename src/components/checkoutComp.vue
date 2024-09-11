@@ -56,7 +56,7 @@
                                     <div class="card-image"><img :src="cart.image" alt=""></div>
                                     <div class="card-details">
                                         <div class="card-name">{{ cart.prodName }}</div>
-                                        <div class="card-price text-success">{{ cart.price }}</div>
+                                        <div class="card-price text-success">R {{ cart.price }}</div>
                                         <div class="card-wheel">
                                             <button @click="decreaseQuantity(cart)">-</button>
                                             <span>{{cart.quantity}}</span>
@@ -71,7 +71,7 @@
                                 <p>R{{ deliveryFee }}</p>
                             </div>
                             <div class="checkout-total">
-                                <h6>Total</h6>
+                                <h6>Total To Pay</h6>
                                 <p>R{{ totalCart }}</p>
                             </div>
                         </div>
@@ -169,7 +169,7 @@ export default{
             confirmButtonText: 'OK'
             })
         }
-    },
+    }
     },
     mounted() {
         this.getUserCart()
@@ -241,7 +241,6 @@ export default{
 
 .checkout-form {
     background-color: transparent;
-    /* backdrop-filter: blur(15px); */
     padding: 20px;
 }
 
@@ -413,14 +412,14 @@ export default{
 .checkout-details .checkout-shipping p,
 .checkout-details .checkout-total p {
     font-size: 20px;
-    color: rgb(9, 9, 9);
+    color: rgb(239, 228, 228);
     margin: 10px;
 }
 
 .checkout-details .checkout-shipping h6,
 .checkout-details .checkout-total h6 {
     font-size: 20px;
-    color: rgb(9, 9, 9);
+    color: rgb(243, 237, 237);
     margin: 10px;
 }
 
@@ -501,7 +500,7 @@ export default{
 }
 
 .container img:hover{
-    transform: scale(1.8); 
+    transform: scale(1.5); 
 
 }
 
@@ -518,5 +517,10 @@ export default{
 
 .btn-delete:hover {
   background-color: #cc0000;
+  transform: scale(1.1); 
+}
+
+.btn:hover{
+    transform: scale(1.1); 
 }
 </style>

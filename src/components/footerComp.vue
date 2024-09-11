@@ -68,7 +68,6 @@
   }
   
   .footer-social-icons  a:hover {
-    color: #ff5e14;
     background-color: #ff5e14;
   }
   

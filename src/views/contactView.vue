@@ -121,6 +121,12 @@ section {
     backdrop-filter: blur(15px);
 }
 
+.btn-block:hover {
+    background-color: #ff9100 !important;
+    border: 1px solid #053504 !important;
+    transform: scale(1.1); 
+}
+
 @media screen and (max-width: 768px) {
    #message {
        font-size: 18px !important;

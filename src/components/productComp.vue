@@ -183,13 +183,13 @@ export default {
     },
     addToCart(prodID) {
       if(this.checkLogin()){
-        this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
+        this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 })
       }else{
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'You need to be logged in to add to cart!',
-        })
+        });
       }
     },
     openModal(product) {
@@ -208,7 +208,7 @@ export default {
           icon: 'error',
           title: 'Oops...',
           text: 'You need to be logged in to add to wishlist!',
-        })
+        });
       }
     }, 
   },
