@@ -169,6 +169,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,400;0,900;1,500&display=swap');
 
 * {

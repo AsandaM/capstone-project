@@ -5,84 +5,85 @@
         </header>    
         <div v-if="!$store.state.userCart">
             <spinner-comp/>
-
         </div>
-        <main class="main" v-if="userCart && userCart.length > 0">
-            <div class="checkout-container">
-                <section class="checkout-form">
-                    <form @submit.prevent="validateForm" id="form">
-                        <h6>Contact information</h6>
-                        <div class="form-control">
-                            <label for="checkout-email font-weight-bold">Email</label>
-                            <div>
-                                <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email address" v-model="email">
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <label for="checkout-phone">Phone</label>
-                            <div>
-                                <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number" v-model="phone">
-                            </div>
-                        </div>
-                        <br>
-                        <h6>Shipping address</h6>
-                        <div class="form-control">
-                            <label for="checkout-name">Full name</label>
-                            <div>
-                                <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name" v-model="fullName">
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <label for="checkout-address">Address</label>
-                            <div>
-                                <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address" v-model="address">
-                            </div>
-                        </div>
-                        <div class="form-control">
-                            <label for="checkout-city">City</label>
-                            <div>
-                                <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city" v-model="city">
-                            </div>
-                        </div>
-                        <div class="form-control-btn">
-                            <button type="submit" class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">Place your order</button>
-                        </div>
-                    </form>
-                </section>
-                <section class="checkout-details">
-                    <div class="checkout-details-inner">
-                        <div class="checkout-lists">
-                            <div class="card" v-for="cart in userCart" :key="cart.cartID">
-                                <div class="card-image"><img :src="cart.image" alt=""></div>
-                                <div class="card-details">
-                                    <div class="card-name">{{ cart.prodName }}</div>
-                                    <div class="card-price text-success">{{ cart.price }}</div>
-                                    <div class="card-wheel">
-                                        <button @click="decreaseQuantity(cart)">-</button>
-                                        <span>{{cart.quantity}}</span>
-                                        <button @click="increaseQuantity(cart)">+</button>
-                                    </div>
-                                    <button @click="deleteItem(cart)" class="btn-delete">Delete</button>
+        <div v-else>
+            <main class="main" v-if="userCart && userCart.length > 0">
+                <div class="checkout-container">
+                    <section class="checkout-form">
+                        <form @submit.prevent="validateForm" id="form">
+                            <h6>Contact information</h6>
+                            <div class="form-control">
+                                <label for="checkout-email font-weight-bold">Email</label>
+                                <div>
+                                    <input type="email" id="checkout-email" name="checkout-email" placeholder="Enter your email address" v-model="email">
                                 </div>
                             </div>
+                            <div class="form-control">
+                                <label for="checkout-phone">Phone</label>
+                                <div>
+                                    <input type="tel" name="checkout-phone" id="checkout-phone" placeholder="Enter you phone number" v-model="phone">
+                                </div>
+                            </div>
+                            <br>
+                            <h6>Shipping address</h6>
+                            <div class="form-control">
+                                <label for="checkout-name">Full name</label>
+                                <div>
+                                    <input type="text" id="checkout-name" name="checkout-name" placeholder="Enter you name" v-model="fullName">
+                                </div>
+                            </div>
+                            <div class="form-control">
+                                <label for="checkout-address">Address</label>
+                                <div>
+                                    <input type="text" name="checkout-address" id="checkout-address" placeholder="Your address" v-model="address">
+                                </div>
+                            </div>
+                            <div class="form-control">
+                                <label for="checkout-city">City</label>
+                                <div>
+                                    <input type="text" name="checkout-city" id="checkout-city" placeholder="Your city" v-model="city">
+                                </div>
+                            </div>
+                            <div class="form-control-btn">
+                                <button type="submit" class="btn btn-success text-white h4 font-weight-medium px-3 py-2 rounded shadow">Place your order</button>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="checkout-details">
+                        <div class="checkout-details-inner">
+                            <div class="checkout-lists">
+                                <div class="card" v-for="cart in userCart" :key="cart.cartID">
+                                    <div class="card-image"><img :src="cart.image" alt=""></div>
+                                    <div class="card-details">
+                                        <div class="card-name">{{ cart.prodName }}</div>
+                                        <div class="card-price text-success">{{ cart.price }}</div>
+                                        <div class="card-wheel">
+                                            <button @click="decreaseQuantity(cart)">-</button>
+                                            <span>{{cart.quantity}}</span>
+                                            <button @click="increaseQuantity(cart)">+</button>
+                                        </div>
+                                        <button @click="deleteItem(cart)" class="btn-delete">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-shipping">
+                                <h6>Delivery</h6>
+                                <p>R{{ deliveryFee }}</p>
+                            </div>
+                            <div class="checkout-total">
+                                <h6>Total</h6>
+                                <p>R{{ totalCart }}</p>
+                            </div>
                         </div>
-                        <div class="checkout-shipping">
-                            <h6>Delivery</h6>
-                            <p>R{{ deliveryFee }}</p>
-                        </div>
-                        <div class="checkout-total">
-                            <h6>Total</h6>
-                            <p>R{{ totalCart }}</p>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
+            </main>
+            <div class="container" v-else>
+                <img alt="empty cart" src="https://asandam.github.io/images/images_capstone/cart.png"/>
+                <h1> YOUR BAG IS EMPTY. </h1>
+                <p> Haven't added anything yet?<br> Add some fresh juices or smoothies to boost your day!  </p>
+                <router-link to="/products" class="cta-btn">Shop Now</router-link>
             </div>
-        </main>
-        <div class="container" v-else>
-            <img alt="empty cart" src="https://asandam.github.io/images/images_capstone/cart.png"/>
-            <h1> YOUR BAG IS EMPTY. </h1>
-            <p> Haven't added anything yet?<br> Add some fresh juices or smoothies to boost your day!  </p>
-            <router-link to="/products" class="cta-btn">Shop Now</router-link>
         </div>
     </div>
 </template>
@@ -138,25 +139,28 @@ export default{
     this.$store.dispatch('deleteCartItem', {userID: this.userID, prodID: cart.prodID});
     this.getUserCart();
     },
-    clearCart(){
-      this.$store.dispatch('clearCart', {userID: this.userID})
+     clearCart(){
+       this.$store.dispatch('clearCart')
     },
     validateForm() {
         this.formSubmitted = true;
         this.formValid = this.email && this.phone && this.fullName && this.address && this.city;
-
+        
+        if (this.userCart && this.userCart.length > 0) {  
+        this.clearCart().then(()=>{
+            this.getUserCart()
+        })
+        
+    }
         if(this.formValid){
            Swal.fire({
             title: 'Order Placed!',
             text: 'Thank you for shopping with us!',
             icon: 'success',
             confirmButtonText: 'OK'
-            }).then(()=>{
-                if (this.userCart && this.userCart.length > 0) {
-                this.clearCart(); // Pass the cartID
-                location.reload();
-            }
             })
+            // .then(()=>{
+            // })
         }else{
             Swal.fire({
             title: 'Error!',

@@ -207,12 +207,14 @@ export default createStore({
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
-    async clearCart({ commit }, {userID}) {
+    async clearCart({ commit }) {
       try {
-        await axios.delete(`http://localhost:5005/cart/${userID}`)
+        await axios.delete(`http://localhost:5005/cart/clearAll/`)
+        console.log(n+'hehe2');
+        
         commit('setCart', null)
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.message}`, { autoClose: 5000 });
       }
     },
 
