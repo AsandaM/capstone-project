@@ -56,9 +56,10 @@ const verifyAToken = (req, res, next)=>{
             res.json({err: 'Token is invalid, please login'})
             return
         }
-       
+        
         req.body.userID = decoded.userID
         req.user = decoded.emailAdd
+        
         next()       
     })
 }

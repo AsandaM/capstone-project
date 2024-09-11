@@ -9,7 +9,7 @@ router.get('/:userID', verifyAToken, getCartByUser)
 router.get('/product/:prodID', getCartByProduct)
 router.post('/',verifyAToken, insertCart)
 router.patch('/:id', editCart)
-router.delete('/:id', deleteCart)
+router.delete('/clearAll/', verifyAToken, deleteCart)
 router.delete('/:userID/:prodID', verifyAToken , deleteItemCart)
 
 export default router
