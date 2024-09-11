@@ -30,7 +30,7 @@ const editWishlistDb = async(quantity, id)=>{
 }
 
 const deleteWishlistDb = async(id)=>{
-    await pool.query('DELETE FROM wishlist WHERE wishlistID = ?', [id])
+    await pool.query('DELETE FROM wishlist WHERE userID = ?', [id])
 }
 
 const deleteItemWishlistDb = async(userID, prodID)=>{

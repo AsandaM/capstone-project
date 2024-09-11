@@ -79,7 +79,7 @@ const editWishlist = async(req, res) => {
 // delete wishlist
 const deleteWishlist = async(req, res)=>{
     try {
-        await deleteWishlistDb(req.params.id)
+        await deleteWishlistDb(req.body.userID)
         res.status(200).json(await getWishlistDb())
         
     } catch (err) {
