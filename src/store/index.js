@@ -29,6 +29,7 @@ export default createStore({
   getters: {
   },
   mutations: {
+    // products mutations
     setProducts(state, payload) {
       state.products = payload
     },
@@ -41,6 +42,8 @@ export default createStore({
     setAddProduct(state, payload) {
       state.addProduct = payload
     },
+
+    // cart mutations
     setCart(state, payload) {
       state.cart = payload
     },
@@ -50,12 +53,16 @@ export default createStore({
     setUserCart(state, payload) {
       state.userCart = payload
     },
+
+    // wishlist mutations
     setWishlist(state, payload) {
       state.wishlist = payload
     },
     setUserWishlist(state, payload) {
       state.userWishlist = payload
     },
+
+    // users mutations
     setUser(state, payload) {
       state.user = payload
     },
@@ -73,12 +80,14 @@ export default createStore({
     }
   },
   actions: {
+
+    // products actions
     async getProducts({ commit }) {
       try {
         let { data } = await axios.get('http://localhost:5005/products')
         commit('setProducts', data)
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
+        toast.error(`${e.message}`, { autoClose: 3000 });
       }
     },
     async addProduct({ commit }, product) {
@@ -139,7 +148,7 @@ export default createStore({
           commit('setUserCart', data)
           commit('setTotalCart', totalCart)
       } catch (e) {
-        toast.error(`${e.data.message}`, { autoClose: 5000 }); 
+        toast.error(`${e.message}`, { autoClose: 5000 }); 
       }
     },
     async addToCart({commit}, data) { 
@@ -210,8 +219,6 @@ export default createStore({
     async clearCart({ commit }) {
       try {
         await axios.delete(`http://localhost:5005/cart/clearAll/`)
-        console.log(n+'hehe2');
-        
         commit('setCart', null)
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 5000 });
@@ -225,7 +232,7 @@ export default createStore({
         commit('setUserWishlist', data)
 
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.message}`, { autoClose: 5000 });
       }
     },
     async addToWishlist({ commit }, data) {
@@ -233,13 +240,16 @@ export default createStore({
         let { userID, prodID, quantity } = data
         await axios.post('http://localhost:5005/wishlist', { userID, prodID, quantity })
         commit('setWishlist', data)
+        
         if(!data.err){
           Swal.fire({
             icon: 'success',
             title: 'Product added to wishlist',
             showConfirmButton: false,
             timer: 3000
-          })
+          }).then(() => {
+          location.reload();
+        })
         }else{
           Swal.fire({
             icon: 'error',
@@ -285,10 +295,16 @@ export default createStore({
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
     },
-    async clearWishlist({ commit }, {wishlistID}) {
+    async clearWishlist({ commit }) {
       try {
-        await axios.delete(`http://localhost:5005/wishlist/${wishlistID}`)
+        await axios.delete(`http://localhost:5005/wishlist/clearAll`)
         commit('setWishlist', null)
+        Swal.fire({
+          icon: 'success',
+          title: 'Wishlist Cleared',
+          text: 'You have successfully cleared your wishlist.',
+          confirmButtonText: 'OK'
+        });
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
       }
@@ -335,11 +351,13 @@ export default createStore({
       try {
         let { data } = await axios.post('http://localhost:5005/users/signup', user)
         commit('setAddUser', data)
+        console.log(data);
+        
         if(!data.err){
           Swal.fire({
             icon: 'success',
             title: 'Account Created',
-            text: `${data.message}`,
+            text: `You have successfully created an account. Please login to continue.`,
             confirmButtonText: 'OK'
           })
         } else{
@@ -449,10 +467,7 @@ export default createStore({
                 text: 'Your account has been deleted.',
                 icon: 'success',
                 confirmButtonText: 'OK'
-              }).then(() => {
-                this.$router.push('/');
-                this.$cookies.remove('token');
-              });
+              })
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               Swal.fire({
                 title: 'Cancelled',

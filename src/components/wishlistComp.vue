@@ -33,11 +33,11 @@
             </tr>
           </tbody>
         </table>
-        <button class="clear-all" @click="clearWishlist(wishlist.wishlistID)">Clear All</button>
+        <button class="clear-all" @click="clearWishlist()">Clear All</button>
       </div>
     </div>
     <div v-else class="empty-wishlist">
-      <p>Your wishlist is empty. <router-link to="/products">Go shop</router-link></p> 
+      <p>Your wishlist is empty. <router-link to="/products" id="goShop">Go shop</router-link></p> 
     </div>
   </main>
 </template>
@@ -58,8 +58,9 @@ export default {
       this.$store.dispatch('addToCart', { userID: this.userID, prodID, quantity: 1 });
 
     },
-    clearWishlist(wishlistID){
-      this.$store.dispatch('clearWishlist', {wishlistID})
+    clearWishlist(){
+      this.$store.dispatch('clearWishlist')
+      this.getWishlist()
     },
     increaseQuantity(wishlist) {
       const newQuantity = wishlist.quantity + 1;
@@ -242,5 +243,10 @@ tr {
   .remove {
     margin-top: 10px;
   }
+}
+
+#goShop:hover{
+
+  color: #ff5e14;
 }
 </style>
