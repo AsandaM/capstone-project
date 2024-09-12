@@ -58,7 +58,7 @@
             <tr>
                 <td>/users/signup</td>
                 <td>POST</td>
-                <td>Add a new user</td>
+                <td>Add/register a new user</td>
             </tr>
             <tr>
                 <td>/users/login</td>
@@ -85,7 +85,16 @@
                 <td>PATCH</td>
                 <td>Updates details of a specific user by ID.</td>
             </tr>
-
+            <tr>
+                <td>/users/profile</td>
+                <td>GET</td>
+                <td>Get Retrieves details of a specific user by ID.</td>
+            </tr>
+            <tr>
+                <td>/users/updatepassword</td>
+                <td>PATCH</td>
+                <td>Updates password of a specific user</td>
+            </tr>
         </tbody>
     </table>
 
@@ -124,15 +133,89 @@
                 <td>PATCH</td>
                 <td>Updates details of a specific product by ID.</td>
             </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>Cart</caption>
+        <thead>
             <tr>
-                <td>/products/recent</td>
-                <td>GET</td>
-                <td>Retrieves the 5 most recent products.</td>
+                <th>Path</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/cart</td>
+                <td>POST</td>
+                <td>Add a product to the user's cart.</td>
             </tr>
             <tr>
-                <td>/products/homeRecent</td>
+                <td>/cart</td>
                 <td>GET</td>
-                <td>Retrieves the 3 most recent products for the homepage.</td>
+                <td>Retrieves a list of all products in the cart.</td>
+            </tr>
+            <tr>
+                <td>/cart/:userID</td>
+                <td>GET</td>
+                <td>Retrieves a list of all products in a users cart.</td>
+            </tr>
+            <tr>
+                <td>/products/:userID/:prodID</td>
+                <td>DELETE</td>
+                <td>Delete a product from the user's cart</td>
+            </tr>
+            <tr>
+                <td>/products/clearAll</td>
+                <td>DELETE</td>
+                <td>Delete all products from the user's cart</td>
+            </tr>
+            <tr>
+                <td>/products/:id</td>
+                <td>PATCH</td>
+                <td>Updates quantity of a specific product in the cart.</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>WishList</caption>
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>/wishlist</td>
+                <td>POST</td>
+                <td>Add a product to the user's wishlist.</td>
+            </tr>
+            <tr>
+                <td>/wishlist</td>
+                <td>GET</td>
+                <td>Retrieves a list of all wishlist in the wishlist.</td>
+            </tr>
+            <tr>
+                <td>/wishlist/:userID</td>
+                <td>GET</td>
+                <td>Retrieves a list of all wishlist in a user's wishlist.</td>
+            </tr>
+            <tr>
+                <td>/wishlist/:userID/:prodID</td>
+                <td>DELETE</td>
+                <td>Delete a product from the user's wishlist</td>
+            </tr>
+            <tr>
+                <td>/wishlist/clearAll</td>
+                <td>DELETE</td>
+                <td>Delete all products from the user's wishlist</td>
+            </tr>
+            <tr>
+                <td>/wishlist/:id</td>
+                <td>PATCH</td>
+                <td>Updates quantity of a specific product in the wishlist.</td>
             </tr>
         </tbody>
     </table>

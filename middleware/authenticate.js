@@ -14,7 +14,7 @@ const emailCheck = async(req, res, next)=>{
         next()
         return
     }
-    res.send({err:'Email not found'})
+    res.send({err:'Incorrect email'})
 }
 
 
@@ -53,7 +53,7 @@ const verifyAToken = (req, res, next)=>{
     jwt.verify(token1, process.env.SECRET_KEY, (err, decoded)=>{
       
         if(err){
-            res.json({err: 'Token is invalid, please login'})
+            res.json({err: 'Token has expired, please logout and login again'})
             return
         }
         

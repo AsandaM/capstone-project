@@ -5,7 +5,7 @@ const getUsers = async(req, res)=>{
     try {
         res.status(200).json(await getUsersDb())   
     } catch (err) {
-        res.status(500).send({message:'Error fetching users'})
+        res.status(500).send({err:'Error fetching users'})
         throw err
     }
 }
@@ -14,11 +14,11 @@ const getUser = async(req, res)=>{
     try{
         const user = await getUserDb(req.params.id);
         if(!user){
-            return res.status(404).json({message:'User does not exist.'})
+            return res.status(404).json({error:'User does not exist.'})
         }
         res.status(200).json(await getUserDb(req.params.id))   
     } catch(err){
-        res.status(500).send({message:'Error fetching user'})
+        res.status(500).send({err:'Error fetching user'})
         throw err
     }
 }
@@ -60,7 +60,7 @@ const insertUser = async (req, res) => {
             res.status(200).json(await getUsersDb());
         });
     } catch (error) {
-        res.status(500).json({ err: 'Internal server error' });
+        res.status(500).json({ err: 'Internal server errr' });
         throw error
     }
 }
@@ -73,7 +73,7 @@ const deleteUser = async(req, res)=>{
         res.status(200).json(await getUsersDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a user'})
+        res.status(500).send({err:'Error deleting a user'})
     }
 }
 
@@ -111,7 +111,7 @@ const editUser = async(req, res)=>{
          res.status(200).send(await getUsersDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error editing user'})
+        res.status(500).send({err:'Error editing user'})
         throw err
     }
 
@@ -122,7 +122,7 @@ const loginUser = (req,res)=>{
         res.status(200).json({message:"You have signed in ", token:req.body.token})  
         
     } catch (err) {
-        res.status(500).send({message:'Error logging in'})
+        res.status(500).send({err:'Error logging in'})
     }
 }
 

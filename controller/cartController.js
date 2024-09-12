@@ -6,7 +6,7 @@ const getCart = async(req, res)=>{
     try{
         res.status(200).json(await getCartDb())
     } catch(err){
-        res.status(500).send({message:'Error fetching cart'})
+        res.status(500).send({err:'Error fetching cart'})
         throw err
         
     }
@@ -20,7 +20,7 @@ const getCartByUser = async(req, res)=>{
         res.status(200).json(await getCartByUserDb(user.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching a users cart'})
+        res.status(500).send({err:'Error fetching a users cart'})
         throw err
     }
 }
@@ -31,7 +31,7 @@ const getCartByProduct = async(req, res)=>{
         res.status(200).json(await getCartByProductDb(req.params.prodID))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching a single cart'})
+        res.status(500).send({err:'Error fetching a single cart'})
         throw err
     }
 }
@@ -61,7 +61,7 @@ const insertCart = async(req, res) => {
         res.status(200).json(await getCartByUserDb(userID));
 
     } catch (err) {
-        res.status(500).send({message:'Error inserting/updating a cart'});
+        res.status(500).send({err:'Error inserting/updating a cart'});
         throw err;
     }
 }
@@ -77,7 +77,7 @@ const editCart = async(req, res)=>{
         res.status(200).json(await getCartDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error updating a cart'})
+        res.status(500).send({err:'Error updating a cart'})
         throw err
         
     }
@@ -90,7 +90,7 @@ const deleteCart = async(req, res)=>{
         res.status(200).json(await getCartDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a cart'})
+        res.status(500).send({err:'Error deleting a cart'})
         throw err
     }
 }
@@ -102,7 +102,7 @@ const deleteItemCart = async(req, res)=>{
         res.status(200).json(await getCartByUserDb(req.body.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a item'})
+        res.status(500).send({err:'Error deleting a item'})
         throw err
     }
 }

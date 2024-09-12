@@ -5,7 +5,7 @@ const getWishlist = async(req, res)=>{
     try{
         res.status(200).json(await getWishlistDb())
     } catch(err){
-        res.status(500).send({message:'Error fetching wishlist'})
+        res.status(500).send({err:'Error fetching wishlist'})
         throw err
         
     }
@@ -19,7 +19,7 @@ const getWishlistByUser = async(req, res)=>{
         res.status(200).json(await getWishlistByUserDb(user.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching a single wishlist'})
+        res.status(500).send({err:'Error fetching a single wishlist'})
         throw err
     }
 }
@@ -30,7 +30,7 @@ const getWishlistByProduct = async(req, res)=>{
         res.status(200).json(await getWishlistByProductDb(req.params.prodID))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching a single wishlist'})
+        res.status(500).send({err:'Error fetching a single wishlist'})
         throw err
     }
 }
@@ -59,7 +59,7 @@ const insertWishlist = async(req, res) => {
         // Return the updated wishlist
         res.status(200).json(await getWishlistByUserDb(userID));
     } catch (err) {
-        res.status(500).send({message:'Error inserting into wishlist'})
+        res.status(500).send({err:'Error inserting into wishlist'})
         throw err
     }
 }
@@ -71,7 +71,7 @@ const editWishlist = async(req, res) => {
         await editWishlistDb(quantity, req.params.id);
         res.status(200).json(await getWishlistDb());
     } catch (err) {
-        res.status(500).send({message:'Error editing a wishlist'})
+        res.status(500).send({err:'Error editing a wishlist'})
         throw err
     }
 }
@@ -83,7 +83,7 @@ const deleteWishlist = async(req, res)=>{
         res.status(200).json(await getWishlistDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a wishlist'})
+        res.status(500).send({err:'Error deleting a wishlist'})
         throw err
         
     }
@@ -96,7 +96,7 @@ const deleteItemWishlist = async(req, res)=>{
         res.status(200).json(await getWishlistByUserDb(req.body.userID))
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting an item from wishlist'})
+        res.status(500).send({err:'Error deleting an item from wishlist'})
         throw err
         
     }

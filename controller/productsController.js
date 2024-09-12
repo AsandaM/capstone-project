@@ -5,7 +5,7 @@ const getProducts = async(req, res)=>{
     try{
         res.status(200).json(await getProductsDb())
     } catch(err){
-        res.status(500).send('Error fetching products')
+        res.status(500).send({err:'Error fetching products'})
         throw err
         
     }
@@ -17,7 +17,7 @@ const getProduct = async(req, res)=>{
         res.status(200).json(await getProductDb(req.params.id))
         
     } catch (err) {
-        res.status(500).send({message:'Error fetching  a single product'})
+        res.status(500).send({err:'Error fetching  a single product'})
         throw err
     }
 }
@@ -32,7 +32,7 @@ const insertProduct = async(req, res)=>{
         res.status(200).json(await getProductDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error inserting a product'})
+        res.status(500).send({err:'Error inserting a product'})
         throw err
         
     }
@@ -46,7 +46,7 @@ const deleteProduct = async(req, res)=>{
         res.status(200).json(await getProductsDb())
         
     } catch (err) {
-        res.status(500).send({message:'Error deleting a products'})
+        res.status(500).send({err:'Error deleting a products'})
         throw err
     }
 }
@@ -57,7 +57,7 @@ const editProduct = async(req, res)=>{
     let product = await getProductDb(req.params.id)
     
     if(!product){
-        res.status(404).send({message:'Product not found'})
+        res.status(404).send({err:'Product not found'})
     }
     
     prodName? prodName = prodName: prodName = product.prodName
@@ -76,7 +76,7 @@ const editProduct = async(req, res)=>{
         await editProductDb(prodName, prodDesc, type, image, category, price, duration_days, calories, benefits, instructions, ingredients, req.params.id)    
         res.status(200).send(await getProductsDb())
     } catch (err) {
-        res.status(500).send({message:'Error editing a product'})
+        res.status(500).send({err:'Error editing a product'})
         throw err
     }
 }
