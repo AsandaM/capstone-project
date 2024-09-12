@@ -36,16 +36,20 @@
           <td colspan="5">
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-                <li class="page-item w-10 h-10">
-                  <a class="page-link bg-success text-white" @click="prevPage" :disabled="page === 1">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item w-10 h-10">
-                  <a class="page-link bg-success text-white" href="#" @click="nextPage" :disabled="page === totalPages">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
+                <b-button v-b-popover.hover.top="'Previous'" title="Previous">
+                  <li class="page-item w-10 h-10">
+                    <a class="page-link bg-success text-white" @click="prevPage" :disabled="page === 1">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                </b-button>
+                <b-button v-b-popover.hover.top="'Next'" title="Next">
+                  <li class="page-item w-10 h-10">
+                    <a class="page-link bg-success text-white" href="#" @click="nextPage" :disabled="page === totalPages">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </b-button>
               </ul>
             </nav>
             <div class="page-number text-success"> Page {{ page }} of {{ totalPages }} </div>

@@ -376,6 +376,8 @@ export default createStore({
       try {
         let data = await (await axios.post('http://localhost:5005/users/login', user)).data
         commit('setAddUser', data)
+        console.log(data);
+        
         if(!data.err) {
           $cookies.set('token', data.token)
           let userRole = JSON.parse(window.atob(data.token.split('.')[1]))

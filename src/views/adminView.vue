@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       active_tab: 0,
-      isModalOpen: false, // Ensure this is defined
+      isModalOpen: false, 
       tabs: [
         {
           tab_title: "Products",
@@ -79,8 +79,6 @@ export default {
       this.isModalOpen = false;
     },
     submitForm() {
-      // Insert your logic to save the product data to the database here
-      console.log(this.formData);
       this.closeModal();
     }
   }

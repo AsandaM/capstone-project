@@ -25,36 +25,48 @@
           <div class="navbar-right">
             <ul class="navbar-nav">
               <div v-if="$cookies.get('token')" class="dropdown-center">
-                <a href="#" class="nav-link text-success nav-icon-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fas fa-user me-2"></i></a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item">
-                    <a href="#" class="dropdown-item" @click="logout">Logout</a>
-                  </li>
-                  <li class="nav-item">
-                    <router-link to="/profile" href="#" class="dropdown-item">View profile</router-link>
-                  </li>
-                </ul>
+                <b-button v-b-popover.hover.top="'Profile'" title="Profile">
+                  <a href="#" class="nav-link text-success nav-icon-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fas fa-user me-2"></i></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-item">
+                      <a href="#" class="dropdown-item" @click="logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                      <router-link to="/profile" href="#" class="dropdown-item">View profile</router-link>
+                    </li>
+                  </ul>
+                </b-button>
               </div>
               <div v-else>
                 <li class="nav-item" :class="{ active: $route.path === '/signup' }">
+                  <b-button v-b-popover.hover.top="'Login/Sign-up'" title="Login/Signup">
                   <a href="#" class="nav-link text-success nav-icon-link" @click="showModal">
                     <i class="fas fa-user me-2"></i>
                   </a>
+                  </b-button>
                 </li>
               </div>
               <li class="nav-item" :class="{ active: $route.path === '/checkout' }">
-                <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
+                <b-button v-b-popover.hover.top="'Wishlist'" title="WishList">
+                  <router-link to="/checkout" class="nav-link text-success"><i class="fas fa-cart-shopping me-2"></i></router-link>
+                </b-button>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/wishlist' }">
-                <a to="/wishlist" class="nav-link text-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ><i class="fas fa-heart me-2"></i></a>
+                <b-button v-b-popover.hover.top="'Wishlist'" title="WishList">
+                  <a to="/wishlist" class="nav-link text-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ><i class="fas fa-heart me-2"></i></a>
+                </b-button>
               </li>
               <li class="nav-item" :class="{ active: $route.path === '/admin' }">
                 <div v-if="isAdmin">
-                  <router-link to="/admin" class="nav-link text-success" :disabled="!isAdmin"><i class="fas fa-cogs me-3"></i></router-link>
+                  <b-button v-b-popover.hover.top="'Admin'" title="Admin Page">
+                    <router-link to="/admin" class="nav-link text-success" :disabled="!isAdmin"><i class="fas fa-cogs me-3"></i></router-link>
+                  </b-button>
                 </div>
                 <div v-else>
                   <li class="nav-item">
-                    <a href="#" class="nav-link text-success nav-icon-link" @click="showAdminAlert"><i class="fas fa-cogs me-3"></i></a>
+                    <b-button v-b-popover.hover.top="'Admin'" title="Admin">
+                      <a href="#" class="nav-link text-success nav-icon-link" @click="showAdminAlert"><i class="fas fa-cogs me-3"></i></a>
+                    </b-button>
                   </li>
                 </div>
               </li>

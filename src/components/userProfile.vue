@@ -19,10 +19,14 @@
         </div>
         <div class="edit-delete-container">
           <div class="edit-profile" @click="toggleEditForm">
-            <i class="fas fa-pencil-alt"></i>
+            <b-button v-b-popover.hover.top="'Edit Profile'" title="Edit">
+              <i class="fas fa-pencil-alt"></i>
+            </b-button>
           </div>
           <div class="edit-profile" @click="deleteUser(user.userID)">
-            <i class="fas fa-trash-alt"></i>
+            <b-button v-b-popover.hover.top="'Delete account'" title="Delete">
+              <i class="fas fa-trash-alt"></i>
+            </b-button>
           </div>
         </div>
 
@@ -85,7 +89,6 @@ export default {
       });
     },
     deleteUser(id) {
-
       this.$store.dispatch('deleteUser', id);
       this.$router.push('/');
     }

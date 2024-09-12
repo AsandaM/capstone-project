@@ -24,7 +24,7 @@
               <input type="password" v-model="password" placeholder="Password"/>
             </div>
             <div class="input-container">
-              <a href="#" type="button" class="btn" id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your
+              <a href="#" type="button" class="btn" id="forgot" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your
                 password?</a>
             </div>
             <button type="submit" class="btn1">Sign in</button>
@@ -74,35 +74,36 @@
       </div>
     </main>
   </div>
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Change password</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3 row">
-          <div class="input-container">
-              <i class="fas fa-user"></i>
-              <input type="email" v-model="email" placeholder="Email"/>
-            </div>
+
+  <!-- Modal for forgot password -->
+  <div class="modal fade" id="forgot" tabindex="-1" aria-labelledby="forgotLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="forgotLabel">Change password</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="mb-3 row">
-          <div class="input-container">
-              <i class="fas fa-lock"></i>
-              <input type="password" v-model="password" placeholder="Password"/>
+        <div class="modal-body">
+          <div class="mb-3 row">
+            <div class="input-container">
+                <i class="fas fa-user"></i>
+                <input type="email" v-model="email" placeholder="Email"/>
+              </div>
+          </div>
+          <div class="mb-3 row">
+            <div class="input-container">
+                <i class="fas fa-lock"></i>
+                <input type="password" v-model="password" placeholder="Password"/>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" @click="updatePassword()">Save changes</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" @click="updatePassword()">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -210,7 +211,7 @@ export default {
   background-position: 0 0;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
-  /* position: relative; */
+  position: relative;
   /* overflow: hidden; */
   width: 768px;
   /* max-width: 100%; */
@@ -314,7 +315,7 @@ form{
   font-size: 24px;
   cursor: pointer;
   color: rgb(248, 244, 244);
-  /* z-index: -1; */
+  z-index: 1;
 }
 
 .close-button:hover {
