@@ -87,7 +87,7 @@ export default createStore({
         let { data } = await axios.get('https://capstone-project-v1fj.onrender.com/products')
         commit('setProducts', data)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 3000 });
+        toast.error(`${e.err}`, { autoClose: 3000 });
       }
     },
     async addProduct({ commit }, product) {
@@ -101,7 +101,7 @@ export default createStore({
           confirmButtonText: 'OK'
         })
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
+        toast.error(`${e.response.err.message}`, { autoClose: 3000 });
       }
     },
     async deleteProduct({ commit }, prodID) {
@@ -115,7 +115,7 @@ export default createStore({
           confirmButtonText: 'OK'
         });
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 3000 });
+        toast.error(`${e.response.err.message}`, { autoClose: 3000 });
       }
     },
     async editProduct({ commit }, product) {
@@ -129,7 +129,7 @@ export default createStore({
           confirmButtonText: 'OK'
         });
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.err}`, { autoClose: 5000 });
       }
     },
 
@@ -148,7 +148,7 @@ export default createStore({
           commit('setUserCart', data)
           commit('setTotalCart', totalCart)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 }); 
+        toast.error(`${e.err}`, { autoClose: 5000 }); 
       }
     },
     async addToCart({commit}, data) { 
@@ -189,7 +189,7 @@ export default createStore({
       } catch (e) {
         console.log(e);
         
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.err}`, { autoClose: 5000 });
       }
     },
     async deleteCartItem({ commit }, data) {
@@ -213,7 +213,7 @@ export default createStore({
           })
         }
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.err}`, { autoClose: 5000 });
       }
     },
     async clearCart({ commit }) {
@@ -221,7 +221,7 @@ export default createStore({
         await axios.delete(`https://capstone-project-v1fj.onrender.com/cart/clearAll/`)
         commit('setCart', null)
       } catch (e) {
-        toast.error(`${e.message}`, { autoClose: 5000 });
+        toast.error(`${e.err}`, { autoClose: 5000 });
       }
     },
 
@@ -328,7 +328,7 @@ export default createStore({
         let { data } = await axios.get(`https://capstone-project-v1fj.onrender.com/users/`)
         commit('setUsers', data)
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.err}`, { autoClose: 5000 });
       }
     },
     async userProfile({ commit }) {
@@ -488,7 +488,7 @@ export default createStore({
           })
         }
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.err}`, { autoClose: 5000 });
       }
     },
     async updatePassword({ commit }, { userPass, emailAdd }) {
