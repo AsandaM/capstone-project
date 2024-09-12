@@ -84,7 +84,7 @@ export default createStore({
     // products actions
     async getProducts({ commit }) {
       try {
-        let { data } = await axios.get('http://localhost:5005/products')
+        let { data } = await axios.get('https://capstone-project-v1fj.onrender.com/products')
         commit('setProducts', data)
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 3000 });
@@ -92,7 +92,7 @@ export default createStore({
     },
     async addProduct({ commit }, product) {
       try {
-        let { data } = await axios.post('http://localhost:5005/products', product)
+        let { data } = await axios.post('https://capstone-project-v1fj.onrender.com/products', product)
         commit('setAddProduct', data)
         Swal.fire({
           icon: 'success',
@@ -106,7 +106,7 @@ export default createStore({
     },
     async deleteProduct({ commit }, prodID) {
       try {
-        let { data } = await axios.delete(`http://localhost:5005/products/${prodID}`)
+        let { data } = await axios.delete(`https://capstone-project-v1fj.onrender.com/products/${prodID}`)
         commit('setDeleteProduct', data)
         Swal.fire({
           icon: 'success',
@@ -120,7 +120,7 @@ export default createStore({
     },
     async editProduct({ commit }, product) {
       try {
-        let { data } = await axios.patch(`http://localhost:5005/products/${product.prodID}`, product)
+        let { data } = await axios.patch(`https://capstone-project-v1fj.onrender.com/products/${product.prodID}`, product)
         commit('setEditProduct', data)
         Swal.fire({
           icon: 'success',
@@ -136,7 +136,7 @@ export default createStore({
     // cart actions
     async getCart({ commit }, userID) {
       try {
-        let { data } = await axios.get(`http://localhost:5005/cart/${userID}`)
+        let { data } = await axios.get(`https://capstone-project-v1fj.onrender.com/cart/${userID}`)
 
         let cartItems = Array.isArray(data) ? data : [];
         
@@ -155,7 +155,7 @@ export default createStore({
       try {
         let {userID, prodID,  quantity } = data
         
-        await axios.post('http://localhost:5005/cart', {userID, prodID,  quantity })
+        await axios.post('https://capstone-project-v1fj.onrender.com/cart', {userID, prodID,  quantity })
         commit('setCart', data)
 
         if(!data.err){
@@ -184,7 +184,7 @@ export default createStore({
     async updateQuantity({ commit }, data) {
       try {
         let { prodID, userID, quantity } = data
-        await axios.patch(`http://localhost:5005/cart/${prodID}`, { userID, quantity })
+        await axios.patch(`https://capstone-project-v1fj.onrender.com/cart/${prodID}`, { userID, quantity })
         commit('setCart', data)
       } catch (e) {
         console.log(e);
@@ -195,7 +195,7 @@ export default createStore({
     async deleteCartItem({ commit }, data) {
       try {
         let { prodID, userID } = data
-        await axios.delete(`http://localhost:5005/cart/${userID}/${prodID}`)
+        await axios.delete(`https://capstone-project-v1fj.onrender.com/cart/${userID}/${prodID}`)
         commit('setCart', data)
         if(!data.err){
           Swal.fire({
@@ -218,7 +218,7 @@ export default createStore({
     },
     async clearCart({ commit }) {
       try {
-        await axios.delete(`http://localhost:5005/cart/clearAll/`)
+        await axios.delete(`https://capstone-project-v1fj.onrender.com/cart/clearAll/`)
         commit('setCart', null)
       } catch (e) {
         toast.error(`${e.message}`, { autoClose: 5000 });
@@ -228,7 +228,7 @@ export default createStore({
     // wishlist actions
     async getWishlist({ commit }, userID) {
       try {
-        let { data } = await axios.get(`http://localhost:5005/wishlist/${userID}`)
+        let { data } = await axios.get(`https://capstone-project-v1fj.onrender.com/wishlist/${userID}`)
         commit('setUserWishlist', data)
 
       } catch (e) {
@@ -238,7 +238,7 @@ export default createStore({
     async addToWishlist({ commit }, data) {
       try {
         let { userID, prodID, quantity } = data
-        await axios.post('http://localhost:5005/wishlist', { userID, prodID, quantity })
+        await axios.post('https://capstone-project-v1fj.onrender.com/wishlist', { userID, prodID, quantity })
         commit('setWishlist', data)
         
         if(!data.err){
@@ -265,7 +265,7 @@ export default createStore({
     async deleteWishlistItem({ commit }, data) {
       try {
         let { prodID, userID } = data
-        await axios.delete(`http://localhost:5005/wishlist/${userID}/${prodID}`, { data: { userID } })
+        await axios.delete(`https://capstone-project-v1fj.onrender.com/wishlist/${userID}/${prodID}`, { data: { userID } })
         commit('setWishlist', data)
         if(!data.err){
           Swal.fire({
@@ -289,7 +289,7 @@ export default createStore({
     async updateWishlist({ commit }, data) {
       try {
         let { prodID, userID, quantity } = data
-        await axios.patch(`http://localhost:5005/wishlist/${prodID}`, { userID, quantity })
+        await axios.patch(`https://capstone-project-v1fj.onrender.com/wishlist/${prodID}`, { userID, quantity })
         commit('setWishlist', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
@@ -297,7 +297,7 @@ export default createStore({
     },
     async clearWishlist({ commit }) {
       try {
-        await axios.delete(`http://localhost:5005/wishlist/clearAll`)
+        await axios.delete(`https://capstone-project-v1fj.onrender.com/wishlist/clearAll`)
         commit('setWishlist', null)
         Swal.fire({
           icon: 'success',
@@ -314,7 +314,7 @@ export default createStore({
       
       try {
         let { prodID, userID, quantity } = data
-        await axios.patch(`http://localhost:5005/wishlist/${prodID}`, { userID, quantity })
+        await axios.patch(`https://capstone-project-v1fj.onrender.com/wishlist/${prodID}`, { userID, quantity })
         commit('setWishlist', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
@@ -325,7 +325,7 @@ export default createStore({
     // users actions
     async getUsers({ commit }) {
       try {
-        let { data } = await axios.get(`http://localhost:5005/users/`)
+        let { data } = await axios.get(`https://capstone-project-v1fj.onrender.com/users/`)
         commit('setUsers', data)
       } catch (e) {
         toast.error(`${e.response.data.message}`, { autoClose: 5000 });
@@ -333,7 +333,7 @@ export default createStore({
     },
     async userProfile({ commit }) {
       try {
-        let { data } = await axios.get(`http://localhost:5005/users/profile`)
+        let { data } = await axios.get(`https://capstone-project-v1fj.onrender.com/users/profile`)
         commit('setProfile', data)
         if(data.err){
           Swal.fire({
@@ -349,7 +349,7 @@ export default createStore({
     },
     async addUser({ commit }, user) {
       try {
-        let { data } = await axios.post('http://localhost:5005/users/signup', user)
+        let { data } = await axios.post('https://capstone-project-v1fj.onrender.com/users/signup', user)
         commit('setAddUser', data)
         console.log(data);
         
@@ -374,7 +374,7 @@ export default createStore({
     },
     async login({ commit }, user) {
       try {
-        let data = await (await axios.post('http://localhost:5005/users/login', user)).data
+        let data = await (await axios.post('https://capstone-project-v1fj.onrender.com/users/login', user)).data
         commit('setAddUser', data)
         console.log(data);
         
@@ -409,7 +409,7 @@ export default createStore({
     async updateProfile({ commit }, data) {
       try {
         let { userID, info } = data
-        await axios.patch(`http://localhost:5005/users/${userID}`, info)
+        await axios.patch(`https://capstone-project-v1fj.onrender.com/users/${userID}`, info)
         commit('setUsers', data)
         $cookies.set('userRole', info.userRole)
         if(!data.err){
@@ -437,7 +437,7 @@ export default createStore({
     async editUser({ commit }, user) {
       
       try {
-        let {data} = await axios.patch(`http://localhost:5005/users/${user.userID}`, user)
+        let {data} = await axios.patch(`https://capstone-project-v1fj.onrender.com/users/${user.userID}`, user)
         commit('setEditUser', data)
         Swal.fire({
           icon: 'success',
@@ -452,7 +452,7 @@ export default createStore({
     },
     async deleteUser({ commit }, userID) {
       try {
-        let { data } = await axios.delete(`http://localhost:5005/users/${userID}`)
+        let { data } = await axios.delete(`https://capstone-project-v1fj.onrender.com/users/${userID}`)
         commit('setUsers', data)
         if(!data.err){
           Swal.fire({
@@ -493,7 +493,7 @@ export default createStore({
     },
     async updatePassword({ commit }, { userPass, emailAdd }) {
       try {
-        let  {data} = await axios.patch(`http://localhost:5005/users//updatepassword`, { userPass, emailAdd })
+        let  {data} = await axios.patch(`https://capstone-project-v1fj.onrender.com/users/updatepassword`, { userPass, emailAdd })
         commit('setUsers', data)
         if(!data.err){
           Swal.fire({
