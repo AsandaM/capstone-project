@@ -10,7 +10,7 @@ let port = process.env.PORT || 5005
 
 const app = express()
 app.use(express.json())
-app.use(cors({origin:'*', credentials:true}))
+app.use(cors({origin:'https://capstone-ecommerce-3d5bf.web.app/', credentials:true}))
 app.use('/users', usersRoutes)
 app.use('/products', productsRoutes)
 app.use('/cart', cartRoutes)
