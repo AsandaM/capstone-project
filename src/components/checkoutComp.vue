@@ -147,10 +147,7 @@ export default{
         this.formValid = this.email && this.phone && this.fullName && this.address && this.city;
         
         if (this.userCart && this.userCart.length > 0) {  
-        this.clearCart().then(()=>{
-            this.getUserCart()
-        })
-        
+        this.clearCart() 
     }
         if(this.formValid){
            Swal.fire({
@@ -158,9 +155,10 @@ export default{
             text: 'Thank you for shopping with us!',
             icon: 'success',
             confirmButtonText: 'OK'
+            }).then(()=>{
+                location.reload()
+                this.getUserCart()
             })
-            // .then(()=>{
-            // })
         }else{
             Swal.fire({
             title: 'Error!',

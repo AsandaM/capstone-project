@@ -34,7 +34,9 @@
               <option value="">Filter by Category</option>
               <option value="Detox">Detox</option>
               <option value="Immune Boost">Immune Boost</option>
-              <option value="Energize">Energizer</option>
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Performance">Performance</option>
+              <option value="Muscle Gain">Muscle Gain</option>
             </select>
             <select class="form-select me-2 text-success" aria-label="Filter by Type" v-model="filterType">
               <option value="">Filter by Type</option>
@@ -49,7 +51,6 @@
           <div v-for="product in filteredAndSortedProducts" :key="product.id" class="col-md-6 col-lg-4 col-xl-3">
             <div :id="'product-' + product.prodID" class="single-product">
               <div class="part-1" :style="getProductStyle(product)">
-                <!-- <img :src="product.image" alt=""> -->
                 <ul>
                   <li @click="addToCart(product.prodID)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -60,11 +61,6 @@
                         width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                         <path
                           d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                      </svg></a></li>
-                  <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-plus" viewBox="0 0 16 16">
-                        <path
-                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                       </svg></a></li>
                   <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrows-angle-expand" viewBox="0 0 16 16" @click="openModal(product)">
@@ -174,7 +170,7 @@ export default {
         backgroundImage: `url(${product.image})`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
         transition: 'all 0.3s',
       }
     },
@@ -408,16 +404,19 @@ a:hover {
 
 @media (min-width: 324px) and (max-width: 768px) {
   .product-image-container {
-    background-size: cover; /* Zoom effect */
+    background-size: contain !important; 
   }
 }
 
 @media (min-width: 768px) {
   .product-image-container {
-    background-size: contain; /* Contain the image on larger screens */
+    background-size: contain !important;
   }
 }
 
+.single-product{
+  border: 1px solid white;
+}
 
 @keyframes floating {
   0% {

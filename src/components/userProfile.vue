@@ -45,15 +45,18 @@
       </div>
     </div>
     <div v-else>
-      <p>Please sign up or log in see your profile</p>
+      <spinner-comp/>
     </div>
   </main>
 
 </template>
 
 <script>
-// import Swal from 'sweetalert2';
+import spinnerComp from './spinnerComp.vue';
 export default {
+  components:{
+    spinnerComp
+  },
   data() {
     return {
       isEditVisible: false,

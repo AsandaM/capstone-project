@@ -138,7 +138,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 40%;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px); /* Apply blur effect */
   display: flex;
@@ -214,6 +214,7 @@ h4 {
 .h5 {
   font-size: 16px;  
 }
+
 }
 
 

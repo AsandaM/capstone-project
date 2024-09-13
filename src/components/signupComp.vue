@@ -24,7 +24,7 @@
               <input type="password" v-model="password" placeholder="Password"/>
             </div>
             <div class="input-container">
-              <a href="#" type="button" class="btn" id="forgot" data-bs-toggle="modal" data-bs-target="#forgot">Forgot your
+              <a href="#" type="button" class="btn" id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your
                 password?</a>
             </div>
             <button type="submit" class="btn1">Sign in</button>
@@ -76,11 +76,11 @@
   </div>
 
   <!-- Modal for forgot password -->
-  <div class="modal fade" id="forgot" tabindex="-1" aria-labelledby="forgotLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="forgotLabel">Change password</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Change password</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

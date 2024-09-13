@@ -10,7 +10,8 @@ import "vue3-toastify/dist/index.css";
 axios.defaults.withCredentials = true
 axios.defaults.headers.common['Authorization'] = $cookies.get('token')
 
-const apiURL = ('https://capstone-project-v1fj.onrender.com/')
+// const apiURL = ('https://capstone-project-v1fj.onrender.com/')
+const apiURL = ('http://localhost:5005/')
 
 export default createStore({
   state: {
@@ -373,7 +374,7 @@ export default createStore({
           })
         }
       } catch (e) {
-        toast.error(`${e.response.data.message}`, { autoClose: 5000 });
+        toast.error(`${e.response.data.message}`, { autoClose: 6000 });
       }
     },
     async login({ commit }, user) {
@@ -392,7 +393,7 @@ export default createStore({
             showConfirmButton: false,
             timer: 2000
           }).then(() => {
-            // location.reload()
+            location.reload()
             router.push('/');
           });
         }else {
