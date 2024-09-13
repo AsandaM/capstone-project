@@ -460,30 +460,12 @@ export default createStore({
         let { data } = await axios.delete(`${apiURL}users/${userID}`)
         commit('setUsers', data)
         if(!data.err){
-          Swal.fire({
-            title: 'Are you sure?',
-            text: 'You will not be able to recover this account!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
-          }).then((result) => {
-            if (result.isConfirmed) {
               Swal.fire({
                 title: 'Deleted!',
                 text: 'Your account has been deleted.',
                 icon: 'success',
                 confirmButtonText: 'OK'
-              })
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire({
-                title: 'Cancelled',
-                text: 'Your account is safe :)',
-                icon: 'error',
-                confirmButtonText: 'OK'
               });
-            }
-          });
         }else{
           Swal.fire({
             icon: 'error',
