@@ -40,6 +40,9 @@ const checkUser = async(req, res, next)=>{
 
 const verifyAToken = (req, res, next)=>{
     let {cookie} = req.headers
+    console.log(cookie);
+    console.log(req.headers);
+    
 
     // Check if cookie exists
     if (!cookie) {
