@@ -10,8 +10,7 @@ import "vue3-toastify/dist/index.css";
 axios.defaults.withCredentials = true
 axios.defaults.headers.common['Authorization'] = $cookies.get('token')
 
-// const apiURL = ('https://capstone-project-v1fj.onrender.com/')
-const apiURL = ('http://localhost:5005/')
+const apiURL = ('https://capstone-project-v1fj.onrender.com/')
 
 export default createStore({
   state: {
