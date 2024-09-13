@@ -39,9 +39,8 @@ const checkUser = async(req, res, next)=>{
 }
 
 const verifyAToken = (req, res, next)=>{
-    let {cookie} = req.headers
+    let cookie = req.headers.authorization
     console.log(cookie);
-    console.log(req.headers);
     
 
     // Check if cookie exists
@@ -50,10 +49,11 @@ const verifyAToken = (req, res, next)=>{
     }
 
     //checks if the token exits first
-    let token = cookie && cookie.split('=')[1]
-    let token1 = token.split(';')[0]
+    // let token = cookie && cookie.split('=')[1]
+    // let token = cookie && cookie.split('=')[1]
+    // let token1 = token.split(';')[0]
 
-    jwt.verify(token1, process.env.SECRET_KEY, (err, decoded)=>{
+    jwt.verify(cookie, process.env.SECRET_KEY, (err, decoded)=>{
       
         if(err){
             res.json({err: 'Token has expired, please logout and login again'})
