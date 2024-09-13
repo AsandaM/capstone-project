@@ -45,7 +45,7 @@ const verifyAToken = (req, res, next)=>{
 
     // Check if cookie exists
     if (!cookie) {
-        return res.json({ err: 'No token provided' });
+        return res.json({ err: 'No token provided,try logging out and log in again' });
     }
 
     //checks if the token exits first
