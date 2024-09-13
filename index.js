@@ -9,7 +9,7 @@ import wishlistRoutes from './routes/wishlistRoutes.js'
 const app = express()
 let port = process.env.PORT || 5005
 
-app.use(cors({origin:'https://capstone-ecommerce-3d5bf.firebaseapp.com', credentials:true}))
+app.use(cors({origin:['https://capstone-ecommerce-3d5bf.firebaseapp.com','http://localhost:8080'], credentials:true}))
 app.use(express.json())
 app.use(express.static('public'))
 app.use('/users', usersRoutes)
