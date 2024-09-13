@@ -337,6 +337,8 @@ export default createStore({
       try {
         let { data } = await axios.get(`${apiURL}users/profile`)
         commit('setProfile', data)
+        console.log(data);
+        
         if(data.err){
           Swal.fire({
             icon: 'error',
@@ -390,7 +392,7 @@ export default createStore({
             showConfirmButton: false,
             timer: 2000
           }).then(() => {
-            location.reload()
+            // location.reload()
             router.push('/');
           });
         }else {
